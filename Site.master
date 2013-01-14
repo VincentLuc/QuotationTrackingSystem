@@ -1,0 +1,79 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/jquery-ui-1.9.0.custom.css" rel="stylesheet" type="text/css" />
+    <link href="~/Styles/Custom.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.9.0.custom.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".close").click(function () {
+                $(this).parent().parent().remove();
+            });
+        });
+    </script>
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1>
+                    Quotation tracking System
+                </h1>
+            </div>
+            <div class="loginDisplay">
+                 <% if (Page.User.Identity.IsAuthenticated)
+                 {%>
+                 Logged In as <%= Page.User.Identity.Name %> |
+                 <a href="~/CurrentUser/ChangePassword.aspx">Change Password</a> | 
+                <a href="~/Account/Logout.aspx"> Log Out</a>
+              <%}
+                 else
+                 { %>
+                <a href="/ASM/Account/Login.aspx">Log In</a>
+              <%} %>
+            </div>
+            <div class="clear hideSkiplink">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/Users/Index.aspx" Text="Users"/>
+                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>
+        <div class="main">
+        <% if (Session["NoticeMessage"] != null)
+               {%>
+               <div class="alert alert-success">
+                 <h4><%= Session["NoticeMessage"]%>  <a class="right close">X</a></h4>
+                 <div class="clear"></div>
+                 <% Session["NoticeMessage"] = null; %>
+               </div>
+            <%} %>
+            <% if (Session["ErrorMessage"] != null)
+               {%>
+               <div class="alert alert-danger">
+                 <h4><%= Session["ErrorMessage"]%> <a class="right close">X</a></h4>
+                 <div class="clear"></div>
+                 <% Session["ErrorMessage"] = null; %>
+               </div>
+            <%} %>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+        
+    </div>
+    </form>
+</body>
+</html>
