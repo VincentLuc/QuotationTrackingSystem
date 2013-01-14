@@ -32,21 +32,23 @@
                  <% if (Page.User.Identity.IsAuthenticated)
                  {%>
                  Logged In as <%= Page.User.Identity.Name %> |
-                 <a href="~/CurrentUser/ChangePassword.aspx">Change Password</a> | 
-                <a href="~/Account/Logout.aspx"> Log Out</a>
+                 <a href="/QuotationTrackingSystem/CurrentUser/ChangePassword.aspx">Change Password</a> | 
+                <a href="/QuotationTrackingSystem/Account/Logout.aspx"> Log Out</a>
               <%}
                  else
                  { %>
-                <a href="/ASM/Account/Login.aspx">Log In</a>
+                <a href="/QuotationTrackingSystem/Account/Login.aspx">Log In</a>
               <%} %>
             </div>
             <div class="clear hideSkiplink">
+            <% if (Page.User.Identity.IsAuthenticated)
+               {%>
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
                         <asp:MenuItem NavigateUrl="~/Users/Index.aspx" Text="Users"/>
-                        <asp:MenuItem NavigateUrl="~/About.aspx" Text="About"/>
                     </Items>
                 </asp:Menu>
+                <% } %>
             </div>
         </div>
         <div class="main">

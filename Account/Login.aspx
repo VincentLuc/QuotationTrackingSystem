@@ -4,6 +4,9 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
+  <div class="alert alert-danger" runat="server" id="errorDiv">
+    <h4>Invalid login !</h4>
+  </div>
     <div class="accountInfo">
     <fieldset class="login">
       <legend>Log in</legend>

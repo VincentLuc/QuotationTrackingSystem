@@ -32,7 +32,7 @@ public partial class Users_ChangePassword : System.Web.UI.Page
         user.Password = StringHelper.MD5Hash(txtPassword.Text);
         user.UpdatedAt = DateTime.Now;
         _quotationTrackingSystemDBEntities.SaveChanges();
-        Session["NoticeMessage"] = "Successfully changed password!";
+        Session["NoticeMessage"] = "Successfully changed password !";
         Response.Redirect("Index.aspx");
     }
     protected void btnCacnel_Click(object sender, EventArgs e)

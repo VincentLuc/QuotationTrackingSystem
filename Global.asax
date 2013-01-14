@@ -34,5 +34,32 @@
         // or SQLServer, the event is not raised.
 
     }
+
+    protected void FormsAuthentication_OnAuthenticate(Object sender, FormsAuthenticationEventArgs e)
+    {
+        if (FormsAuthentication.CookiesSupported == true)
+        {
+            if (Request.Cookies[FormsAuthentication.FormsCookieName] != null)
+            {
+                try
+                {
+                    //let us take out the username now                
+                    var cookie = FormsAuthentication.Decrypt(Request.Cookies[FormsAuthentication.FormsCookieName].Value);
+                    string username = cookie.Name;
+
+                    //let us extract the roles from our own custom cookie
+                    string roles = cookie.UserData.Split('#')[0];
+
+                    //Let us set the Pricipal with our user specific details
+                    e.User = new System.Security.Principal.GenericPrincipal(
+                      new System.Security.Principal.GenericIdentity(username, "Forms"), roles.Split(';'));
+                }
+                catch (Exception)
+                {
+                    //somehting went wrong
+                }
+            }
+        }
+    }
        
 </script>

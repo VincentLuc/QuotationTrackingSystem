@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 /// <summary>
 /// Summary description for StringHelper
@@ -29,5 +30,10 @@ public static class StringHelper
         }
 
         return strBuilder.ToString();
+    }
+
+    public static string ToSentenceCase(string str)
+    {
+        return Regex.Replace(str, "[a-z][A-Z]", m => m.Value[0] + " " + char.ToLower(m.Value[1]));
     }
 }

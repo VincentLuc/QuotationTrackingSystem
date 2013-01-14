@@ -70,7 +70,7 @@ public partial class Users_Index : System.Web.UI.Page
             dr["Middle Name"] = x.MiddleName;
             dr["Last Name"] = x.LastName;
             dr["User Name"] = x.UserName;
-            dr["Role"] = x.Role;
+            dr["Role"] = StringHelper.ToSentenceCase(x.Role);
             dr["Status"] = x.Status;
             dr["Created At"] = DateTimeHelper.ConvertToString(x.CreatedAt.ToString());
             dr["Updated At"] = DateTimeHelper.ConvertToString(x.UpdatedAt.ToString());
