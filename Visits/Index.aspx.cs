@@ -52,7 +52,7 @@ public partial class Visits_Index : System.Web.UI.Page
 
         var user = CurrentUser.DbUser();
 
-        foreach (var x in user.Visits.ToList())
+        foreach (var x in user.Visits.OrderByDescending(x => x.CreatedAt).ToList())
         {
             dr = dt.NewRow();
             dr["Client Name"] = x.ClientName;

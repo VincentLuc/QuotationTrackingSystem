@@ -31,7 +31,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         List<MenuItem> toRemoveItems = new List<MenuItem>();
         foreach (MenuItem menuItem in menuItems)
         {
-            if (menuItem.Value == "Sales" || menuItem.Value == "UnderWriter" || menuItem.Value == "Visit")
+            if (menuItem.Value == "Sales" || menuItem.Value == "UnderWriter" || menuItem.Value == "Visit" || menuItem.Value == "SalesSupervisor")
             {
                 toRemoveItems.Add(menuItem);
             }
@@ -45,7 +45,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         List<MenuItem> toRemoveItems = new List<MenuItem>();
         foreach (MenuItem menuItem in menuItems)
         {
-            if (menuItem.Text == "Users" || menuItem.Value == "UnderWriter" || menuItem.Value == "Admin")
+            if (menuItem.Text == "Users" || menuItem.Value == "UnderWriter" || menuItem.Value == "Admin" || menuItem.Value == "Sales")
             {
                 toRemoveItems.Add(menuItem);
             }
@@ -59,7 +59,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         List<MenuItem> toRemoveItems = new List<MenuItem>();
         foreach (MenuItem menuItem in menuItems)
         {
-            if (menuItem.Text == "Users" || menuItem.Value == "UnderWriter" || menuItem.Value == "Admin")
+            if (menuItem.Text == "Users" || menuItem.Value == "UnderWriter" || menuItem.Value == "Admin" || menuItem.Value == "SalesSupervisor")
             {
                 toRemoveItems.Add(menuItem);
             }
@@ -73,7 +73,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         List<MenuItem> toRemoveItems = new List<MenuItem>();
         foreach (MenuItem menuItem in menuItems)
         {
-            if (menuItem.Text == "Users" || menuItem.Value == "Sales" || menuItem.Value == "Admin" || menuItem.Value == "Visit")
+            if (menuItem.Text == "Users" || menuItem.Value == "Sales" || menuItem.Value == "Admin" || menuItem.Value == "Visit" || menuItem.Value == "SalesSupervisor")
             {
                 toRemoveItems.Add(menuItem);
             }

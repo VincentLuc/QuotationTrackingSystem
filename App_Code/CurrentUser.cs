@@ -67,9 +67,13 @@ public static class CurrentUser
         {
             returnUrl1 = "/QuotationTrackingSystem/Admin/Home.aspx";
         }
-        else if (role == "Sales" || role == "SalesSupervisor")
+        else if (role == "Sales")
         {
             returnUrl1 = "/QuotationTrackingSystem/Sales/Home.aspx";
+        }
+        else if (role == "SalesSupervisor") 
+        {
+            returnUrl1 = "/QuotationTrackingSystem/SalesSupervisor/Home.aspx";
         }
         else if (role == "UnderWriter")
         {

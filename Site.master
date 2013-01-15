@@ -52,6 +52,8 @@
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/UnderWriters/Home.aspx" Text="Home" 
                             Value="UnderWriter"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/SalesSupervisor/Home.aspx" Text="Home" 
+                            Value="SalesSupervisor"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Users/Index.aspx" Text="Users"/>
                         <asp:MenuItem NavigateUrl="~/Visits/Index.aspx" Text="Visit" Value="Visit">
                         </asp:MenuItem>
