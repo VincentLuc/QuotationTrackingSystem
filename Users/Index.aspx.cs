@@ -19,18 +19,25 @@ public partial class Users_Index : System.Web.UI.Page
         if (e.Row.RowType != DataControlRowType.DataRow) return;
 
         LinkButton lb = new LinkButton();
-        lb.CommandArgument = e.Row.Cells[9].Text;
+        lb.CommandArgument = e.Row.Cells[4].Text;
         lb.CommandName = "NumClick";
         lb.Text = "Edit";
-        lb.PostBackUrl = "~/Users/Edit.aspx?id=" + e.Row.Cells[9].Text;
-        e.Row.Cells[9].Controls.Add((Control)lb);
+        lb.PostBackUrl = "~/Users/Edit.aspx?id=" + e.Row.Cells[4].Text;
+        e.Row.Cells[4].Controls.Add((Control)lb);
 
         LinkButton lb1 = new LinkButton();
-        lb1.CommandArgument = e.Row.Cells[10].Text;
+        lb1.CommandArgument = e.Row.Cells[5].Text;
         lb1.CommandName = "NumClick";
         lb1.Text = "Change Password";
-        lb1.PostBackUrl = "~/Users/ChangePassword.aspx?id=" + e.Row.Cells[10].Text;
-        e.Row.Cells[10].Controls.Add((Control)lb1);
+        lb1.PostBackUrl = "~/Users/ChangePassword.aspx?id=" + e.Row.Cells[5].Text;
+        e.Row.Cells[5].Controls.Add((Control)lb1);
+
+        LinkButton lb2 = new LinkButton();
+        lb2.CommandArgument = e.Row.Cells[6].Text;
+        lb2.CommandName = "NumClick";
+        lb2.Text = "Details";
+        lb2.PostBackUrl = "~/Users/Details.aspx?id=" + e.Row.Cells[6].Text;
+        e.Row.Cells[6].Controls.Add((Control)lb2);
 
         for (int i = 0; i < e.Row.Cells.Count; i++)
         {
@@ -50,33 +57,25 @@ public partial class Users_Index : System.Web.UI.Page
         DataTable dt = new DataTable();
         DataRow dr = null;
 
-        dt.Columns.Add(new DataColumn("First Name", typeof(string)));
-        dt.Columns.Add(new DataColumn("Middle Name", typeof(string)));
-        dt.Columns.Add(new DataColumn("Last Name", typeof(string)));
         dt.Columns.Add(new DataColumn("User Name", typeof(string)));
         dt.Columns.Add(new DataColumn("Role", typeof(string)));
         dt.Columns.Add(new DataColumn("Status", typeof(string)));
         dt.Columns.Add(new DataColumn("Created At", typeof(string)));
-        dt.Columns.Add(new DataColumn("Updated At", typeof(string)));
-        dt.Columns.Add(new DataColumn("Last Signin At", typeof(string)));
         dt.Columns.Add(new DataColumn("Edit", typeof(string)));
         dt.Columns.Add(new DataColumn("Change Password", typeof(string)));
+        dt.Columns.Add(new DataColumn("Details", typeof(string)));
 
         gvUsers.DataSource = _quotationTrackingSystemDBEntities.tblUsers.ToList();
-        foreach (var x in _quotationTrackingSystemDBEntities.tblUsers.ToList())
+        foreach (var x in _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Role != "Sales").ToList())
         {
             dr = dt.NewRow();
-            dr["First Name"] = x.FirstName;
-            dr["Middle Name"] = x.MiddleName;
-            dr["Last Name"] = x.LastName;
             dr["User Name"] = x.UserName;
             dr["Role"] = StringHelper.ToSentenceCase(x.Role);
             dr["Status"] = x.Status;
             dr["Created At"] = DateTimeHelper.ConvertToString(x.CreatedAt.ToString());
-            dr["Updated At"] = DateTimeHelper.ConvertToString(x.UpdatedAt.ToString());
-            dr["Last Signin At"] = DateTimeHelper.ConvertToString(x.LastSignInAt.ToString());
             dr["Edit"] = x.Id;
             dr["Change Password"] = x.Id;
+            dr["Details"] = x.Id;
             dt.Rows.Add(dr);
         }
 

@@ -33,7 +33,8 @@ public partial class Users_ChangePassword : System.Web.UI.Page
         user.UpdatedAt = DateTime.Now;
         _quotationTrackingSystemDBEntities.SaveChanges();
         Session["NoticeMessage"] = "Successfully changed password !";
-        Response.Redirect("Index.aspx");
+        var Url = user.Role == "Sales" ? "Details.aspx?id=" + user.SupervisorId : "Index.aspx";
+        Response.Redirect(Url);
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {

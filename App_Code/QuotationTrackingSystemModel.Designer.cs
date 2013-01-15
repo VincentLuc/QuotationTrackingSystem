@@ -336,6 +336,30 @@ namespace QuotationTrackingSystemDBModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> SupervisorId
+        {
+            get
+            {
+                return _SupervisorId;
+            }
+            set
+            {
+                OnSupervisorIdChanging(value);
+                ReportPropertyChanging("SupervisorId");
+                _SupervisorId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SupervisorId");
+                OnSupervisorIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _SupervisorId;
+        partial void OnSupervisorIdChanging(Nullable<global::System.Int32> value);
+        partial void OnSupervisorIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.DateTime CreatedAt

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="New.aspx.cs" Inherits="Users_New" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="NewSalesUser.aspx.cs" Inherits="Users_NewSalesUser" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
@@ -6,15 +6,18 @@
 <div class="breadcrumb">
   <ul>
     <li><a href="Index.aspx">Users</a><span class="divider">></span></li>
-    <li><a class="active">New</a></li>
+    <li><a href="Details.aspx?id=<%= SupervisorUser.Id%>"><%= SupervisorUser.UserName %></a><span class="divider">></span></li>
+    <li><a class="active">New Sales User</a></li>
   </ul>
 </div>
-<h3>New User</h3>
+<h3>New Sales User</h3>
 <hr />
     <table style="width:35%;">
         <tr>
             <td align="left">
-                First Name</td>
+                First Name<asp:HiddenField 
+                    ID="hdnSalesSupervisorId" runat="server" />
+            </td>
             <td>
                 <asp:TextBox ID="txtFirstName" runat="server" MaxLength="45"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvFirstName" runat="server" 
@@ -24,7 +27,9 @@
         </tr>
         <tr>
             <td align="left">
-                Middle Name</td>
+                Middle Name<asp:HiddenField ID="hdnFldUserRole" 
+                    runat="server" />
+            </td>
             <td>
                 <asp:TextBox ID="txtMiddleName" runat="server" MaxLength="45"></asp:TextBox>
             </td>
@@ -36,21 +41,6 @@
                 <asp:TextBox ID="txtLastName" runat="server" MaxLength="45"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvLastName" runat="server" 
                     ControlToValidate="txtLastName" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
-            </td>
-        </tr>
-        <tr>
-            <td align="left">
-                Role</td>
-            <td>
-                <asp:DropDownList ID="ddlRole" runat="server">
-                    <asp:ListItem Value="0">Select</asp:ListItem>
-                    <asp:ListItem>Admin </asp:ListItem>
-                    <asp:ListItem Value="SalesSupervisor">Sales Supervisor</asp:ListItem>
-                    <asp:ListItem Value="UnderWriter">Under Writer</asp:ListItem>
-                </asp:DropDownList>
-                <asp:RequiredFieldValidator ID="rfvRole" runat="server" 
-                    ControlToValidate="ddlRole" ForeColor="#FF3300" SetFocusOnError="True" 
-                    InitialValue="0">*</asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>

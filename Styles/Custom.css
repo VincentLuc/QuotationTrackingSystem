@@ -115,4 +115,19 @@ h1, h2, h3, h4, h5, h6 {
 .alert .close
 {
     cursor: pointer;
-    }
+}
+.borderTable tr td
+{
+    width: 25%;
+    padding: 7px;
+    border-top: solid 1px #000;
+    border-left: solid 1px #000;
+}    
+.borderTable tr td:last-child
+{
+    border-right: solid 1px #000;
+}
+.borderTable tr:last-child td
+{
+    border-bottom: solid 1px #000;
+}

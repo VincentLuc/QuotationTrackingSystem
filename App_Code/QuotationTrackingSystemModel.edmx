@@ -20,6 +20,7 @@
           <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Role" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SupervisorId" Type="int" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
           <Property Name="LastSignInAt" Type="datetime" />
@@ -45,6 +46,7 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Role" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SupervisorId" Type="Int32" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" />
           <Property Name="LastSignInAt" Type="DateTime" />
@@ -65,6 +67,7 @@
             <ScalarProperty Name="Password" ColumnName="Password" />
             <ScalarProperty Name="Role" ColumnName="Role" />
             <ScalarProperty Name="Status" ColumnName="Status" />
+            <ScalarProperty Name="SupervisorId" ColumnName="SupervisorId" />
             <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
             <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
             <ScalarProperty Name="LastSignInAt" ColumnName="LastSignInAt" />
@@ -91,7 +94,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="QuotationTrackingSystemModel">
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.tblUser" Width="1.5" PointX="0.75" PointY="0.75" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.tblUser" Width="1.5" PointX="0.75" PointY="0.75" Height="3.5186979166666665" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>

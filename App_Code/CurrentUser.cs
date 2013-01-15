@@ -39,6 +39,21 @@ public static class CurrentUser
         return action == "all";
     }
 
+    public static bool IsSalesSupervisor(string UserId){
+        var action = "";
+        if (String.Empty == UserId){
+            var cookie = FormsAuthentication.Decrypt(HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).UserData;
+            action = cookie.Split('#')[2];
+        }
+        else {
+            int IntUserId = int.Parse(UserId.ToString());
+            QuotationTrackingSystemDBModel.QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBModel.QuotationTrackingSystemDBEntities();
+            var user = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == IntUserId).First();
+            action = user.Role;
+        }
+        return action == "SalesSupervisor";
+    }
+
     public static string GetRedirectPath(string role) {
         String returnUrl1 = "";
         if (role == "Admin")
