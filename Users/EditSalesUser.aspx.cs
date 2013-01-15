@@ -54,6 +54,6 @@ public partial class Users_EditSalesUser : System.Web.UI.Page
     }
     protected void btnCancel_Click(object sender, EventArgs e)
     {
-        Response.Redirect("Details.aspx?id=" + hdnSalesSupervisorId);
+        Response.Redirect("Details.aspx?id=" + hdnSalesSupervisorId.Value);
     }
 }

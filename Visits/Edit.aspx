@@ -121,11 +121,11 @@
         </tr>
         <tr>
             <td align="center">
-                <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save" />
+                <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save"  CssClass="btn"/>
             </td>
             <td>
                 <asp:Button ID="btnCancel" runat="server" CausesValidation="False" 
-                    onclick="btnCancel_Click" Text="Cancel" />
+                    onclick="btnCancel_Click" Text="Cancel"  CssClass="btn"/>
             </td>
         </tr>
         <tr>
