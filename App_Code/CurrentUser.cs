@@ -41,29 +41,17 @@ public static class CurrentUser
 
     public static string GetRedirectPath(string role) {
         String returnUrl1 = "";
-        if (role == "super_admin")
+        if (role == "Admin")
         {
-            returnUrl1 = "/ASM/Users/Index.aspx";
+            returnUrl1 = "/QuotationTrackingSystem/Admin/Home.aspx";
         }
-        else if (role == "admin")
+        else if (role == "Sales")
         {
-            returnUrl1 = "/ASM/Hardwares/Index.aspx";
+            returnUrl1 = "/QuotationTrackingSystem/Sales/Home.aspx";
         }
-        else if (role == "dispose_items")
+        else if (role == "UnderWriter")
         {
-            returnUrl1 = "/ASM/DisposeItems/Index.aspx";
-        }
-        else if (role == "po_deliveries_master")
-        {
-            returnUrl1 = "/ASM/PODeliveriesMaster/Index.aspx";
-        }
-        else if (role == "smart_streem_logs_master")
-        {
-            returnUrl1 = "/ASM/SmartStreemLogsMaster/Index.aspx";
-        }
-        else if (role == "store_logs")
-        {
-            returnUrl1 = "/ASM/StoreLogs/Index.aspx";
+            returnUrl1 = "/QuotationTrackingSystem/UnderWriters/Home.aspx";
         }
         return returnUrl1;
     }

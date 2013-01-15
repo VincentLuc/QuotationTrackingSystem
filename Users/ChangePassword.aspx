@@ -18,7 +18,7 @@
             <td align="left">
                 Password</td>
             <td>
-                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="45"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvPassword" runat="server" 
                     ControlToValidate="txtPassword" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="revPassword" runat="server" 
@@ -31,7 +31,8 @@
             <td align="left">
                 Confirm Password</td>
             <td>
-                <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" 
+                    MaxLength="45"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvConfirmPassword" runat="server" 
                     ControlToValidate="txtConfirmPassword" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
@@ -51,8 +52,8 @@
                 <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save" />
             </td>
             <td>
-                <asp:Button ID="btnCacnel" runat="server" CausesValidation="False" 
-                    onclick="btnCacnel_Click" Text="Cancel" />
+                <asp:Button ID="btnCancel" runat="server" CausesValidation="False" 
+                    onclick="btnCancel_Click" Text="Cancel" />
             </td>
         </tr>
         <tr>

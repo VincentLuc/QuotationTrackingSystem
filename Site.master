@@ -31,7 +31,8 @@
             <div class="loginDisplay">
                  <% if (Page.User.Identity.IsAuthenticated)
                  {%>
-                 Logged In as <%= Page.User.Identity.Name %> |
+                 Logged In as <%= Page.User.Identity.Name %> | 
+                 <a href="/QuotationTrackingSystem/CurrentUser/MyAccount.aspx">My Account</a> |
                  <a href="/QuotationTrackingSystem/CurrentUser/ChangePassword.aspx">Change Password</a> | 
                 <a href="/QuotationTrackingSystem/Account/Logout.aspx"> Log Out</a>
               <%}
@@ -45,6 +46,12 @@
                {%>
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
+                        <asp:MenuItem NavigateUrl="~/Admin/Home.aspx" Text="Home" Value="Admin">
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Sales/Home.aspx" Text="Home" Value="Sales">
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/UnderWriters/Home.aspx" Text="Home" 
+                            Value="UnderWriter"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Users/Index.aspx" Text="Users"/>
                     </Items>
                 </asp:Menu>

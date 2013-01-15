@@ -35,7 +35,7 @@ public partial class Users_ChangePassword : System.Web.UI.Page
         Session["NoticeMessage"] = "Successfully changed password !";
         Response.Redirect("Index.aspx");
     }
-    protected void btnCacnel_Click(object sender, EventArgs e)
+    protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("Index.aspx");
     }

@@ -6,25 +6,29 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using QuotationTrackingSystemDBModel;
 
-public partial class CurrentUser_ChangePassword : System.Web.UI.Page
+public partial class MyAccount : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!IsPostBack) { 
+            QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
+            var Id = CurrentUser.Id();
+            var user = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == Id).First();
+            txtFirstName.Text = user.FirstName;
+            txtMiddleName.Text = user.MiddleName;
+            txtLastName.Text = user.LastName;
+        }
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
         QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
         var Id = CurrentUser.Id();
         var user = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == Id).First();
-        var encodedCurrentPassword = StringHelper.MD5Hash(txtCurrentPassword.Text.Trim());
-        if (user.Password != encodedCurrentPassword) {
-            Session["ErrorMessage"] = "Your Current Password is Incorrect !";
-            return;
-        }
-        user.Password = StringHelper.MD5Hash(txtPassword.Text);
+        user.FirstName = txtFirstName.Text;
+        user.MiddleName = txtMiddleName.Text;
+        user.LastName = txtLastName.Text;
         _quotationTrackingSystemDBEntities.SaveChanges();
-        Session["NoticeMessage"] = "Successfully updated your password !";
+        Session["NoticeMessage"] = "Successfully updated your account information !";
         Response.Redirect(CurrentUser.GetRedirectPath(CurrentUser.Role()));
     }
     protected void btnCancel_Click(object sender, EventArgs e)

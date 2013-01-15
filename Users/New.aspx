@@ -112,8 +112,8 @@
                 <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save" />
             </td>
             <td>
-                <asp:Button ID="btnCacnel" runat="server" CausesValidation="False" 
-                    onclick="btnCacnel_Click" Text="Cancel" />
+                <asp:Button ID="btnCancel" runat="server" CausesValidation="False" 
+                    onclick="btnCancel_Click" Text="Cancel" />
             </td>
         </tr>
         <tr>

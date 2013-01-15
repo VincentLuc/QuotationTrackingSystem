@@ -21,7 +21,7 @@ public partial class Account_Login : System.Web.UI.Page
         }
         else if (User.Identity.IsAuthenticated)
         {
-            //Response.Redirect(CurrentUser.GetRedirectPath(CurrentUser.Role()));
+            Response.Redirect(CurrentUser.GetRedirectPath(CurrentUser.Role()));
         }    
     }
     protected void btnSave_Click(object sender, EventArgs e)
@@ -51,6 +51,16 @@ public partial class Account_Login : System.Web.UI.Page
         user.SignInCount = count + 1;
         user.LastSignInAt = DateTime.Now;
         _quotationTrackingSystemDBEntities.SaveChanges();
-        Response.Redirect("~/Users/Index.aspx");
+        String returnUrl1 = "";
+        if (Request.QueryString["ReturnUrl"] != null)
+        {
+            returnUrl1 = Request.QueryString["ReturnUrl"];
+        }
+        else
+        {
+            returnUrl1 = CurrentUser.GetRedirectPath(user.Role);
+        }
+        Session["NoticeMessage"] = "Successfully logged in !";
+        Response.Redirect(returnUrl1);
     }
 }

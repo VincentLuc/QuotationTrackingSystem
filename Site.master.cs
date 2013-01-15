@@ -26,7 +26,16 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 
     protected void AdminMenuItems()
     {
-        
+        MenuItemCollection menuItems = NavigationMenu.Items;
+        List<MenuItem> toRemoveItems = new List<MenuItem>();
+        foreach (MenuItem menuItem in menuItems)
+        {
+            if (menuItem.Value == "Sales" || menuItem.Value == "UnderWriter")
+            {
+                toRemoveItems.Add(menuItem);
+            }
+        }
+        DeleteMenuItems(menuItems, toRemoveItems);
     }
 
     protected void SalesMenuItems()
@@ -35,7 +44,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         List<MenuItem> toRemoveItems = new List<MenuItem>();
         foreach (MenuItem menuItem in menuItems)
         {
-            if (menuItem.Text == "Users")
+            if (menuItem.Text == "Users" || menuItem.Value == "UnderWriter" || menuItem.Value == "Admin")
             {
                 toRemoveItems.Add(menuItem);
             }
@@ -49,7 +58,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         List<MenuItem> toRemoveItems = new List<MenuItem>();
         foreach (MenuItem menuItem in menuItems)
         {
-            if (menuItem.Text == "Users")
+            if (menuItem.Text == "Users" || menuItem.Value == "Sales" || menuItem.Value == "Admin")
             {
                 toRemoveItems.Add(menuItem);
             }
