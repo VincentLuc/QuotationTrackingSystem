@@ -28,6 +28,11 @@ public static class DateTimeHelper
         return result;
     }
 
+    public static DateTime ConvertToDateWithoutNull(string inputDateTime)
+    {
+        return DateTime.ParseExact(inputDateTime, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+    }
+
     public static string ToTimeStamp() {
         return DateTime.Now.ToString("yyyyddMMHHmmss");
     }

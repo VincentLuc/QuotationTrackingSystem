@@ -7,8 +7,8 @@
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/jquery-ui-1.9.0.custom.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/Custom.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="~/Scripts/jquery-1.8.2.js"></script>
-    <script type="text/javascript" src="~/Scripts/jquery-ui-1.9.0.custom.js"></script>
+    <script type="text/javascript" src="/QuotationTrackingSystem/Scripts/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="/QuotationTrackingSystem/Scripts/jquery-ui-1.9.0.custom.js"></script>
     <script type="text/javascript">
         $(function () {
             $(".close").click(function () {
@@ -53,6 +53,8 @@
                         <asp:MenuItem NavigateUrl="~/UnderWriters/Home.aspx" Text="Home" 
                             Value="UnderWriter"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Users/Index.aspx" Text="Users"/>
+                        <asp:MenuItem NavigateUrl="~/Visits/Index.aspx" Text="Visit" Value="Visit">
+                        </asp:MenuItem>
                     </Items>
                 </asp:Menu>
                 <% } %>

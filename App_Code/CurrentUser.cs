@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using QuotationTrackingSystemDBModel;
 
 /// <summary>
 /// Summary description for CurrentUser
@@ -13,6 +14,12 @@ public static class CurrentUser
         var cookie = FormsAuthentication.Decrypt(HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName].Value).UserData;
         //return int.Parse(HttpContext.Current.Session["currentUserId"].ToString());
         return int.Parse(cookie.Split('#')[1].ToString());
+    }
+
+    public static tblUser DbUser() {
+        QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
+        int CurrentUserId = Id();
+        return _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == CurrentUserId).First();
     }
 
     public static string Role() {
@@ -60,7 +67,7 @@ public static class CurrentUser
         {
             returnUrl1 = "/QuotationTrackingSystem/Admin/Home.aspx";
         }
-        else if (role == "Sales")
+        else if (role == "Sales" || role == "SalesSupervisor")
         {
             returnUrl1 = "/QuotationTrackingSystem/Sales/Home.aspx";
         }

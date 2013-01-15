@@ -73,7 +73,6 @@ public partial class Users_Details : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("Edit", typeof(string)));
         dt.Columns.Add(new DataColumn("Change Password", typeof(string)));
 
-        gvSalesUser.DataSource = _quotationTrackingSystemDBEntities.tblUsers.ToList();
         int SupervisorId = int.Parse(hdnFldUserId.Value);
         foreach (var x in _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Role == "Sales").Where(x => x.SupervisorId == SupervisorId).ToList())
         {

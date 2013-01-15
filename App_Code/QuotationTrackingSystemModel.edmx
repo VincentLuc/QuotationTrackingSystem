@@ -7,6 +7,11 @@
       <Schema Namespace="QuotationTrackingSystemDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="QuotationTrackingSystemDBModelStoreContainer">
           <EntitySet Name="tblUsers" EntityType="QuotationTrackingSystemDBModel.Store.tblUsers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Visits" EntityType="QuotationTrackingSystemDBModel.Store.Visits" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Visits_tblUsers" Association="QuotationTrackingSystemDBModel.Store.FK_Visits_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tblUsers">
           <Key>
@@ -26,6 +31,35 @@
           <Property Name="LastSignInAt" Type="datetime" />
           <Property Name="SignInCount" Type="int" />
         </EntityType>
+        <EntityType Name="Visits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClientName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ContactPerson" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Designation" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="LineOfInsurance" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="PolicyStartAt" Type="datetime" Nullable="false" />
+          <Property Name="Remarks" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Visits_tblUsers">
+          <End Role="tblUsers" Type="QuotationTrackingSystemDBModel.Store.tblUsers" Multiplicity="1" />
+          <End Role="Visits" Type="QuotationTrackingSystemDBModel.Store.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
@@ -33,6 +67,11 @@
       <Schema Namespace="QuotationTrackingSystemDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="QuotationTrackingSystemDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblUsers" EntityType="QuotationTrackingSystemDBModel.tblUser" />
+          <EntitySet Name="Visits" EntityType="QuotationTrackingSystemDBModel.Visit" />
+          <AssociationSet Name="FK_Visits_tblUsers" Association="QuotationTrackingSystemDBModel.FK_Visits_tblUsers">
+            <End Role="tblUsers" EntitySet="tblUsers" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="tblUser">
           <Key>
@@ -51,7 +90,38 @@
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" />
           <Property Name="LastSignInAt" Type="DateTime" />
           <Property Name="SignInCount" Type="Int32" />
+          <NavigationProperty Name="Visits" Relationship="QuotationTrackingSystemDBModel.FK_Visits_tblUsers" FromRole="tblUsers" ToRole="Visits" />
         </EntityType>
+        <EntityType Name="Visit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Designation" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LineOfInsurance" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PolicyStartAt" Type="DateTime" Nullable="false" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
+          <Property Name="UpdatedAt" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="tblUser" Relationship="QuotationTrackingSystemDBModel.FK_Visits_tblUsers" FromRole="Visits" ToRole="tblUsers" />
+        </EntityType>
+        <Association Name="FK_Visits_tblUsers">
+          <End Role="tblUsers" Type="QuotationTrackingSystemDBModel.tblUser" Multiplicity="1" />
+          <End Role="Visits" Type="QuotationTrackingSystemDBModel.Visit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -72,6 +142,20 @@
             <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
             <ScalarProperty Name="LastSignInAt" ColumnName="LastSignInAt" />
             <ScalarProperty Name="SignInCount" ColumnName="SignInCount" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Visits"><EntityTypeMapping TypeName="QuotationTrackingSystemDBModel.Visit"><MappingFragment StoreEntitySet="Visits">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+            <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+            <ScalarProperty Name="Designation" ColumnName="Designation" />
+            <ScalarProperty Name="Phone" ColumnName="Phone" />
+            <ScalarProperty Name="LineOfInsurance" ColumnName="LineOfInsurance" />
+            <ScalarProperty Name="Status" ColumnName="Status" />
+            <ScalarProperty Name="PolicyStartAt" ColumnName="PolicyStartAt" />
+            <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+            <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
@@ -94,7 +178,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="QuotationTrackingSystemModel">
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.tblUser" Width="1.5" PointX="0.75" PointY="0.75" Height="3.5186979166666665" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.tblUser" Width="1.5" PointX="0.75" PointY="1" Height="3.7109993489583331" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Visit" Width="1.5" PointX="3" PointY="1.125" Height="3.5186979166666656" IsExpanded="true" />
+        <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Visits_tblUsers" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.8843489583333328" />
+          <ConnectorPoint PointX="3" PointY="2.8843489583333328" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>
