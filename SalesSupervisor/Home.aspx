@@ -9,7 +9,7 @@
 <div class="clear"></div>
     <asp:GridView ID="gvSalesUsers" runat="server" AllowPaging="True" 
         onpageindexchanging="gvSalesUsers_PageIndexChanging" 
-        onrowdatabound="gvSalesUsers_RowDataBound" Width="100%">
+        onrowdatabound="gvSalesUsers_RowDataBound" Width="100%" CssClass="table table-bordered">
     </asp:GridView>
 </asp:Content>
 

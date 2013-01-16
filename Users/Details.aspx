@@ -18,7 +18,7 @@
 </h3>
 <div class="clear"></div>
 <%} %>
-    <table style="width:100%;" class="borderTable">
+    <table style="width:100%;" class="table table-bordered">
         <tr>
             <td align="left" style="width:25%;">First Name<asp:HiddenField ID="hdnFldUserId" runat="server" /></td>
             <td><%= _user.FirstName %></td>
@@ -70,7 +70,7 @@
     <hr />
     <asp:GridView ID="gvSalesUser" runat="server" 
         onpageindexchanging="gvSalesUser_PageIndexChanging" 
-        onrowdatabound="gvSalesUser_RowDataBound" Width="100%" AllowPaging="True">
+        onrowdatabound="gvSalesUser_RowDataBound" Width="100%" AllowPaging="True" CssClass="table table-bordered">
     </asp:GridView>
     <%} %>
 </asp:Content>

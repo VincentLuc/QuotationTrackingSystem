@@ -10,7 +10,8 @@
   <hr />
     <asp:GridView ID="gvUsers" runat="server" AllowPaging="True" 
         onpageindexchanging="gvUsers_PageIndexChanging" 
-        onrowdatabound="gvUsers_RowDataBound" PageSize="20" Width="100%">
+        onrowdatabound="gvUsers_RowDataBound" PageSize="20" Width="100%" 
+        CssClass="table table-bordered">
     </asp:GridView>
 </asp:Content>
 
