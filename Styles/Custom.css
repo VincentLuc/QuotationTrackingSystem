@@ -3,6 +3,14 @@
   width: 99.5%;
   margin-top: 0px;
 }
+.header
+{
+    background: #08C;
+}
+.hideSkiplink
+{
+    background: #010;
+}
 .main
 {
   min-height: 600px;

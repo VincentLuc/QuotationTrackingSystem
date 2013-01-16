@@ -9,6 +9,13 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!User.Identity.IsAuthenticated)
+        {
+            Response.Redirect("/QuotationTrackingSystem/Account/Login.aspx");
+        }
+        else if (User.Identity.IsAuthenticated)
+        {
+            Response.Redirect(CurrentUser.GetRedirectPath(CurrentUser.Role()));
+        }    
     }
 }
