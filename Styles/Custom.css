@@ -1,10 +1,11 @@
 ﻿.page 
 {
   width: 99.5%;
+  margin-top: 0px;
 }
 .main
 {
-  min-height: 550px;
+  min-height: 600px;
 }
 .footr
 {
