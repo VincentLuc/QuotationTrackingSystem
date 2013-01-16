@@ -28,7 +28,7 @@ public partial class Account_Login : System.Web.UI.Page
     {
         QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
         var encodedPassword = StringHelper.MD5Hash(txtPassword.Text);
-        var user = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.UserName == txtUserName.Text).Where(x => x.Password == encodedPassword).FirstOrDefault();
+        var user = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.UserName == txtUserName.Text).Where(x => x.Password == encodedPassword).Where(x => x.Status == "Active").FirstOrDefault();
         if (user == null) {
             errorDiv.Visible = true;
             return;
