@@ -24,7 +24,8 @@
 <hr />
     <asp:GridView ID="gvTodaysSalesVisits" runat="server" AllowPaging="True" 
         CssClass="table table-bordered" Width="100%" 
-        onpageindexchanging="gvTodaysSalesVisits_PageIndexChanging">
+        onpageindexchanging="gvTodaysSalesVisits_PageIndexChanging" 
+        EmptyDataText="No Visits for this Date !">
     </asp:GridView>
 </asp:Content>
 
