@@ -54,5 +54,6 @@ public partial class SalesSupervisor_Home : System.Web.UI.Page
 
         gvSalesUsers.DataSource = dt;
         gvSalesUsers.DataBind();
+
     }
 }

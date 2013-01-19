@@ -58,6 +58,8 @@
                         <asp:MenuItem NavigateUrl="~/Users/Index.aspx" Text="Users"/>
                         <asp:MenuItem NavigateUrl="~/Visits/Index.aspx" Text="Visit" Value="Visit">
                         </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/SalesSupervisor/TodaysVisit.aspx" 
+                            Text="Todays Visit" Value="SalesSupervisor"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
                 <% } %>

@@ -6,6 +6,7 @@
 .header
 {
     background: #08C;
+    border-bottom: solid 7px #000;
 }
 .hideSkiplink
 {
