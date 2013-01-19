@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
-    <title></title>
+    <title>ACIG-Quotation tracking System</title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/jquery-ui-1.9.0.custom.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/Custom.css" rel="stylesheet" type="text/css" />
@@ -60,6 +60,8 @@
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/SalesSupervisor/TodaysVisit.aspx" 
                             Text="Todays Visit" Value="SalesSupervisor"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/SalesSupervisor/Report.aspx" Text="Report" 
+                            Value="SalesSupervisor"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
                 <% } %>

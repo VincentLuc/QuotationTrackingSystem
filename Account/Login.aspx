@@ -29,7 +29,7 @@
       </p>
       <p>
           <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" 
-              Text="Sign in" CssClass="btn" />
+              Text="Sign in" CssClass="btn btn-primary" />
       </p>
     </fieldset>
   </div>
