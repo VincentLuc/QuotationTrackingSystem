@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
     <script type="text/javascript">
         $(function () {
-            $(".txtCalendarx").datepicker({
+            $(".txtCalendar").datepicker({
                 constrainInput: true,
                 dateFormat: "dd-mm-yy",
                 changeMonth: true,

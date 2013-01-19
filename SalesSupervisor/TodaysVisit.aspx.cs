@@ -41,9 +41,6 @@ public partial class SalesSupervisor_TodaysVisit : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("User Name", typeof(string)));
         dt.Columns.Add(new DataColumn("Visited At", typeof(string)));
         dt.Columns.Add(new DataColumn("Total Visits", typeof(string)));
-        
-        int CurrentUserId = CurrentUser.Id();
-        var list = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.SupervisorId == CurrentUserId).ToList();
 
         foreach (var x in visitDetails)
         {
@@ -67,7 +64,7 @@ public partial class SalesSupervisor_TodaysVisit : System.Web.UI.Page
         var qurey =
           from v in _quotationTrackingSystemDBEntities.Visits
           join u in _quotationTrackingSystemDBEntities.tblUsers
-            on v.UserId equals u.Id
+          on v.UserId equals u.Id
           where v.CreatedAt >= startTime && v.CreatedAt <= endTime && u.SupervisorId == currentUserId
           group v by new { y = v.CreatedAt.Year, m = v.CreatedAt.Month, d = v.CreatedAt.Day, u.UserName } into x
           select new { x.Key.UserName, x.Key.d, x.Key.m, x.Key.y, countx = x.Count() };

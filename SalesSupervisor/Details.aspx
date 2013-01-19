@@ -3,23 +3,30 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-<h3>Sales Supervisor sales users !</h3>
+<h3 class="left">Sales user details visits !</h3>
+<div class="right">
+    <asp:HiddenField ID="hdnFldSalesUserId" runat="server" />
+<asp:TextBox ID="txtQueryDate" runat="server" CssClass="txtCalendar"></asp:TextBox>
+    <asp:Button ID="btnSearch" runat="server" onclick="btnSearch_Click" 
+        Text="Search" class="btn btn-primary" />
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".txtCalendar").datepicker({
+            constrainInput: true,
+            dateFormat: "dd-mm-yy",
+            changeMonth: true,
+            changeYear: true
+        });
+        $(".txtCalendar").attr("readonly", true);
+    });
+</script>
+<div class="clear"></div>
 <hr />
 <div class="clear"></div>
-<table class="table table-bordered">
-<tr>
-<th>User Name</th>
-<th>Visisted Date</th>
-<th>Total Count</th>
-</tr>
-<% foreach (var x in _visitDetailsList)
-   { %>
-   <tr>
-   <td><%= x.UserName %></td>
-   <td><%= x.VisitedAt %></td>
-   <td><%= x.Count %></td>
-   </tr>
-<% } %>
-</table>
+    <asp:GridView ID="gvVisitDetails" runat="server" AllowPaging="True" 
+        CssClass="table table-bordered" EmptyDataText="No Visits for this search criteria !" 
+        onpageindexchanging="gvVisitDetails_PageIndexChanging" Width="100%">
+    </asp:GridView>
 </asp:Content>
 

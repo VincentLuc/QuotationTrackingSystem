@@ -11,7 +11,10 @@ public partial class SalesSupervisor_Home : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        BindDataToGridView();
+        if (!IsPostBack)
+        {
+            BindDataToGridView();
+        }
     }
 
      protected void gvSalesUsers_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -22,6 +25,14 @@ public partial class SalesSupervisor_Home : System.Web.UI.Page
     protected void gvSalesUsers_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType != DataControlRowType.DataRow) return;
+
+        LinkButton lb = new LinkButton();
+        lb.CommandArgument = e.Row.Cells[4].Text;
+        lb.CommandName = "NumClick";
+        lb.Text = "Details";
+        lb.PostBackUrl = "~/SalesSupervisor/Details.aspx?id=" + e.Row.Cells[4].Text;
+        e.Row.Cells[4].Controls.Add((Control)lb);
+
         for (int i = 0; i < e.Row.Cells.Count; i++)
         {
             e.Row.Cells[i].HorizontalAlign = HorizontalAlign.Center;
@@ -38,6 +49,7 @@ public partial class SalesSupervisor_Home : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("Role", typeof(string)));
         dt.Columns.Add(new DataColumn("Status", typeof(string)));
         dt.Columns.Add(new DataColumn("Created At", typeof(string)));
+        dt.Columns.Add(new DataColumn("Details", typeof(string)));
 
         int CurrentUserId = CurrentUser.Id();
         var list = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.SupervisorId == CurrentUserId).ToList();
@@ -46,9 +58,10 @@ public partial class SalesSupervisor_Home : System.Web.UI.Page
         {
             dr = dt.NewRow();
             dr["User Name"] = x.UserName;
-            dr["Role"] = StringHelper.ToSentenceCase(x.Role);
+            dr["Role"] = StringHelper.ToSentenceCase(x.Role.ToString());
             dr["Status"] = x.Status;
             dr["Created At"] = DateTimeHelper.ConvertToString(x.CreatedAt.ToString());
+            dr["Details"] = x.Id;
             dt.Rows.Add(dr);
         }
 
