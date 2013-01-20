@@ -33,7 +33,7 @@
     <label>Role</label>
     <asp:DropDownList ID="ddlRole" runat="server">
       <asp:ListItem Value="0">Select</asp:ListItem>
-      <asp:ListItem>Admin </asp:ListItem>
+      <asp:ListItem Value="Admin">Admin </asp:ListItem>
       <asp:ListItem Value="SalesSupervisor">Sales Supervisor</asp:ListItem>
       <asp:ListItem Value="UnderWriter">Under Writer</asp:ListItem>
     </asp:DropDownList>
