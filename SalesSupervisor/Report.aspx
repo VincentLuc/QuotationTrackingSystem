@@ -41,15 +41,19 @@
 </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-    <h3>Sales user details report !</h3>
-<br />
-<div class="left">
+<div class="left"> <h3 style="margin-top:33px;">Sales user details report !</h3> </div>
+<div class="right">
     <label style="display: inline-block;width: 231px;"> From Date </label>
     <label style="display: inline-block;"> To Date </label>
     <br />
     <asp:TextBox ID="txtFromDate" runat="server" CssClass="fromDate"></asp:TextBox>
-    &nbsp;
+    <asp:RequiredFieldValidator ID="rfvFromDate" runat="server" 
+        ControlToValidate="txtFromDate" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
+    &nbsp;&nbsp;
     <asp:TextBox ID="txtToDate" runat="server" CssClass="toDate"></asp:TextBox>
+        <asp:RequiredFieldValidator ID="rfvToDate" runat="server" 
+        ControlToValidate="txtToDate" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
+    &nbsp;&nbsp;
     <asp:Button ID="btnSearch" runat="server" Text="Search" class="btn btn-primary" 
         onclick="btnSearch_Click" />
 </div>

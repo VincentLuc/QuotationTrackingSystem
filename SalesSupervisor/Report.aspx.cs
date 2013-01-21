@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using QuotationTrackingSystemDBModel;
 using System.Data;
+using System.Data.Objects.SqlClient;
 
 public partial class SalesSupervisor_Report : System.Web.UI.Page
 {
@@ -46,8 +47,8 @@ public partial class SalesSupervisor_Report : System.Web.UI.Page
         {
             dr = dt.NewRow();
             dr["User Name"] = x.UserName;
-            dr["Line of Insurance"] = x.LineOfInsurance;
-            dr["Status"] = x.Status;
+            dr["Line of Insurance"] = StringHelper.ToSentenceCase(x.LineOfInsurance);
+            dr["Status"] = StringHelper.ToSentenceCase(x.Status);
             dr["Visited At"] = x.VisitedAt;
             dr["Total Visits"] = x.Count;
             dt.Rows.Add(dr);
@@ -71,6 +72,8 @@ public partial class SalesSupervisor_Report : System.Web.UI.Page
                     on v.UserId equals u.Id
                     where v.CreatedAt >= startTime && v.CreatedAt <= endTime && u.SupervisorId == currentUserId
                     group v by new { y = v.CreatedAt.Year, m = v.CreatedAt.Month, d = v.CreatedAt.Day, u.UserName, v.LineOfInsurance, v.Status } into x
+                    let VisitedAt = SqlFunctions.StringConvert((decimal) x.Key.d) + "-" + SqlFunctions.StringConvert((decimal) x.Key.m) + "-" + SqlFunctions.StringConvert((decimal) x.Key.y)
+                    orderby VisitedAt
                     select new { x.Key.UserName, x.Key.d, x.Key.m, x.Key.y, x.Key.LineOfInsurance, x.Key.Status, countx = x.Count() };
         var listData = query.ToList();
 
