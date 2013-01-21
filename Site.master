@@ -24,12 +24,11 @@
     <form runat="server">
     <div class="page">
         <div class="header">
-            <div class="title">
-                <h1>
-                    Quotation tracking System
-                </h1>
+            <div class="title" style="padding:0">
+            <img src="/QuotationTrackingSystem/Images/acig_logo.png" alt="Acig Logo" style="position:relative;display:inline-block;top:10px;left:11px;width:35px;"/>
+            <h1 style="display:inline-block;font-family:Times New Roman"><a href="/QuotationTrackingSystem/" style="color:#f9f9f9;text-decoration:none;">Quotation tracking System</a></h1>
             </div>
-            <div class="loginDisplay">
+            <div class="loginDisplay" style="float:right;margin-top:6px;">
                  <% if (Page.User.Identity.IsAuthenticated)
                  {%>
                  Logged In as <%= Page.User.Identity.Name %> | 
