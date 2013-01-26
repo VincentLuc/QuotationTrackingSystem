@@ -21,7 +21,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form runat="server">
+    <form runat="server" enctype="multipart/form-data">
     <div class="page">
         <div class="header">
             <div class="title" style="padding:0">
@@ -61,6 +61,8 @@
                             Text="Todays Visit" Value="SalesSupervisor"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/SalesSupervisor/Report.aspx" Text="Report" 
                             Value="SalesSupervisor"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Enquiries/Index.aspx" Text="Enquiries" 
+                            Value="SalesAndSalesSupervisor"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
                 <% } %>

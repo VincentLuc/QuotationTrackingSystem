@@ -18,6 +18,9 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
+[assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Enquiries_tblUsers", "tblUsers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.tblUser), "Enquiries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Enquiry), true)]
+[assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Events_Enquiries", "Enquiries", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.Enquiry), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Event), true)]
+[assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Messages_Enquiries", "Enquiries", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.Enquiry), "Messages", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Message), true)]
 [assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Visits_tblUsers", "tblUsers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.tblUser), "Visits", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Visit), true)]
 
 #endregion
@@ -73,6 +76,54 @@ namespace QuotationTrackingSystemDBModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Enquiry> Enquiries
+        {
+            get
+            {
+                if ((_Enquiries == null))
+                {
+                    _Enquiries = base.CreateObjectSet<Enquiry>("Enquiries");
+                }
+                return _Enquiries;
+            }
+        }
+        private ObjectSet<Enquiry> _Enquiries;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Event> Events
+        {
+            get
+            {
+                if ((_Events == null))
+                {
+                    _Events = base.CreateObjectSet<Event>("Events");
+                }
+                return _Events;
+            }
+        }
+        private ObjectSet<Event> _Events;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Message> Messages
+        {
+            get
+            {
+                if ((_Messages == null))
+                {
+                    _Messages = base.CreateObjectSet<Message>("Messages");
+                }
+                return _Messages;
+            }
+        }
+        private ObjectSet<Message> _Messages;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<tblUser> tblUsers
         {
             get
@@ -106,6 +157,30 @@ namespace QuotationTrackingSystemDBModel
         #region AddTo Methods
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Enquiries EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEnquiries(Enquiry enquiry)
+        {
+            base.AddObject("Enquiries", enquiry);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Events EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEvents(Event @event)
+        {
+            base.AddObject("Events", @event);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Messages EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToMessages(Message message)
+        {
+            base.AddObject("Messages", message);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the tblUsers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTotblUsers(tblUser tblUser)
@@ -128,6 +203,1046 @@ namespace QuotationTrackingSystemDBModel
     #endregion
     
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="QuotationTrackingSystemDBModel", Name="Enquiry")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Enquiry : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Enquiry object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="clientName">Initial value of the ClientName property.</param>
+        /// <param name="contactPersonName">Initial value of the ContactPersonName property.</param>
+        /// <param name="phone">Initial value of the Phone property.</param>
+        /// <param name="insuranceType">Initial value of the InsuranceType property.</param>
+        /// <param name="status">Initial value of the Status property.</param>
+        /// <param name="address">Initial value of the Address property.</param>
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="underWriterId">Initial value of the UnderWriterId property.</param>
+        /// <param name="createdAt">Initial value of the CreatedAt property.</param>
+        /// <param name="updatedAt">Initial value of the UpdatedAt property.</param>
+        public static Enquiry CreateEnquiry(global::System.Int32 id, global::System.String clientName, global::System.String contactPersonName, global::System.String phone, global::System.String insuranceType, global::System.String status, global::System.String address, global::System.Int32 createdBy, global::System.Int32 underWriterId, global::System.DateTime createdAt, global::System.DateTime updatedAt)
+        {
+            Enquiry enquiry = new Enquiry();
+            enquiry.Id = id;
+            enquiry.ClientName = clientName;
+            enquiry.ContactPersonName = contactPersonName;
+            enquiry.Phone = phone;
+            enquiry.InsuranceType = insuranceType;
+            enquiry.Status = status;
+            enquiry.Address = address;
+            enquiry.CreatedBy = createdBy;
+            enquiry.UnderWriterId = underWriterId;
+            enquiry.CreatedAt = createdAt;
+            enquiry.UpdatedAt = updatedAt;
+            return enquiry;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ClientName
+        {
+            get
+            {
+                return _ClientName;
+            }
+            set
+            {
+                OnClientNameChanging(value);
+                ReportPropertyChanging("ClientName");
+                _ClientName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ClientName");
+                OnClientNameChanged();
+            }
+        }
+        private global::System.String _ClientName;
+        partial void OnClientNameChanging(global::System.String value);
+        partial void OnClientNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ContactPersonName
+        {
+            get
+            {
+                return _ContactPersonName;
+            }
+            set
+            {
+                OnContactPersonNameChanging(value);
+                ReportPropertyChanging("ContactPersonName");
+                _ContactPersonName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ContactPersonName");
+                OnContactPersonNameChanged();
+            }
+        }
+        private global::System.String _ContactPersonName;
+        partial void OnContactPersonNameChanging(global::System.String value);
+        partial void OnContactPersonNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Phone
+        {
+            get
+            {
+                return _Phone;
+            }
+            set
+            {
+                OnPhoneChanging(value);
+                ReportPropertyChanging("Phone");
+                _Phone = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Phone");
+                OnPhoneChanged();
+            }
+        }
+        private global::System.String _Phone;
+        partial void OnPhoneChanging(global::System.String value);
+        partial void OnPhoneChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CRCopyName
+        {
+            get
+            {
+                return _CRCopyName;
+            }
+            set
+            {
+                OnCRCopyNameChanging(value);
+                ReportPropertyChanging("CRCopyName");
+                _CRCopyName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("CRCopyName");
+                OnCRCopyNameChanged();
+            }
+        }
+        private global::System.String _CRCopyName;
+        partial void OnCRCopyNameChanging(global::System.String value);
+        partial void OnCRCopyNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CRCopyPath
+        {
+            get
+            {
+                return _CRCopyPath;
+            }
+            set
+            {
+                OnCRCopyPathChanging(value);
+                ReportPropertyChanging("CRCopyPath");
+                _CRCopyPath = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("CRCopyPath");
+                OnCRCopyPathChanged();
+            }
+        }
+        private global::System.String _CRCopyPath;
+        partial void OnCRCopyPathChanging(global::System.String value);
+        partial void OnCRCopyPathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LossRatioReportName
+        {
+            get
+            {
+                return _LossRatioReportName;
+            }
+            set
+            {
+                OnLossRatioReportNameChanging(value);
+                ReportPropertyChanging("LossRatioReportName");
+                _LossRatioReportName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LossRatioReportName");
+                OnLossRatioReportNameChanged();
+            }
+        }
+        private global::System.String _LossRatioReportName;
+        partial void OnLossRatioReportNameChanging(global::System.String value);
+        partial void OnLossRatioReportNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LossRatioReportPath
+        {
+            get
+            {
+                return _LossRatioReportPath;
+            }
+            set
+            {
+                OnLossRatioReportPathChanging(value);
+                ReportPropertyChanging("LossRatioReportPath");
+                _LossRatioReportPath = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LossRatioReportPath");
+                OnLossRatioReportPathChanged();
+            }
+        }
+        private global::System.String _LossRatioReportPath;
+        partial void OnLossRatioReportPathChanging(global::System.String value);
+        partial void OnLossRatioReportPathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String InsuranceType
+        {
+            get
+            {
+                return _InsuranceType;
+            }
+            set
+            {
+                OnInsuranceTypeChanging(value);
+                ReportPropertyChanging("InsuranceType");
+                _InsuranceType = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("InsuranceType");
+                OnInsuranceTypeChanged();
+            }
+        }
+        private global::System.String _InsuranceType;
+        partial void OnInsuranceTypeChanging(global::System.String value);
+        partial void OnInsuranceTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> PolicyStartAt
+        {
+            get
+            {
+                return _PolicyStartAt;
+            }
+            set
+            {
+                OnPolicyStartAtChanging(value);
+                ReportPropertyChanging("PolicyStartAt");
+                _PolicyStartAt = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PolicyStartAt");
+                OnPolicyStartAtChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _PolicyStartAt;
+        partial void OnPolicyStartAtChanging(Nullable<global::System.DateTime> value);
+        partial void OnPolicyStartAtChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Remarks
+        {
+            get
+            {
+                return _Remarks;
+            }
+            set
+            {
+                OnRemarksChanging(value);
+                ReportPropertyChanging("Remarks");
+                _Remarks = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Remarks");
+                OnRemarksChanged();
+            }
+        }
+        private global::System.String _Remarks;
+        partial void OnRemarksChanging(global::System.String value);
+        partial void OnRemarksChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.Int32 _CreatedBy;
+        partial void OnCreatedByChanging(global::System.Int32 value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UnderWriterId
+        {
+            get
+            {
+                return _UnderWriterId;
+            }
+            set
+            {
+                OnUnderWriterIdChanging(value);
+                ReportPropertyChanging("UnderWriterId");
+                _UnderWriterId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UnderWriterId");
+                OnUnderWriterIdChanged();
+            }
+        }
+        private global::System.Int32 _UnderWriterId;
+        partial void OnUnderWriterIdChanging(global::System.Int32 value);
+        partial void OnUnderWriterIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CompanyName
+        {
+            get
+            {
+                return _CompanyName;
+            }
+            set
+            {
+                OnCompanyNameChanging(value);
+                ReportPropertyChanging("CompanyName");
+                _CompanyName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("CompanyName");
+                OnCompanyNameChanged();
+            }
+        }
+        private global::System.String _CompanyName;
+        partial void OnCompanyNameChanging(global::System.String value);
+        partial void OnCompanyNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AcceptedQuotation
+        {
+            get
+            {
+                return _AcceptedQuotation;
+            }
+            set
+            {
+                OnAcceptedQuotationChanging(value);
+                ReportPropertyChanging("AcceptedQuotation");
+                _AcceptedQuotation = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AcceptedQuotation");
+                OnAcceptedQuotationChanged();
+            }
+        }
+        private global::System.String _AcceptedQuotation;
+        partial void OnAcceptedQuotationChanging(global::System.String value);
+        partial void OnAcceptedQuotationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedAt
+        {
+            get
+            {
+                return _CreatedAt;
+            }
+            set
+            {
+                OnCreatedAtChanging(value);
+                ReportPropertyChanging("CreatedAt");
+                _CreatedAt = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedAt");
+                OnCreatedAtChanged();
+            }
+        }
+        private global::System.DateTime _CreatedAt;
+        partial void OnCreatedAtChanging(global::System.DateTime value);
+        partial void OnCreatedAtChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime UpdatedAt
+        {
+            get
+            {
+                return _UpdatedAt;
+            }
+            set
+            {
+                OnUpdatedAtChanging(value);
+                ReportPropertyChanging("UpdatedAt");
+                _UpdatedAt = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UpdatedAt");
+                OnUpdatedAtChanged();
+            }
+        }
+        private global::System.DateTime _UpdatedAt;
+        partial void OnUpdatedAtChanging(global::System.DateTime value);
+        partial void OnUpdatedAtChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Enquiries_tblUsers", "tblUsers")]
+        public tblUser tblUser
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Enquiries_tblUsers", "tblUsers").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Enquiries_tblUsers", "tblUsers").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<tblUser> tblUserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Enquiries_tblUsers", "tblUsers");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Enquiries_tblUsers", "tblUsers", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Events_Enquiries", "Events")]
+        public EntityCollection<Event> Events
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("QuotationTrackingSystemDBModel.FK_Events_Enquiries", "Events");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("QuotationTrackingSystemDBModel.FK_Events_Enquiries", "Events", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Messages_Enquiries", "Messages")]
+        public EntityCollection<Message> Messages
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Message>("QuotationTrackingSystemDBModel.FK_Messages_Enquiries", "Messages");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Message>("QuotationTrackingSystemDBModel.FK_Messages_Enquiries", "Messages", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="QuotationTrackingSystemDBModel", Name="Event")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Event : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Event object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="state">Initial value of the State property.</param>
+        /// <param name="enquiryId">Initial value of the EnquiryId property.</param>
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="createdAt">Initial value of the CreatedAt property.</param>
+        public static Event CreateEvent(global::System.Int32 id, global::System.String state, global::System.Int32 enquiryId, global::System.String createdBy, global::System.DateTime createdAt)
+        {
+            Event @event = new Event();
+            @event.Id = id;
+            @event.State = state;
+            @event.EnquiryId = enquiryId;
+            @event.CreatedBy = createdBy;
+            @event.CreatedAt = createdAt;
+            return @event;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String State
+        {
+            get
+            {
+                return _State;
+            }
+            set
+            {
+                OnStateChanging(value);
+                ReportPropertyChanging("State");
+                _State = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("State");
+                OnStateChanged();
+            }
+        }
+        private global::System.String _State;
+        partial void OnStateChanging(global::System.String value);
+        partial void OnStateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EnquiryId
+        {
+            get
+            {
+                return _EnquiryId;
+            }
+            set
+            {
+                OnEnquiryIdChanging(value);
+                ReportPropertyChanging("EnquiryId");
+                _EnquiryId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EnquiryId");
+                OnEnquiryIdChanged();
+            }
+        }
+        private global::System.Int32 _EnquiryId;
+        partial void OnEnquiryIdChanging(global::System.Int32 value);
+        partial void OnEnquiryIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.String _CreatedBy;
+        partial void OnCreatedByChanging(global::System.String value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedAt
+        {
+            get
+            {
+                return _CreatedAt;
+            }
+            set
+            {
+                OnCreatedAtChanging(value);
+                ReportPropertyChanging("CreatedAt");
+                _CreatedAt = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedAt");
+                OnCreatedAtChanged();
+            }
+        }
+        private global::System.DateTime _CreatedAt;
+        partial void OnCreatedAtChanging(global::System.DateTime value);
+        partial void OnCreatedAtChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Events_Enquiries", "Enquiries")]
+        public Enquiry Enquiry
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Events_Enquiries", "Enquiries").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Events_Enquiries", "Enquiries").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Enquiry> EnquiryReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Events_Enquiries", "Enquiries");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Events_Enquiries", "Enquiries", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="QuotationTrackingSystemDBModel", Name="Message")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Message : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Message object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="text">Initial value of the Text property.</param>
+        /// <param name="enquiryId">Initial value of the EnquiryId property.</param>
+        /// <param name="createdBy">Initial value of the CreatedBy property.</param>
+        /// <param name="createdAt">Initial value of the CreatedAt property.</param>
+        public static Message CreateMessage(global::System.Int32 id, global::System.String text, global::System.Int32 enquiryId, global::System.String createdBy, global::System.DateTime createdAt)
+        {
+            Message message = new Message();
+            message.Id = id;
+            message.Text = text;
+            message.EnquiryId = enquiryId;
+            message.CreatedBy = createdBy;
+            message.CreatedAt = createdAt;
+            return message;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Text
+        {
+            get
+            {
+                return _Text;
+            }
+            set
+            {
+                OnTextChanging(value);
+                ReportPropertyChanging("Text");
+                _Text = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Text");
+                OnTextChanged();
+            }
+        }
+        private global::System.String _Text;
+        partial void OnTextChanging(global::System.String value);
+        partial void OnTextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FileName
+        {
+            get
+            {
+                return _FileName;
+            }
+            set
+            {
+                OnFileNameChanging(value);
+                ReportPropertyChanging("FileName");
+                _FileName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FileName");
+                OnFileNameChanged();
+            }
+        }
+        private global::System.String _FileName;
+        partial void OnFileNameChanging(global::System.String value);
+        partial void OnFileNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FilePath
+        {
+            get
+            {
+                return _FilePath;
+            }
+            set
+            {
+                OnFilePathChanging(value);
+                ReportPropertyChanging("FilePath");
+                _FilePath = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FilePath");
+                OnFilePathChanged();
+            }
+        }
+        private global::System.String _FilePath;
+        partial void OnFilePathChanging(global::System.String value);
+        partial void OnFilePathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EnquiryId
+        {
+            get
+            {
+                return _EnquiryId;
+            }
+            set
+            {
+                OnEnquiryIdChanging(value);
+                ReportPropertyChanging("EnquiryId");
+                _EnquiryId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EnquiryId");
+                OnEnquiryIdChanged();
+            }
+        }
+        private global::System.Int32 _EnquiryId;
+        partial void OnEnquiryIdChanging(global::System.Int32 value);
+        partial void OnEnquiryIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CreatedBy
+        {
+            get
+            {
+                return _CreatedBy;
+            }
+            set
+            {
+                OnCreatedByChanging(value);
+                ReportPropertyChanging("CreatedBy");
+                _CreatedBy = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("CreatedBy");
+                OnCreatedByChanged();
+            }
+        }
+        private global::System.String _CreatedBy;
+        partial void OnCreatedByChanging(global::System.String value);
+        partial void OnCreatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedAt
+        {
+            get
+            {
+                return _CreatedAt;
+            }
+            set
+            {
+                OnCreatedAtChanging(value);
+                ReportPropertyChanging("CreatedAt");
+                _CreatedAt = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedAt");
+                OnCreatedAtChanged();
+            }
+        }
+        private global::System.DateTime _CreatedAt;
+        partial void OnCreatedAtChanging(global::System.DateTime value);
+        partial void OnCreatedAtChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Messages_Enquiries", "Enquiries")]
+        public Enquiry Enquiry
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Messages_Enquiries", "Enquiries").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Messages_Enquiries", "Enquiries").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Enquiry> EnquiryReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Messages_Enquiries", "Enquiries");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Messages_Enquiries", "Enquiries", value);
+                }
+            }
+        }
+
+        #endregion
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -485,6 +1600,28 @@ namespace QuotationTrackingSystemDBModel
         #endregion
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Enquiries_tblUsers", "Enquiries")]
+        public EntityCollection<Enquiry> Enquiries
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Enquiry>("QuotationTrackingSystemDBModel.FK_Enquiries_tblUsers", "Enquiries");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Enquiry>("QuotationTrackingSystemDBModel.FK_Enquiries_tblUsers", "Enquiries", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
