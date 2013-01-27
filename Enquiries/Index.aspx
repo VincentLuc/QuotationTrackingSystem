@@ -12,7 +12,8 @@
     <asp:GridView ID="gvEnquiries" runat="server" AllowPaging="True" 
         EmptyDataText="There are no enquiries !" 
         onpageindexchanging="gvEnquiries_PageIndexChanging" 
-        onrowdatabound="gvEnquiries_RowDataBound" PageSize="1" Width="100%">
+        onrowdatabound="gvEnquiries_RowDataBound" PageSize="1" Width="100%" 
+        CssClass="table table-bordered">
     </asp:GridView>
 
 </asp:Content>
