@@ -35,6 +35,13 @@
   <p>
     <label>Type of Insurance</label>
       <asp:DropDownList ID="ddlInsuranceType" runat="server">
+          <asp:ListItem Value="0">Select</asp:ListItem>
+          <asp:ListItem>Motor</asp:ListItem>
+          <asp:ListItem Value="GroupMedical">Group Medical</asp:ListItem>
+          <asp:ListItem>Property</asp:ListItem>
+          <asp:ListItem Value="GeneralAccident">General Accident</asp:ListItem>
+          <asp:ListItem>Marine</asp:ListItem>
+          <asp:ListItem>Engineering</asp:ListItem>
       </asp:DropDownList>
     <asp:RequiredFieldValidator ID="rfvInsuranceType" runat="server" 
                     ControlToValidate="ddlInsuranceType" ForeColor="#FF3300" 

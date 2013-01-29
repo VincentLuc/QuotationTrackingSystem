@@ -27,7 +27,6 @@ public partial class Enquiries_Edit : System.Web.UI.Page
                 return;
             }
             BindDdlUnerderWritersDropDown();
-            BindDdInsuranceTypesDropDown();
             ddlUnderwriterId.SelectedValue = enquiry.UnderWriterId.ToString();
             ddlInsuranceType.SelectedValue = enquiry.InsuranceType;
             txtClientName.Text = enquiry.ClientName;
@@ -95,32 +94,6 @@ public partial class Enquiries_Edit : System.Web.UI.Page
         ddlUnderwriterId.DataTextField = table.Columns["Text"].ColumnName;
         ddlUnderwriterId.DataValueField = table.Columns["Value"].ColumnName;
         ddlUnderwriterId.DataBind();
-    }
-
-    protected void BindDdInsuranceTypesDropDown()
-    {
-        var _users = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Role == "UnderWriter");
-        string[] text = {"Motor", "Group Medical", "Property", "General Accident", "Marine", "Engineering"};
-        string[] values = { "Motor", "GroupMedical", "Property", "GeneralAccident", "Marine", "Engineering" };
-        DataTable table = new DataTable();
-        table.Columns.Add("Text");
-        table.Columns.Add("Value");
-        DataRow defaultRow = table.NewRow();
-        defaultRow["Text"] = "Select";
-        defaultRow["Value"] = 0;
-        table.Rows.Add(defaultRow);
-        int i = 0;
-        foreach (var x in text){
-            DataRow dr = table.NewRow();
-            dr["Value"] = values[i];
-            dr["Text"] = x;
-            table.Rows.Add(dr);
-            i += 1;
-        }
-        ddlInsuranceType.DataSource = table;
-        ddlInsuranceType.DataTextField = table.Columns["Text"].ColumnName;
-        ddlInsuranceType.DataValueField = table.Columns["Value"].ColumnName;
-        ddlInsuranceType.DataBind();
     }
    
 }
