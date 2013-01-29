@@ -29,7 +29,7 @@ public partial class Enquiries_New : System.Web.UI.Page
         var _currentUserID = CurrentUser.Id();
         var _createdAt = DateTime.Now;
         var _underWriterId = int.Parse(ddlUnderwriterId.SelectedValue);
-        _enquiry = new Enquiry { ClientName = txtClientName.Text, ContactPersonName = txtContactPersonName.Text, Phone = txtPhone.Text, InsuranceType = ddlInuranceType.SelectedValue, PolicyStartAt = _policyStartAt, Status = "Created", Address = txtAddress.Text, Remarks = txtRemarks.Text, CreatedBy = _currentUserID, UnderWriterId = _underWriterId, CreatedAt = _createdAt, UpdatedAt = _createdAt };
+        _enquiry = new Enquiry { ClientName = txtClientName.Text, ContactPersonName = txtContactPersonName.Text, Phone = txtPhone.Text, InsuranceType = ddlInsuranceType.SelectedValue, PolicyStartAt = _policyStartAt, Status = "Created", Address = txtAddress.Text, Remarks = txtRemarks.Text, CreatedBy = _currentUserID, UnderWriterId = _underWriterId, CreatedAt = _createdAt, UpdatedAt = _createdAt };
         var _currentUserName = User.Identity.Name;
         _event = new Event { State = "Created", CreatedAt = _createdAt, CreatedBy = _currentUserName };
         _enquiry.Events.Add(_event);
@@ -37,7 +37,8 @@ public partial class Enquiries_New : System.Web.UI.Page
         _quotationTrackingSystemDBEntities.SaveChanges();
 
         HttpPostedFile lossRatioFile = Request.Files["fileLossRatioReport"];
-        Hashtable hash = GetFilesDetails(fileCRCopy, lossRatioFile, _enquiry);
+
+        Hashtable hash = FileHelper.GetFilesDetails(fileCRCopy, lossRatioFile, _enquiry);
         _enquiry.CRCopyName = hash["CRFileName"].ToString();
         _enquiry.CRCopyPath = hash["CRFilePath"].ToString();
         _enquiry.LossRatioReportName = hash["LossRatioFileName"].ToString();
@@ -51,28 +52,5 @@ public partial class Enquiries_New : System.Web.UI.Page
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("Index.aspx");
-    }
-
-    public Hashtable GetFilesDetails(HttpPostedFile crFile, HttpPostedFile lossRatioFilex, Enquiry enquiry) {
-        var _timeStamp = DateTimeHelper.ToTimeStamp();
-        var path = FileHelper.GetEnquiryFolderPath(enquiry.Id);
-        var _CRFileName = "cr_file_" + _timeStamp + "_" + Path.GetFileName(crFile.FileName);
-        var _CRFilePath = path + "\\" + _CRFileName;
-        crFile.SaveAs(_CRFilePath);
-
-        var _lossRatioFileName = "";
-        var _lossRatioFilePath = "";
-
-        if (lossRatioFilex != null && lossRatioFilex.ContentLength > 0){
-            _lossRatioFileName = "loss_ratio_" + _timeStamp + "_" + Path.GetFileName(lossRatioFilex.FileName);
-            _lossRatioFilePath = path + "\\" + _lossRatioFileName ;
-            lossRatioFilex.SaveAs(_lossRatioFilePath);
-        }
-        Hashtable _hash = new Hashtable();
-        _hash.Add("CRFileName", _CRFileName);
-        _hash.Add("CRFilePath", _CRFilePath);
-        _hash.Add("LossRatioFileName", _lossRatioFileName);
-        _hash.Add("LossRatioFilePath", _lossRatioFilePath);
-        return _hash;
     }
 }

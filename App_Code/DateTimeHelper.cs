@@ -35,7 +35,7 @@ public static class DateTimeHelper
     }
 
     public static string ToTimeStamp() {
-        return DateTime.Now.ToString("yyyyddMMHHmmss");
+        return DateTime.Now.ToString("yyyyMMddHHmmss");
     }
 
     public static void GetStartAndEndTime(string inputDate, out DateTime startTime, out DateTime endTime) {
@@ -54,5 +54,9 @@ public static class DateTimeHelper
         h.Add("StartDate", StartDate);
         h.Add("EndDate", EndDate);
         return h;
+    }
+
+    public static string To24Hours(DateTime dateTime) {
+        return dateTime.ToString("dd-MM-yyyy hh:mm tt");
     }
 }

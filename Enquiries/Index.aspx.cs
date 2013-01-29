@@ -22,12 +22,20 @@ public partial class Enquiries_Index : System.Web.UI.Page
     {
         if (e.Row.RowType != DataControlRowType.DataRow) return;
 
-        LinkButton lb = new LinkButton();
+        LinkButton lb;
+        lb = new LinkButton();
         lb.CommandArgument = e.Row.Cells[4].Text;
         lb.CommandName = "NumClick";
         lb.Text = "Details";
-        lb.PostBackUrl = "~/Users/Edit.aspx?id=" + e.Row.Cells[4].Text;
+        lb.PostBackUrl = "Details.aspx?id=" + e.Row.Cells[4].Text;
         e.Row.Cells[4].Controls.Add((Control)lb);
+
+        lb = new LinkButton();
+        lb.CommandArgument = e.Row.Cells[5].Text;
+        lb.CommandName = "NumClick";
+        lb.Text = "Edit";
+        lb.PostBackUrl = "Edit.aspx?id=" + e.Row.Cells[5].Text;
+        e.Row.Cells[5].Controls.Add((Control)lb);
     }
     protected void BindDataToGridView()
     {
@@ -40,6 +48,7 @@ public partial class Enquiries_Index : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("Phone", typeof(string)));
         dt.Columns.Add(new DataColumn("Insurance Type", typeof(string)));
         dt.Columns.Add(new DataColumn("Details", typeof(string)));
+        dt.Columns.Add(new DataColumn("Edit", typeof(string)));
 
         var _currentUserId = CurrentUser.Id();
         foreach (var x in _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.CreatedBy == _currentUserId).OrderByDescending(x => x.CreatedAt).ToList())
@@ -50,6 +59,7 @@ public partial class Enquiries_Index : System.Web.UI.Page
             dr["Phone"] = x.Phone;
             dr["Insurance Type"] = x.InsuranceType;
             dr["Details"] = x.Id;
+            dr["Edit"] = x.Id;
             dt.Rows.Add(dr);
         }
 

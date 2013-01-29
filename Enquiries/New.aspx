@@ -1,6 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="New.aspx.cs" Inherits="Enquiries_New" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+<script type="text/javascript">
+    $(function () {
+        $(".txtCalendar").datepicker({
+            constrainInput: true,
+            dateFormat: "dd-mm-yy",
+            changeMonth: true,
+            changeYear: true
+        });
+        $(".txtCalendar").attr("readonly", true);
+    });
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <div class="breadcrumb">
@@ -31,7 +42,7 @@
   </p>
   <p>
     <label>Type of Insurance</label>
-      <asp:DropDownList ID="ddlInuranceType" runat="server">
+      <asp:DropDownList ID="ddlInsuranceType" runat="server">
           <asp:ListItem Value="0">Select</asp:ListItem>
           <asp:ListItem>Motor</asp:ListItem>
           <asp:ListItem Value="GroupMedical">Group Medical</asp:ListItem>
@@ -40,8 +51,8 @@
           <asp:ListItem>Marine</asp:ListItem>
           <asp:ListItem>Engineering</asp:ListItem>
       </asp:DropDownList>
-    <asp:RequiredFieldValidator ID="rfvInuranceType" runat="server" 
-                    ControlToValidate="ddlInuranceType" ForeColor="#FF3300" 
+    <asp:RequiredFieldValidator ID="rfvInsuranceType" runat="server" 
+                    ControlToValidate="ddlInsuranceType" ForeColor="#FF3300" 
                     SetFocusOnError="True" InitialValue="0">*</asp:RequiredFieldValidator>
   </p>
   <p>
@@ -93,7 +104,7 @@
           onclick="btnSave_Click" />
       &nbsp;
       <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn" 
-          onclick="btnCancel_Click" />
+          onclick="btnCancel_Click" CausesValidation="False" />
   </p>
 </fieldset>
 </asp:Content>
