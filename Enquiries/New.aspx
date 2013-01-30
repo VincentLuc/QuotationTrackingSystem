@@ -1,7 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="New.aspx.cs" Inherits="Enquiries_New" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="New.aspx.cs" Inherits="Enquiries_New" MaintainScrollPositionOnPostback="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
-<script type="text/javascript">
+    <script type="text/javascript">
     $(function () {
         $(".txtCalendar").datepicker({
             constrainInput: true,
@@ -12,9 +11,29 @@
         $(".txtCalendar").attr("readonly", true);
     });
 </script>
+<style type="text/css">
+    #MainContent_rbtnInsurance
+    {
+        margin-left: 9px;
+    }
+    #MainContent_rbtnInsurance label
+    {
+        display: inline;
+        margin: 0 13px 0  7px;
+    }
+    .left-custom, .right-custom
+    {
+        width: 49%;
+        display: inline-block;
+    }
+    table textarea{
+      width: 209px;
+      height: 100px;
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-<div class="breadcrumb">
+    <div class="breadcrumb">
   <ul>
     <li><a href="Index.aspx">Enquiries</a><span class="divider">></span></li>
     <li><a class="active">New</a></li>
@@ -22,6 +41,7 @@
 </div>
 <fieldset>
   <legend>New Enquiry</legend>
+  <div class="left-custom">
   <p>
     <label>Underwriter</label>
       <asp:DropDownList ID="ddlUnderwriterId" runat="server" 
@@ -41,6 +61,49 @@
       </asp:SqlDataSource>
   </p>
   <p>
+    <label>Client Name</label>
+    <asp:TextBox ID="txtClientName" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvClientName" runat="server" 
+                    ControlToValidate="txtClientName" ForeColor="#FF3300" 
+                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  </p>
+  <p>
+    <label>Phone1</label>
+    <asp:TextBox ID="txtPhone1" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvPhone1" runat="server" 
+                    ControlToValidate="txtPhone1" ForeColor="#FF3300" 
+                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  </p>
+  <p>
+    <label>Intended Policy Start At</label>
+    <asp:TextBox ID="txtIntendedPolicyStartAt" runat="server" MaxLength="45" CssClass="txtCalendar"></asp:TextBox>
+  </p>
+  
+  <p>
+    <label>Insurance For</label>
+      <asp:RadioButtonList ID="rbtnInsurance" runat="server" AutoPostBack="True" 
+          onselectedindexchanged="rbtnInsurance_SelectedIndexChanged" 
+          RepeatDirection="Horizontal">
+          <asp:ListItem>Individual</asp:ListItem>
+          <asp:ListItem>Corporate</asp:ListItem>
+      </asp:RadioButtonList>
+  </p>
+  <p>
+    <label>Address</label>
+    <asp:TextBox ID="txtAddress" runat="server" MaxLength="45" TextMode="MultiLine"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvAddress" runat="server" 
+                    ControlToValidate="txtAddress" ForeColor="#FF3300" 
+                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  </p>
+  <p>
+  <label>Copy of CR*</label>
+  <input type="file" id="fileCRCopy" name="fileCRCopy" />
+  </p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  </div>
+  <div class="right-custom">
+  <p>
     <label>Type of Insurance</label>
       <asp:DropDownList ID="ddlInsuranceType" runat="server">
           <asp:ListItem Value="0">Select</asp:ListItem>
@@ -56,13 +119,6 @@
                     SetFocusOnError="True" InitialValue="0">*</asp:RequiredFieldValidator>
   </p>
   <p>
-    <label>Client Name</label>
-    <asp:TextBox ID="txtClientName" runat="server" MaxLength="45"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="rfvClientName" runat="server" 
-                    ControlToValidate="txtClientName" ForeColor="#FF3300" 
-                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
-  </p>
-  <p>
     <label>Contact Person Name</label>
     <asp:TextBox ID="txtContactPersonName" runat="server" MaxLength="45"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvContactPersonName" runat="server" 
@@ -70,37 +126,40 @@
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
   <p>
-    <label>Phone</label>
-    <asp:TextBox ID="txtPhone" runat="server" MaxLength="45"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="rfvPhone" runat="server" 
-                    ControlToValidate="txtPhone" ForeColor="#FF3300" 
+    <label>Phone2</label>
+    <asp:TextBox ID="txtPhone2" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvPhone2" runat="server" 
+                    ControlToValidate="txtPhone2" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
-  <p>
-    <label>Policy Start At</label>
-    <asp:TextBox ID="txtPolicyStartAt" runat="server" MaxLength="45" CssClass="txtCalendar"></asp:TextBox>
+  <p id="individual" runat="server">
+    <label>National Id / Iqama Number</label>
+      <asp:TextBox ID="txtNationalIdOrIqamaNumber" runat="server"></asp:TextBox>
+      <asp:RequiredFieldValidator ID="rfvNationalIdOrIqamaNumber" runat="server"  ControlToValidate="txtNationalIdOrIqamaNumber" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
-  <p>
-    <label>Address</label>
-    <asp:TextBox ID="txtAddress" runat="server" MaxLength="45" TextMode="MultiLine"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="rfvAddress" runat="server" 
-                    ControlToValidate="txtAddress" ForeColor="#FF3300" 
-                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  <p id="corporate" runat="server">
+  <label>CR Number</label>
+      <asp:TextBox ID="txtCrNumber" runat="server"></asp:TextBox>
+      <asp:RequiredFieldValidator ID="rfvCRNumber" runat="server"  
+          ControlToValidate="txtCrNumber" ForeColor="#FF3300" SetFocusOnError="True" 
+          Enabled="False">*</asp:RequiredFieldValidator>
   </p>
   <p>
     <label>Remarks</label>
     <asp:TextBox ID="txtRemarks" runat="server" MaxLength="45" TextMode="MultiLine"></asp:TextBox>
   </p>
   <p>
-  <label>Copy of CR*</label>
-  <input type="file" id="fileCRCopy" name="fileCRCopy" />
+  <label>Previous Loss Ratio Report</label>
+  <input type="file" id="filePreviousLossRatioReport" name="filePreviousLossRatioReport" />
   </p>
   <p>
-  <label>Loss Ratio Report</label>
-  <input type="file" id="fileLossRatioReport" name="fileLossRatioReport" />
+  <label>Additional Documents</label>
+  <input type="file" id="fileAdditionalDocuments" name="fileAdditionalDocuments" />
   </p>
+  </div>
+  <div class="clear"></div>
   <p>
-      <asp:Button ID="btnSave" runat="server" Text="Save" CssClass="btn" 
+      <asp:Button ID="btnSave" runat="server" Text="Save and Send to Under writer" CssClass="btn" 
           onclick="btnSave_Click" />
       &nbsp;
       <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn" 

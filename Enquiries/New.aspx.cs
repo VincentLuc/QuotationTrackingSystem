@@ -13,10 +13,33 @@ public partial class Enquiries_New : System.Web.UI.Page
     QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities;
     Enquiry _enquiry;
     Event _event;
+    
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (!IsPostBack)
+        {
+            corporate.Visible = false;
+            rbtnInsurance.SelectedValue = "Individual";
+        }
     }
+
+    protected void rbtnInsurance_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (rbtnInsurance.SelectedValue == "Individual"){
+            individual.Visible = true;
+            rfvNationalIdOrIqamaNumber.Enabled = true;
+            corporate.Visible = false;
+            rfvCRNumber.Enabled = false;
+            txtNationalIdOrIqamaNumber.Text = "";
+        }else {
+            individual.Visible = false;
+            rfvNationalIdOrIqamaNumber.Enabled = false;
+            corporate.Visible = true;
+            rfvCRNumber.Enabled = true;
+            txtCrNumber.Text = "";
+        }
+    }
+
     protected void btnSave_Click(object sender, EventArgs e)
     {
         HttpPostedFile fileCRCopy = Request.Files["fileCRCopy"];
@@ -25,24 +48,32 @@ public partial class Enquiries_New : System.Web.UI.Page
           return;
         }
         _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
-        var _policyStartAt = DateTimeHelper.ConvertToDate(txtPolicyStartAt.Text);
+        var _policyStartAt = DateTimeHelper.ConvertToDate(txtIntendedPolicyStartAt.Text);
         var _currentUserID = CurrentUser.Id();
         var _createdAt = DateTime.Now;
         var _underWriterId = int.Parse(ddlUnderwriterId.SelectedValue);
-        _enquiry = new Enquiry { ClientName = txtClientName.Text, ContactPersonName = txtContactPersonName.Text, Phone = txtPhone.Text, InsuranceType = ddlInsuranceType.SelectedValue, PolicyStartAt = _policyStartAt, Status = "Created", Address = txtAddress.Text, Remarks = txtRemarks.Text, CreatedBy = _currentUserID, UnderWriterId = _underWriterId, CreatedAt = _createdAt, UpdatedAt = _createdAt };
+        _enquiry = new Enquiry { ClientName = txtClientName.Text, ContactPersonName = txtContactPersonName.Text, Phone1 = txtPhone1.Text, Phone2 = txtPhone2.Text, InsuranceType = ddlInsuranceType.SelectedValue, IntendedPolicyStartAt = _policyStartAt, InsuranceFor = rbtnInsurance.SelectedValue, Status = "Created", Address = txtAddress.Text, Remarks = txtRemarks.Text, CreatedBy = _currentUserID, UnderWriterId = _underWriterId, CreatedAt = _createdAt, UpdatedAt = _createdAt };
+        if (_enquiry.InsuranceFor == "Individual") {
+            _enquiry.NationalIdOrIqamaNumber = txtNationalIdOrIqamaNumber.Text;
+        } else {
+            _enquiry.CRNumber = txtCrNumber.Text;
+        }
         var _currentUserName = User.Identity.Name;
         _event = new Event { State = "Created", CreatedAt = _createdAt, CreatedBy = _currentUserName };
         _enquiry.Events.Add(_event);
         _quotationTrackingSystemDBEntities.AddToEnquiries(_enquiry);
         _quotationTrackingSystemDBEntities.SaveChanges();
 
-        HttpPostedFile lossRatioFile = Request.Files["fileLossRatioReport"];
+        HttpPostedFile lossRatioFile = Request.Files["filePreviousLossRatioReport"];
+        HttpPostedFile additionalDocumentFile = Request.Files["fileAdditionalDocuments"];
 
-        Hashtable hash = FileHelper.GetFilesDetails(fileCRCopy, lossRatioFile, _enquiry);
+        Hashtable hash = FileHelper.GetFilesDetails(fileCRCopy, lossRatioFile, additionalDocumentFile, _enquiry);
         _enquiry.CRCopyName = hash["CRFileName"].ToString();
         _enquiry.CRCopyPath = hash["CRFilePath"].ToString();
-        _enquiry.LossRatioReportName = hash["LossRatioFileName"].ToString();
-        _enquiry.LossRatioReportPath = hash["LossRatioFilePath"].ToString();
+        _enquiry.PreviousLossRatioReportName = hash["PreviousLossRatioFileName"].ToString();
+        _enquiry.PreviousLossRatioReportPath = hash["PreviousLossRatioFilePath"].ToString();
+        _enquiry.AdditionalDocumentName = hash["AdditionalFileName"].ToString();
+        _enquiry.AdditionalDocumentPath = hash["AdditionalFilePath"].ToString();
         _quotationTrackingSystemDBEntities.SaveChanges();
 
         Session["NoticeMessage"] = "Successfully created enquiry and submitted to under writer !";
@@ -53,4 +84,5 @@ public partial class Enquiries_New : System.Web.UI.Page
     {
         Response.Redirect("Index.aspx");
     }
+  
 }

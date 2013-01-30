@@ -19,7 +19,7 @@ public static class FileHelper
         return path ;
     }
 
-    public static Hashtable GetFilesDetails(HttpPostedFile crFile, HttpPostedFile lossRatioFilex, Enquiry enquiry)
+    public static Hashtable GetFilesDetails(HttpPostedFile crFile, HttpPostedFile lossRatioFilex, HttpPostedFile additionalFile, Enquiry enquiry)
     {
         var _timeStamp = DateTimeHelper.ToTimeStamp();
         var path = FileHelper.GetEnquiryFolderPath(enquiry.Id);
@@ -40,11 +40,24 @@ public static class FileHelper
             _lossRatioFilePath = path + "\\" + _lossRatioFileName;
             lossRatioFilex.SaveAs(_lossRatioFilePath);
         }
+
+        var _additionalFileName = "";
+        var _additionalFilePath = "";
+
+        if (additionalFile != null && additionalFile.ContentLength > 0)
+        {
+            _additionalFileName = "additional_file__" + _timeStamp + "_" + Path.GetFileName(additionalFile.FileName);
+            _additionalFilePath = path + "\\" + _additionalFileName;
+            additionalFile.SaveAs(_additionalFilePath);
+        }
+
         Hashtable _hash = new Hashtable();
         _hash.Add("CRFileName", _CRFileName);
         _hash.Add("CRFilePath", _CRFilePath);
-        _hash.Add("LossRatioFileName", _lossRatioFileName);
-        _hash.Add("LossRatioFilePath", _lossRatioFilePath);
+        _hash.Add("PreviousLossRatioFileName", _lossRatioFileName);
+        _hash.Add("PreviousLossRatioFilePath", _lossRatioFilePath);
+        _hash.Add("AdditionalFileName", _additionalFileName);
+        _hash.Add("AdditionalFilePath", _additionalFilePath);
         return _hash;
     }
 }

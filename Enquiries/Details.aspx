@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="Details.aspx.cs" Inherits="Enquiries_Details" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+<style type="text/css">
+    table span {
+      font-weight: bold;
+      font-size: 12px;
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <div class="breadcrumb">
@@ -10,39 +16,56 @@
   </ul>
 </div>
 <hr />
-<a href="Edit.aspx?id=<%= enquiry.Id %>" class="right btn btn-primary">Edit</a>
-<div class="clear"></div>
-<br />
 <table class="table table-bordered">
   <tr>
-    <td>Client Name: <%= enquiry.ClientName %></td>
-    <td>Contact Person Name: <%= enquiry.ContactPersonName %></td>
+    <td><span>Client Name:</span> <%= enquiry.ClientName %></td>
+    <td><span>Contact Person Name:</span> <%= enquiry.ContactPersonName %></td>
   </tr>
   <tr>
-    <td>Phone: <%= enquiry.Phone %></td>
-    <td>Insurance Type: <%= enquiry.InsuranceType %></td>
+    <td><span>Phone1:</span> <%= enquiry.Phone1 %></td>
+    <td><span>Phone2:</span> <%= enquiry.Phone2 %></td>
   </tr>
   <tr>
-    <td>Policy Start At: <%= DateTimeHelper.ConvertToString(enquiry.PolicyStartAt.ToString()) %></td>
-    <td>Status: <%= enquiry.Status %></td>
+    <td><span>Insurance Type:</span> <%= enquiry.InsuranceType %></td>
+    <td><span>Intended Policy Start At:</span> <%= DateTimeHelper.ConvertToString(enquiry.IntendedPolicyStartAt.ToString()) %></td>
   </tr>
   <tr>
-    <td>Address: <%= enquiry.Address %></td>
-    <td>Remarks: <%= enquiry.Remarks %></td>
+    <td><span>Insurance For:</span> <%= enquiry.InsuranceFor %></td>
+    <td>
+      <% if (enquiry.InsuranceFor == "Individual")
+      {%>
+        <span>National Id / Iqama Number:</span> <%= enquiry.NationalIdOrIqamaNumber %>
+        <%} %>
+        <% else {%>
+        <span>CR Number:</span> <%= enquiry.CRNumber %>
+      <%} %>
+    </td>
   </tr>
   <tr>
-    <td>Created At: <%= DateTimeHelper.ConvertToString(enquiry.CreatedAt.ToString()) %></td>
-    <td>Updated At: <%= DateTimeHelper.ConvertToString(enquiry.UpdatedAt.ToString()) %></td>
+    <td colspan="2"><span>Status:</span> <%= enquiry.Status %></td>
   </tr>
   <tr>
-    <td>Copy of CR: <%= enquiry.CRCopyName %></td>
+    <td><span>Address:</span> <%= enquiry.Address %></td>
+    <td><span>Remarks:</span> <%= enquiry.Remarks %></td>
+  </tr>
+  <tr>
+    <td><span>Created At:</span> <%= DateTimeHelper.ConvertToString(enquiry.CreatedAt.ToString()) %></td>
+    <td><span>Updated At:</span> <%= DateTimeHelper.ConvertToString(enquiry.UpdatedAt.ToString()) %></td>
+  </tr>
+  <tr>
+    <td><span>Copy of CR:</span> <%= enquiry.CRCopyName %></td>
     <td><asp:Button ID="btnDownload" runat="server" Text="Download" onclick="btnDownload_Click"/></td>
   </tr>
-  <% if(!string.IsNullOrEmpty(enquiry.LossRatioReportPath)) {%>
+  <% if(!string.IsNullOrEmpty(enquiry.PreviousLossRatioReportPath)) {%>
     <tr>
-      <td>Loss Ratio Report: <%= enquiry.LossRatioReportName %></td>
+      <td><span>Previous Loss Ratio Report:</span> <%= enquiry.PreviousLossRatioReportName%></td>
       <td><asp:Button ID="btnLossRatio" runat="server" Text="Download" onclick="btnLossRatio_Click"/></td>
-      <td></td>
+    </tr>
+  <% } %>
+  <% if(!string.IsNullOrEmpty(enquiry.AdditionalDocumentName)) {%>
+    <tr>
+      <td><span>Additional Documents:</span> <%= enquiry.AdditionalDocumentName%></td>
+      <td><asp:Button ID="btnAdditionalDocument" runat="server" Text="Download" onclick="btnAdditionalDocument_Click"/></td>
     </tr>
   <% } %>
   <tr>
