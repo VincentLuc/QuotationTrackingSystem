@@ -43,7 +43,15 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
         var _currentUserId = CurrentUser.Id();
         var enquiryId = int.Parse(hdnEnquiryId.Value);
         var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId).Where(x => x.Id == enquiryId).FirstOrDefault();
-        sendFile(enquiry.LossRatioReportName, enquiry.LossRatioReportPath);
+        sendFile(enquiry.PreviousLossRatioReportName, enquiry.PreviousLossRatioReportPath);
+    }
+
+    protected void btnAdditionalDocument_Click(object sender, EventArgs e)
+    {
+        var _currentUserId = CurrentUser.Id();
+        var enquiryId = int.Parse(hdnEnquiryId.Value);
+        var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId).Where(x => x.Id == enquiryId).FirstOrDefault();
+        sendFile(enquiry.AdditionalDocumentName, enquiry.AdditionalDocumentPath);
     }
 
     protected void sendFile(string FileName, string FilePath)
@@ -57,4 +65,5 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
         response.Flush();
         response.End();
     }
+    
 }

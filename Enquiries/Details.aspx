@@ -88,7 +88,7 @@
     <% foreach(var enquiryEvent in enquiry.Events) {%>
       <tr>
         <td><%= enquiryEvent.CreatedBy %></td>
-        <td><%= enquiryEvent.State %></td>
+        <td><%= StringHelper.ToSentenceCase(enquiryEvent.State)%></td>
         <td><%= DateTimeHelper.To24Hours(enquiryEvent.CreatedAt) %></td>
       </tr>
     <% } %>

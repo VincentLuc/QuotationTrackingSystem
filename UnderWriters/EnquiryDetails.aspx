@@ -12,44 +12,53 @@
 <hr />
 <table class="table table-bordered">
   <tr>
-    <td>Client Name: <%= enquiry.ClientName %></td>
-    <td>Contact Person Name: <%= enquiry.ContactPersonName %></td>
+      <asp:HiddenField ID="hdnEnquiryId" runat="server" />
+    <td><span>Client Name:</span> <%= enquiry.Address %></td>
+    <td><span>Contact Person Name:</span> <%= enquiry.Remarks %></td>
   </tr>
   <tr>
-    <td>Phone: <%= enquiry.Phone %></td>
-    <td>Insurance Type: <%= enquiry.InsuranceType %></td>
+    <td><span>Phone1:</span> <%= DateTimeHelper.ConvertToString(enquiry.CreatedAt.ToString()) %></td>
+    <td><span>Phone2:</span> <%= DateTimeHelper.ConvertToString(enquiry.UpdatedAt.ToString()) %></td>
   </tr>
   <tr>
-    <td>Policy Start At: <%= DateTimeHelper.ConvertToString(enquiry.PolicyStartAt.ToString()) %></td>
-    <td>Status: <%= enquiry.Status %></td>
+    <td><span>Insurance Type:</span> <%= enquiry.CRCopyName %></td>
+    <td><span>Intended Policy Start At:</span> <% if(!string.IsNullOrEmpty(enquiry.PreviousLossRatioReportPath)) {%></td>
   </tr>
   <tr>
-    <td>Address: <%= enquiry.Address %></td>
-    <td>Remarks: <%= enquiry.Remarks %></td>
+    <td><span>Insurance For:</span> <%= enquiry.PreviousLossRatioReportName%></td>
+    <td>
+        <% } %>
+        <span>National Id / Iqama Number:</span> <% if(!string.IsNullOrEmpty(enquiry.AdditionalDocumentName)) {%>        <%= enquiry.AdditionalDocumentName%>        <% } %>
+        <span>CR Number:</span> <% foreach(var enquiryEvent in enquiry.Events) {%>      <%= enquiryEvent.CreatedBy %>
+    </td>
   </tr>
   <tr>
-    <td>Created At: <%= DateTimeHelper.ConvertToString(enquiry.CreatedAt.ToString()) %></td>
-    <td>Updated At: <%= DateTimeHelper.ConvertToString(enquiry.UpdatedAt.ToString()) %></td>
+    <td colspan="2"><span>Status:</span> <%= enquiryEvent.State %></td>
   </tr>
   <tr>
-    <td>Copy of CR: <%= enquiry.CRCopyName %></td>
+    <td><span>Address:</span> <%= DateTimeHelper.To24Hours(enquiryEvent.CreatedAt) %></td>
+    <td><span>Remarks:</span> <% } %></td>
+  </tr>
+  <tr>
+    <td><span>Created At:</span> <%= DateTimeHelper.ConvertToString(enquiry.CreatedAt.ToString()) %></td>
+    <td><span>Updated At:</span> <%= DateTimeHelper.ConvertToString(enquiry.UpdatedAt.ToString()) %></td>
+  </tr>
+  <tr>
+    <td><span>Copy of CR:</span> <%= enquiry.CRCopyName %></td>
     <td><asp:Button ID="btnDownload" runat="server" Text="Download" onclick="btnDownload_Click"/></td>
   </tr>
-  <% if(!string.IsNullOrEmpty(enquiry.LossRatioReportPath)) {%>
+  <% if(!string.IsNullOrEmpty(enquiry.PreviousLossRatioReportPath)) {%>
     <tr>
-      <td>Loss Ratio Report: <%= enquiry.LossRatioReportName %></td>
+      <td><span>Previous Loss Ratio Report:</span> <%= enquiry.PreviousLossRatioReportName%></td>
       <td><asp:Button ID="btnLossRatio" runat="server" Text="Download" onclick="btnLossRatio_Click"/></td>
     </tr>
   <% } %>
-  <tr>
-      <asp:HiddenField ID="hdnEnquiryId" runat="server" />
-    <td> 
-      Submitted By (Sales User): <%= enquiry.tblUser.UserName %>
-    </td>
-    <td>
-    Submitted At: <%= DateTimeHelper.ConvertToString(enquiry.CreatedAt.ToString()) %>
-    </td>
-  </tr>
+  <% if(!string.IsNullOrEmpty(enquiry.AdditionalDocumentName)) {%>
+    <tr>
+      <td><span>Additional Documents:</span> <%= enquiry.AdditionalDocumentName%></td>
+      <td><asp:Button ID="btnAdditionalDocument" runat="server" Text="Download" onclick="btnAdditionalDocument_Click"/></td>
+    </tr>
+  <% } %>
 </table>
 <h3 class="left">Events</h3>
 <table class="table table-bordered">

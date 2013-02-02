@@ -56,7 +56,7 @@ public partial class UnderWriters_Enquiries : System.Web.UI.Page
         foreach (var x in list){
             dr = dt.NewRow();
             dr["Client Name"] = x.ClientName;
-            dr["Phone"] = x.Phone;
+            dr["Phone"] = x.Phone1;
             dr["Submitted By (Sales User)"] = x.tblUser.UserName;
             dr["Submitted At"] = DateTimeHelper.ConvertToString(x.CreatedAt.ToString());
             dr["Details"] = x.Id;
