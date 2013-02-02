@@ -24,11 +24,16 @@
     .left-custom, .right-custom
     {
         width: 49%;
-        display: inline-block;
     }
     table textarea{
       width: 209px;
       height: 100px;
+    }
+    .left-custom {
+        float:left;
+    }
+    .right-custom {
+        float:right;
     }
 </style>
 </asp:Content>
@@ -42,6 +47,51 @@
 <fieldset>
   <legend>New Enquiry</legend>
   <div class="left-custom">
+  <p>
+    <label>Client Name</label>
+    <asp:TextBox ID="txtClientName" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvClientName" runat="server" 
+                    ControlToValidate="txtClientName" ForeColor="#FF3300" 
+                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  </p>
+  <p>
+    <label>Contact Person Name</label>
+    <asp:TextBox ID="txtContactPersonName" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvContactPersonName" runat="server" 
+                    ControlToValidate="txtContactPersonName" ForeColor="#FF3300" 
+                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  </p>
+  <p>
+    <label>Phone 1</label>
+    <asp:TextBox ID="txtPhone1" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvPhone1" runat="server" 
+                    ControlToValidate="txtPhone1" ForeColor="#FF3300" 
+                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  </p>
+  <p>
+    <label>Phone 2</label>
+    <asp:TextBox ID="txtPhone2" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvPhone2" runat="server" 
+                    ControlToValidate="txtPhone2" ForeColor="#FF3300" 
+                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  </p>
+  <p>
+    <label>Address</label>
+    <asp:TextBox ID="txtAddress" runat="server" MaxLength="45" TextMode="MultiLine"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvAddress" runat="server" 
+                    ControlToValidate="txtAddress" ForeColor="#FF3300" 
+                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  </p>
+  <p>
+    <label>Remarks</label>
+    <asp:TextBox ID="txtRemarks" runat="server" MaxLength="45" TextMode="MultiLine"></asp:TextBox>
+  </p>
+  <p>
+    <label>Intended Policy Start At</label>
+    <asp:TextBox ID="txtIntendedPolicyStartAt" runat="server" MaxLength="45" CssClass="txtCalendar"></asp:TextBox>
+  </p>
+  </div>
+  <div class="right-custom">
   <p>
     <label>Underwriter</label>
       <asp:DropDownList ID="ddlUnderwriterId" runat="server" 
@@ -61,49 +111,6 @@
       </asp:SqlDataSource>
   </p>
   <p>
-    <label>Client Name</label>
-    <asp:TextBox ID="txtClientName" runat="server" MaxLength="45"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="rfvClientName" runat="server" 
-                    ControlToValidate="txtClientName" ForeColor="#FF3300" 
-                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
-  </p>
-  <p>
-    <label>Phone1</label>
-    <asp:TextBox ID="txtPhone1" runat="server" MaxLength="45"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="rfvPhone1" runat="server" 
-                    ControlToValidate="txtPhone1" ForeColor="#FF3300" 
-                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
-  </p>
-  <p>
-    <label>Intended Policy Start At</label>
-    <asp:TextBox ID="txtIntendedPolicyStartAt" runat="server" MaxLength="45" CssClass="txtCalendar"></asp:TextBox>
-  </p>
-  
-  <p>
-    <label>Insurance For</label>
-      <asp:RadioButtonList ID="rbtnInsurance" runat="server" AutoPostBack="True" 
-          onselectedindexchanged="rbtnInsurance_SelectedIndexChanged" 
-          RepeatDirection="Horizontal">
-          <asp:ListItem>Individual</asp:ListItem>
-          <asp:ListItem>Corporate</asp:ListItem>
-      </asp:RadioButtonList>
-  </p>
-  <p>
-    <label>Address</label>
-    <asp:TextBox ID="txtAddress" runat="server" MaxLength="45" TextMode="MultiLine"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="rfvAddress" runat="server" 
-                    ControlToValidate="txtAddress" ForeColor="#FF3300" 
-                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
-  </p>
-  <p>
-  <label>Copy of CR*</label>
-  <input type="file" id="fileCRCopy" name="fileCRCopy" />
-  </p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  </div>
-  <div class="right-custom">
-  <p>
     <label>Type of Insurance</label>
       <asp:DropDownList ID="ddlInsuranceType" runat="server">
           <asp:ListItem Value="0">Select</asp:ListItem>
@@ -119,18 +126,13 @@
                     SetFocusOnError="True" InitialValue="0">*</asp:RequiredFieldValidator>
   </p>
   <p>
-    <label>Contact Person Name</label>
-    <asp:TextBox ID="txtContactPersonName" runat="server" MaxLength="45"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="rfvContactPersonName" runat="server" 
-                    ControlToValidate="txtContactPersonName" ForeColor="#FF3300" 
-                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
-  </p>
-  <p>
-    <label>Phone2</label>
-    <asp:TextBox ID="txtPhone2" runat="server" MaxLength="45"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="rfvPhone2" runat="server" 
-                    ControlToValidate="txtPhone2" ForeColor="#FF3300" 
-                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+    <label>Insurance For</label>
+      <asp:RadioButtonList ID="rbtnInsurance" runat="server" AutoPostBack="True" 
+          onselectedindexchanged="rbtnInsurance_SelectedIndexChanged" 
+          RepeatDirection="Horizontal">
+          <asp:ListItem>Individual</asp:ListItem>
+          <asp:ListItem>Corporate</asp:ListItem>
+      </asp:RadioButtonList>
   </p>
   <p id="individual" runat="server">
     <label>National Id / Iqama Number</label>
@@ -145,8 +147,8 @@
           Enabled="False">*</asp:RequiredFieldValidator>
   </p>
   <p>
-    <label>Remarks</label>
-    <asp:TextBox ID="txtRemarks" runat="server" MaxLength="45" TextMode="MultiLine"></asp:TextBox>
+  <label>Copy of CR*</label>
+  <input type="file" id="fileCRCopy" name="fileCRCopy" />
   </p>
   <p>
   <label>Previous Loss Ratio Report</label>
@@ -156,8 +158,6 @@
   <label>Additional Documents</label>
   <input type="file" id="fileAdditionalDocuments" name="fileAdditionalDocuments" />
   </p>
-  </div>
-  <div class="clear"></div>
   <p>
       <asp:Button ID="btnSave" runat="server" Text="Save and Send to Under writer" CssClass="btn" 
           onclick="btnSave_Click" />
@@ -165,6 +165,8 @@
       <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn" 
           onclick="btnCancel_Click" CausesValidation="False" />
   </p>
+  </div>
+  <div class="clear"></div>
 </fieldset>
 </asp:Content>
 
