@@ -38,7 +38,7 @@
 </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-    <div class="breadcrumb">
+<div class="breadcrumb">
   <ul>
     <li><a href="Index.aspx">Enquiries</a><span class="divider">></span></li>
     <li><a class="active">New</a></li>

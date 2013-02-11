@@ -54,8 +54,10 @@ public partial class Users_Edit : System.Web.UI.Page
         Session["NoticeMessage"] = "Successfully updated the user!";
         Response.Redirect("Index.aspx");
     }
+
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         Response.Redirect("Index.aspx");
     }
+
 }

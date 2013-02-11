@@ -19,9 +19,11 @@ using System.Runtime.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Enquiries_Comments", "Enquiries", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.Enquiry), "Comments", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Comment), true)]
+[assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Emails_tblUsers", "tblUsers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.tblUser), "Emails", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Email), true)]
 [assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Enquiries_tblUsers", "tblUsers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.tblUser), "Enquiries", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Enquiry), true)]
 [assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Events_Enquiries", "Enquiries", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.Enquiry), "Events", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Event), true)]
-[assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Notes_Enquiries", "Enquiries", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.Enquiry), "Notes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Note), true)]
+[assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Notifications_Enquiries", "Enquiries", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.Enquiry), "Notifications", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Notification), true)]
+[assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Notifications_tblUsers", "tblUsers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.tblUser), "Notifications", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Notification), true)]
 [assembly: EdmRelationshipAttribute("QuotationTrackingSystemDBModel", "FK_Visits_tblUsers", "tblUsers", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(QuotationTrackingSystemDBModel.tblUser), "Visits", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(QuotationTrackingSystemDBModel.Visit), true)]
 
 #endregion
@@ -93,6 +95,22 @@ namespace QuotationTrackingSystemDBModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Email> Emails
+        {
+            get
+            {
+                if ((_Emails == null))
+                {
+                    _Emails = base.CreateObjectSet<Email>("Emails");
+                }
+                return _Emails;
+            }
+        }
+        private ObjectSet<Email> _Emails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Enquiry> Enquiries
         {
             get
@@ -125,18 +143,18 @@ namespace QuotationTrackingSystemDBModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Note> Notes
+        public ObjectSet<Notification> Notifications
         {
             get
             {
-                if ((_Notes == null))
+                if ((_Notifications == null))
                 {
-                    _Notes = base.CreateObjectSet<Note>("Notes");
+                    _Notifications = base.CreateObjectSet<Notification>("Notifications");
                 }
-                return _Notes;
+                return _Notifications;
             }
         }
-        private ObjectSet<Note> _Notes;
+        private ObjectSet<Notification> _Notifications;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -182,6 +200,14 @@ namespace QuotationTrackingSystemDBModel
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Emails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEmails(Email email)
+        {
+            base.AddObject("Emails", email);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the Enquiries EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToEnquiries(Enquiry enquiry)
@@ -198,11 +224,11 @@ namespace QuotationTrackingSystemDBModel
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Notes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Notifications EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToNotes(Note note)
+        public void AddToNotifications(Notification notification)
         {
-            base.AddObject("Notes", note);
+            base.AddObject("Notifications", notification);
         }
     
         /// <summary>
@@ -470,6 +496,284 @@ namespace QuotationTrackingSystemDBModel
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Enquiries_Comments", "Enquiries", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="QuotationTrackingSystemDBModel", Name="Email")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Email : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Email object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="fromUserName">Initial value of the FromUserName property.</param>
+        /// <param name="subject">Initial value of the Subject property.</param>
+        /// <param name="body">Initial value of the Body property.</param>
+        /// <param name="isRead">Initial value of the IsRead property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="fromUserId">Initial value of the FromUserId property.</param>
+        /// <param name="createdAt">Initial value of the CreatedAt property.</param>
+        public static Email CreateEmail(global::System.Int32 id, global::System.String fromUserName, global::System.String subject, global::System.String body, global::System.String isRead, global::System.Int32 userId, global::System.Int32 fromUserId, global::System.DateTime createdAt)
+        {
+            Email email = new Email();
+            email.Id = id;
+            email.FromUserName = fromUserName;
+            email.Subject = subject;
+            email.Body = body;
+            email.IsRead = isRead;
+            email.UserId = userId;
+            email.FromUserId = fromUserId;
+            email.CreatedAt = createdAt;
+            return email;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FromUserName
+        {
+            get
+            {
+                return _FromUserName;
+            }
+            set
+            {
+                OnFromUserNameChanging(value);
+                ReportPropertyChanging("FromUserName");
+                _FromUserName = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("FromUserName");
+                OnFromUserNameChanged();
+            }
+        }
+        private global::System.String _FromUserName;
+        partial void OnFromUserNameChanging(global::System.String value);
+        partial void OnFromUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Subject
+        {
+            get
+            {
+                return _Subject;
+            }
+            set
+            {
+                OnSubjectChanging(value);
+                ReportPropertyChanging("Subject");
+                _Subject = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Subject");
+                OnSubjectChanged();
+            }
+        }
+        private global::System.String _Subject;
+        partial void OnSubjectChanging(global::System.String value);
+        partial void OnSubjectChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Body
+        {
+            get
+            {
+                return _Body;
+            }
+            set
+            {
+                OnBodyChanging(value);
+                ReportPropertyChanging("Body");
+                _Body = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Body");
+                OnBodyChanged();
+            }
+        }
+        private global::System.String _Body;
+        partial void OnBodyChanging(global::System.String value);
+        partial void OnBodyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String IsRead
+        {
+            get
+            {
+                return _IsRead;
+            }
+            set
+            {
+                OnIsReadChanging(value);
+                ReportPropertyChanging("IsRead");
+                _IsRead = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("IsRead");
+                OnIsReadChanged();
+            }
+        }
+        private global::System.String _IsRead;
+        partial void OnIsReadChanging(global::System.String value);
+        partial void OnIsReadChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Int32 _UserId;
+        partial void OnUserIdChanging(global::System.Int32 value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 FromUserId
+        {
+            get
+            {
+                return _FromUserId;
+            }
+            set
+            {
+                OnFromUserIdChanging(value);
+                ReportPropertyChanging("FromUserId");
+                _FromUserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FromUserId");
+                OnFromUserIdChanged();
+            }
+        }
+        private global::System.Int32 _FromUserId;
+        partial void OnFromUserIdChanging(global::System.Int32 value);
+        partial void OnFromUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedAt
+        {
+            get
+            {
+                return _CreatedAt;
+            }
+            set
+            {
+                OnCreatedAtChanging(value);
+                ReportPropertyChanging("CreatedAt");
+                _CreatedAt = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedAt");
+                OnCreatedAtChanged();
+            }
+        }
+        private global::System.DateTime _CreatedAt;
+        partial void OnCreatedAtChanging(global::System.DateTime value);
+        partial void OnCreatedAtChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Emails_tblUsers", "tblUsers")]
+        public tblUser tblUser
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Emails_tblUsers", "tblUsers").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Emails_tblUsers", "tblUsers").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<tblUser> tblUserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Emails_tblUsers", "tblUsers");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Emails_tblUsers", "tblUsers", value);
                 }
             }
         }
@@ -1264,18 +1568,18 @@ namespace QuotationTrackingSystemDBModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Notes_Enquiries", "Notes")]
-        public EntityCollection<Note> Notes
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Notifications_Enquiries", "Notifications")]
+        public EntityCollection<Notification> Notifications
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Note>("QuotationTrackingSystemDBModel.FK_Notes_Enquiries", "Notes");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Notification>("QuotationTrackingSystemDBModel.FK_Notifications_Enquiries", "Notifications");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Note>("QuotationTrackingSystemDBModel.FK_Notes_Enquiries", "Notes", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Notification>("QuotationTrackingSystemDBModel.FK_Notifications_Enquiries", "Notifications", value);
                 }
             }
         }
@@ -1486,30 +1790,34 @@ namespace QuotationTrackingSystemDBModel
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="QuotationTrackingSystemDBModel", Name="Note")]
+    [EdmEntityTypeAttribute(NamespaceName="QuotationTrackingSystemDBModel", Name="Notification")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Note : EntityObject
+    public partial class Notification : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Note object.
+        /// Create a new Notification object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="text">Initial value of the Text property.</param>
+        /// <param name="isRead">Initial value of the IsRead property.</param>
         /// <param name="enquiryId">Initial value of the EnquiryId property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdAt">Initial value of the CreatedAt property.</param>
-        public static Note CreateNote(global::System.Int32 id, global::System.String text, global::System.Int32 enquiryId, global::System.String createdBy, global::System.DateTime createdAt)
+        public static Notification CreateNotification(global::System.Int32 id, global::System.String text, global::System.String isRead, global::System.Int32 enquiryId, global::System.Int32 userId, global::System.String createdBy, global::System.DateTime createdAt)
         {
-            Note note = new Note();
-            note.Id = id;
-            note.Text = text;
-            note.EnquiryId = enquiryId;
-            note.CreatedBy = createdBy;
-            note.CreatedAt = createdAt;
-            return note;
+            Notification notification = new Notification();
+            notification.Id = id;
+            notification.Text = text;
+            notification.IsRead = isRead;
+            notification.EnquiryId = enquiryId;
+            notification.UserId = userId;
+            notification.CreatedBy = createdBy;
+            notification.CreatedAt = createdAt;
+            return notification;
         }
 
         #endregion
@@ -1545,54 +1853,6 @@ namespace QuotationTrackingSystemDBModel
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String FileName
-        {
-            get
-            {
-                return _FileName;
-            }
-            set
-            {
-                OnFileNameChanging(value);
-                ReportPropertyChanging("FileName");
-                _FileName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("FileName");
-                OnFileNameChanged();
-            }
-        }
-        private global::System.String _FileName;
-        partial void OnFileNameChanging(global::System.String value);
-        partial void OnFileNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String FilePath
-        {
-            get
-            {
-                return _FilePath;
-            }
-            set
-            {
-                OnFilePathChanging(value);
-                ReportPropertyChanging("FilePath");
-                _FilePath = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("FilePath");
-                OnFilePathChanged();
-            }
-        }
-        private global::System.String _FilePath;
-        partial void OnFilePathChanging(global::System.String value);
-        partial void OnFilePathChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Text
@@ -1619,6 +1879,30 @@ namespace QuotationTrackingSystemDBModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.String IsRead
+        {
+            get
+            {
+                return _IsRead;
+            }
+            set
+            {
+                OnIsReadChanging(value);
+                ReportPropertyChanging("IsRead");
+                _IsRead = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("IsRead");
+                OnIsReadChanged();
+            }
+        }
+        private global::System.String _IsRead;
+        partial void OnIsReadChanging(global::System.String value);
+        partial void OnIsReadChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 EnquiryId
         {
             get
@@ -1637,6 +1921,30 @@ namespace QuotationTrackingSystemDBModel
         private global::System.Int32 _EnquiryId;
         partial void OnEnquiryIdChanging(global::System.Int32 value);
         partial void OnEnquiryIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Int32 _UserId;
+        partial void OnUserIdChanging(global::System.Int32 value);
+        partial void OnUserIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1696,16 +2004,16 @@ namespace QuotationTrackingSystemDBModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Notes_Enquiries", "Enquiries")]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Notifications_Enquiries", "Enquiries")]
         public Enquiry Enquiry
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Notes_Enquiries", "Enquiries").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Notifications_Enquiries", "Enquiries").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Notes_Enquiries", "Enquiries").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Notifications_Enquiries", "Enquiries").Value = value;
             }
         }
         /// <summary>
@@ -1717,13 +2025,51 @@ namespace QuotationTrackingSystemDBModel
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Notes_Enquiries", "Enquiries");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Notifications_Enquiries", "Enquiries");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Notes_Enquiries", "Enquiries", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Enquiry>("QuotationTrackingSystemDBModel.FK_Notifications_Enquiries", "Enquiries", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Notifications_tblUsers", "tblUsers")]
+        public tblUser tblUser
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Notifications_tblUsers", "tblUsers").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Notifications_tblUsers", "tblUsers").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<tblUser> tblUserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Notifications_tblUsers", "tblUsers");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tblUser>("QuotationTrackingSystemDBModel.FK_Notifications_tblUsers", "tblUsers", value);
                 }
             }
         }
@@ -2094,6 +2440,28 @@ namespace QuotationTrackingSystemDBModel
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Emails_tblUsers", "Emails")]
+        public EntityCollection<Email> Emails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Email>("QuotationTrackingSystemDBModel.FK_Emails_tblUsers", "Emails");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Email>("QuotationTrackingSystemDBModel.FK_Emails_tblUsers", "Emails", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Enquiries_tblUsers", "Enquiries")]
         public EntityCollection<Enquiry> Enquiries
         {
@@ -2106,6 +2474,28 @@ namespace QuotationTrackingSystemDBModel
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Enquiry>("QuotationTrackingSystemDBModel.FK_Enquiries_tblUsers", "Enquiries", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("QuotationTrackingSystemDBModel", "FK_Notifications_tblUsers", "Notifications")]
+        public EntityCollection<Notification> Notifications
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Notification>("QuotationTrackingSystemDBModel.FK_Notifications_tblUsers", "Notifications");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Notification>("QuotationTrackingSystemDBModel.FK_Notifications_tblUsers", "Notifications", value);
                 }
             }
         }

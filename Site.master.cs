@@ -4,12 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using QuotationTrackingSystemDBModel;
 
 public partial class SiteMaster : System.Web.UI.MasterPage
 {
+    public QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntitiesMaster;
+    public int unreadEmailsCount;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.User.Identity.IsAuthenticated) return;
+        _quotationTrackingSystemDBEntitiesMaster = new QuotationTrackingSystemDBEntities();
+        var _currentUserId = CurrentUser.Id();
+        unreadEmailsCount = _quotationTrackingSystemDBEntitiesMaster.Emails.Where(x => x.UserId == _currentUserId).Where(x => x.IsRead == "False").Count();
         var role = CurrentUser.Role();
         if (role == "Admin"){
             AdminMenuItems();
