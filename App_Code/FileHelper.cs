@@ -60,4 +60,24 @@ public static class FileHelper
         _hash.Add("AdditionalFilePath", _additionalFilePath);
         return _hash;
     }
+
+    public static Hashtable UpdateCommentFile(HttpPostedFile file, int enquiryId)
+    {
+        var _timeStamp = DateTimeHelper.ToTimeStamp();
+        var path = FileHelper.GetEnquiryFolderPath(enquiryId);
+        var _fileName = "";
+        var _filePath = "";
+
+        if (file != null && file.ContentLength > 0)
+        {
+            _fileName = "comment_file_" + _timeStamp + "_" + Path.GetFileName(file.FileName);
+            _filePath = path + "\\" + _fileName;
+            file.SaveAs(_filePath);
+        }
+
+        Hashtable _hash = new Hashtable();
+        _hash.Add("fileName", _fileName);
+        _hash.Add("filePath", _filePath);
+        return _hash;
+    }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using QuotationTrackingSystemDBModel;
+using System.Collections;
 
 public partial class Enquiries_Details : System.Web.UI.Page
 {
@@ -62,4 +63,18 @@ public partial class Enquiries_Details : System.Web.UI.Page
         response.End();
     }
 
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        Hashtable hash = FileHelper.UpdateCommentFile(Request.Files["commentFile"], int.Parse(hdnEnquiryId.Value));
+        _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
+        var _currentUserName = User.Identity.Name;
+        var _enquiryId = int.Parse(hdnEnquiryId.Value);
+        var comment = new Comment { Text = txtText.Text.Trim(), FileName = hash["fileName"].ToString(), FilePath = hash["filePath"].ToString(), CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId };
+        var newEvent = new Event { State = "Commented", CreatedBy = _currentUserName, CreatedAt = DateTime.Now, EnquiryId = _enquiryId };
+        _quotationTrackingSystemDBEntities.AddToComments(comment);
+        _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
+        _quotationTrackingSystemDBEntities.SaveChanges();
+        Session["NoticeMessage"] = "Successfully added comment!";
+        Response.Redirect("Details.aspx?id=" + _enquiryId);
+    }
 }

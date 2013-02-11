@@ -16,6 +16,26 @@
   </ul>
 </div>
 <hr />
+<h3 class="left">Events</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Created At</th>
+      <th>Created By</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% foreach(var enquiryEvent in enquiry.Events.OrderBy(x => x.CreatedAt)) {%>
+      <tr>
+        <td><%= DateTimeHelper.To24Hours(enquiryEvent.CreatedAt) %></td>
+        <td><%= enquiryEvent.CreatedBy %></td>
+        <td><%= StringHelper.ToSentenceCase(enquiryEvent.State)%></td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+<div class="clear"></div>
 <table class="table table-bordered">
   <tr>
     <td><span>Client Name:</span> <%= enquiry.ClientName %></td>
@@ -75,25 +95,51 @@
     </td>
   </tr>
 </table>
-<h3 class="left">Events</h3>
+<h3 class="left">Comments</h3>
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Created By</th>
-      <th>State</th>
       <th>Created At</th>
+      <th>Created By</th>
+      <th>File</th>
+      <th>Comment</th>
     </tr>
   </thead>
   <tbody>
-    <% foreach(var enquiryEvent in enquiry.Events) {%>
+    <% foreach(var enquiryComment in enquiry.Comments.OrderBy(x => x.CreatedAt)) {%>
       <tr>
-        <td><%= enquiryEvent.CreatedBy %></td>
-        <td><%= StringHelper.ToSentenceCase(enquiryEvent.State)%></td>
-        <td><%= DateTimeHelper.To24Hours(enquiryEvent.CreatedAt) %></td>
+        <td><%= DateTimeHelper.To24Hours(enquiryComment.CreatedAt) %></td>
+        <td><%= enquiryComment.CreatedBy %></td>
+        <td>
+        <% if(string.IsNullOrEmpty(enquiryComment.FilePath)) {%>
+            No File attached !
+          <%}else{ %>
+            <a href="/QuotationTrackingSystem/Comments/Download.aspx?id=<%= enquiryComment.Id %>" class="btn" target="_blank" style="color:#000;">Download</a>
+          <%} %>
+        </td>
+        <td><%= enquiryComment.Text %></td>
       </tr>
     <% } %>
   </tbody>
 </table>
 <div class="clear"></div>
+<fieldset>
+  <legend>Add Comment</legend>
+  <p>
+    <label>File</label>
+    <input type="file" id="commentFile" name="commentFile" />
+  </p>
+  <p>
+    <label>Text</label>
+    <asp:TextBox ID="txtText" runat="server" MaxLength="495" Height="166px" 
+          TextMode="MultiLine" Width="305px"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="rfvText" runat="server" 
+                    ControlToValidate="txtText" ForeColor="#FF3300" 
+                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  </p>
+    <p>
+        <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save" />
+  </p>
+</fieldset>
 </asp:Content>
 
