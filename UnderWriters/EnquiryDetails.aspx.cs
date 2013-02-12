@@ -73,11 +73,19 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
         _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
         var _currentUserName = User.Identity.Name;
         var _enquiryId = int.Parse(hdnEnquiryId.Value);
+        var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.Id == _enquiryId).First();
+        var salesPersonId = enquiry.CreatedBy;
+        var text = "New Comment on Enquiry. Commented By " + _currentUserName + " !";
+
         var comment = new Comment { Text = txtText.Text.Trim(), FileName = hash["fileName"].ToString(), FilePath = hash["filePath"].ToString(), CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId };
         var newEvent = new Event { State = "Commented", CreatedBy = _currentUserName, CreatedAt = DateTime.Now, EnquiryId = _enquiryId };
+        var notification = new Notification { IsRead = "False", UserId = salesPersonId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = _enquiryId };
+
+        _quotationTrackingSystemDBEntities.AddToNotifications(notification);
         _quotationTrackingSystemDBEntities.AddToComments(comment);
         _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
         _quotationTrackingSystemDBEntities.SaveChanges();
+
         Session["NoticeMessage"] = "Successfully added comment!";
         Response.Redirect("EnquiryDetails.aspx?id=" + _enquiryId);
     }

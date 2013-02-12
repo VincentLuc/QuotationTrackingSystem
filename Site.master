@@ -41,6 +41,13 @@
                    <%} %>
                    Inbox ( <%= unreadEmailsCount %> )
                  </a> |
+                 <a href="/QuotationTrackingSystem/Notifications/Index.aspx">
+                   <% if (unreadNotificationsCount > 0)
+                      {%>
+                     <span class='unread-asterisk'>&#42;</span>
+                   <%} %>
+                   Notifications ( <%= unreadNotificationsCount %> )
+                 </a> |
                 <a href="/QuotationTrackingSystem/Account/Logout.aspx"> Log Out</a>
               <%}
                  else

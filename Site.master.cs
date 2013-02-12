@@ -10,12 +10,14 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 {
     public QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntitiesMaster;
     public int unreadEmailsCount;
+    public int unreadNotificationsCount;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.User.Identity.IsAuthenticated) return;
         _quotationTrackingSystemDBEntitiesMaster = new QuotationTrackingSystemDBEntities();
         var _currentUserId = CurrentUser.Id();
         unreadEmailsCount = _quotationTrackingSystemDBEntitiesMaster.Emails.Where(x => x.UserId == _currentUserId).Where(x => x.IsRead == "False").Count();
+        unreadNotificationsCount = _quotationTrackingSystemDBEntitiesMaster.Notifications.Where(x => x.UserId == _currentUserId).Where(x => x.IsRead == "False").Count();
         var role = CurrentUser.Role();
         if (role == "Admin"){
             AdminMenuItems();

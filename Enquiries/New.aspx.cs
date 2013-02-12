@@ -10,10 +10,10 @@ using System.Collections;
 
 public partial class Enquiries_New : System.Web.UI.Page
 {
-    QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities;
-    Enquiry _enquiry;
-    Event _event;
-    
+    protected QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities;
+    protected Enquiry _enquiry;
+    protected Event _event;
+    protected Notification _notification;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -60,7 +60,10 @@ public partial class Enquiries_New : System.Web.UI.Page
         }
         var _currentUserName = User.Identity.Name;
         _event = new Event { State = "Created", CreatedAt = _createdAt, CreatedBy = _currentUserName };
+        var text = "New Enquiry Created By " + _currentUserName + " !";
+        _notification = new Notification { IsRead = "False", UserId = _underWriterId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text };
         _enquiry.Events.Add(_event);
+        _enquiry.Notifications.Add(_notification);
         _quotationTrackingSystemDBEntities.AddToEnquiries(_enquiry);
         _quotationTrackingSystemDBEntities.SaveChanges();
 

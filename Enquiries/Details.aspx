@@ -22,7 +22,7 @@
     <tr>
       <th>Created At</th>
       <th>Created By</th>
-      <th>State</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
