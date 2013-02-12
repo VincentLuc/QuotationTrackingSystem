@@ -28,10 +28,11 @@ public partial class Notifications_Index : System.Web.UI.Page
         var cell_3 = e.Row.Cells[3];
         var array = cell_3.Text.Split('#');
         e.Row.CssClass = array[1] == "True" ? "read" : "unread";
+        var url = CurrentUser.Role() == "UnderWriter" ? "/QuotationTrackingSystem/UnderWriters/EnquiryDetails.aspx?id=" : "/QuotationTrackingSystem/Enquiries/Details.aspx?id=";
         lb.CommandArgument = array[0];
         lb.CommandName = "NumClick";
         lb.Text = array[0];
-        lb.PostBackUrl = "/QuotationTrackingSystem/UnderWriters/EnquiryDetails.aspx?id=" + array[0];
+        lb.PostBackUrl =  url + array[0];
         cell_3.Controls.Add((Control)lb);
 
         if (array[1] == "False")
@@ -53,6 +54,7 @@ public partial class Notifications_Index : System.Web.UI.Page
         notification.IsRead = "True";
         _quotationTrackingSystemDBEntities.SaveChanges();
         ((Button)sender).Visible = false;
+        Response.Redirect(Request.Path);
     }
 
     protected void BindDataToGridView()

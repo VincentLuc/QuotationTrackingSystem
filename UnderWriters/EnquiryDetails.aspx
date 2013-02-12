@@ -74,18 +74,18 @@
   </tr>
   <tr>
     <td><span>Copy of CR:</span> <%= enquiry.CRCopyName %></td>
-    <td><asp:Button ID="btnDownload" runat="server" Text="Download" onclick="btnDownload_Click"/></td>
+    <td><asp:Button ID="btnDownload" runat="server" Text="Download" onclick="btnDownload_Click" CausesValidation="False"/></td>
   </tr>
   <% if(!string.IsNullOrEmpty(enquiry.PreviousLossRatioReportPath)) {%>
     <tr>
       <td><span>Previous Loss Ratio Report:</span> <%= enquiry.PreviousLossRatioReportName%></td>
-      <td><asp:Button ID="btnLossRatio" runat="server" Text="Download" onclick="btnLossRatio_Click"/></td>
+      <td><asp:Button ID="btnLossRatio" runat="server" Text="Download" onclick="btnLossRatio_Click" CausesValidation="False"/></td>
     </tr>
   <% } %>
   <% if(!string.IsNullOrEmpty(enquiry.AdditionalDocumentName)) {%>
     <tr>
       <td><span>Additional Documents:</span> <%= enquiry.AdditionalDocumentName%></td>
-      <td><asp:Button ID="btnAdditionalDocument" runat="server" Text="Download" onclick="btnAdditionalDocument_Click"/></td>
+      <td><asp:Button ID="btnAdditionalDocument" runat="server" Text="Download" onclick="btnAdditionalDocument_Click" CausesValidation="False"/></td>
     </tr>
   <% } %>
         <asp:HiddenField ID="hdnEnquiryId" runat="server" />
