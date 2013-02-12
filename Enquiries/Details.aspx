@@ -36,6 +36,8 @@
   </tbody>
 </table>
 <div class="clear"></div>
+<h3 class="left">Enquiry Details</h3>
+<div class="clear"></div>
 <table class="table table-bordered">
   <tr>
     <td><span>Client Name:</span> <%= enquiry.ClientName %></td>
