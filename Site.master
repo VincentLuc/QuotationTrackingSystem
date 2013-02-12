@@ -35,7 +35,11 @@
                  <a href="/QuotationTrackingSystem/CurrentUser/MyAccount.aspx">My Account</a> |
                  <a href="/QuotationTrackingSystem/CurrentUser/ChangePassword.aspx">Change Password</a> | 
                  <a href="/QuotationTrackingSystem/Emails/Inbox.aspx">
-                   <span class='unread-asterisk'>&#42;</span>Inbox ( <%= unreadEmailsCount %> )
+                   <% if (unreadEmailsCount > 0)
+                      {%>
+                     <span class='unread-asterisk'>&#42;</span>
+                   <%} %>
+                   Inbox ( <%= unreadEmailsCount %> )
                  </a> |
                 <a href="/QuotationTrackingSystem/Account/Logout.aspx"> Log Out</a>
               <%}

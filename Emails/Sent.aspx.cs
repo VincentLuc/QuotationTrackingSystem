@@ -21,14 +21,6 @@ public partial class Emails_Sent : System.Web.UI.Page
     protected void gvSentEmails_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType != DataControlRowType.DataRow) return;
-
-        LinkButton lb;
-        lb = new LinkButton();
-        lb.CommandArgument = e.Row.Cells[3].Text;
-        lb.CommandName = "NumClick";
-        lb.Text = "Details";
-        lb.PostBackUrl = "Details.aspx?id=" + e.Row.Cells[3].Text;
-        e.Row.Cells[3].Controls.Add((Control)lb);
     }
 
     public void BindDataToGridView()
@@ -41,7 +33,6 @@ public partial class Emails_Sent : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("Sent At", typeof(string)));
         dt.Columns.Add(new DataColumn("Sent To", typeof(string)));
         dt.Columns.Add(new DataColumn("Subject", typeof(string)));
-        dt.Columns.Add(new DataColumn("Details", typeof(string)));
 
         foreach (var x in _quotationTrackingSystemDBEntities.Emails.Where(x => x.FromUserId == _currentUserId).OrderByDescending(x => x.CreatedAt).ToList())
         {
@@ -49,7 +40,6 @@ public partial class Emails_Sent : System.Web.UI.Page
             dr["Sent At"] = DateTimeHelper.To24Hours(x.CreatedAt);
             dr["Sent To"] = x.tblUser.UserName;
             dr["Subject"] = x.Subject;
-            dr["Details"] = x.Id;
             dt.Rows.Add(dr);
         }
 
