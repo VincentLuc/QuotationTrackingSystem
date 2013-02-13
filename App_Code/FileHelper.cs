@@ -28,6 +28,9 @@ public static class FileHelper
 
         if (crFile != null && crFile.ContentLength > 0){
             _CRFileName = "cr_file_" + _timeStamp + "_" + Path.GetFileName(crFile.FileName);
+            if (_CRFileName.Length > 97) {
+                _CRFileName = "cr_file_" + _timeStamp + Path.GetExtension(crFile.FileName);
+            }
             _CRFilePath = path + "\\" + _CRFileName;
             crFile.SaveAs(_CRFilePath);
         }
@@ -37,6 +40,9 @@ public static class FileHelper
 
         if (lossRatioFilex != null && lossRatioFilex.ContentLength > 0){
             _lossRatioFileName = "loss_ratio_" + _timeStamp + "_" + Path.GetFileName(lossRatioFilex.FileName);
+            if (_lossRatioFileName.Length > 97) {
+                _lossRatioFileName = "loss_ratio_" + _timeStamp + Path.GetExtension(lossRatioFilex.FileName);
+            }
             _lossRatioFilePath = path + "\\" + _lossRatioFileName;
             lossRatioFilex.SaveAs(_lossRatioFilePath);
         }
@@ -47,6 +53,9 @@ public static class FileHelper
         if (additionalFile != null && additionalFile.ContentLength > 0)
         {
             _additionalFileName = "additional_file__" + _timeStamp + "_" + Path.GetFileName(additionalFile.FileName);
+            if (_additionalFileName.Length > 97) {
+                _additionalFileName = "additional_file__" + _timeStamp + Path.GetExtension(additionalFile.FileName);
+            }
             _additionalFilePath = path + "\\" + _additionalFileName;
             additionalFile.SaveAs(_additionalFilePath);
         }
@@ -61,7 +70,7 @@ public static class FileHelper
         return _hash;
     }
 
-    public static Hashtable UpdateCommentFile(HttpPostedFile file, int enquiryId)
+    public static Hashtable UpdateCommentFile(HttpPostedFile file, int enquiryId, string prefix)
     {
         var _timeStamp = DateTimeHelper.ToTimeStamp();
         var path = FileHelper.GetEnquiryFolderPath(enquiryId);
@@ -70,7 +79,10 @@ public static class FileHelper
 
         if (file != null && file.ContentLength > 0)
         {
-            _fileName = "comment_file_" + _timeStamp + "_" + Path.GetFileName(file.FileName);
+            _fileName = prefix + _timeStamp + "_" + Path.GetFileName(file.FileName);
+            if (_fileName.Length > 97) {
+                _fileName = prefix + _timeStamp + Path.GetExtension(file.FileName);
+            }
             _filePath = path + "\\" + _fileName;
             file.SaveAs(_filePath);
         }

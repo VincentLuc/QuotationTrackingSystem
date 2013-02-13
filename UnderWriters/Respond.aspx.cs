@@ -1,0 +1,106 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+using QuotationTrackingSystemDBModel;
+using System.Collections;
+
+public partial class UnderWriters_Respond : System.Web.UI.Page
+{
+    QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities;
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack) {
+            declinedDiv.Visible = false;
+            rfvText.Enabled = false;
+            hdnEnquiryId.Value = Request.QueryString["id"];
+            var _enquiryId = int.Parse(hdnEnquiryId.Value);
+            _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
+            var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.Id == _enquiryId).First();
+            var canUpdate = CanUpdateEnquiry(enquiry);
+            if (!canUpdate) {
+                return;
+            }
+        }
+    }
+    
+    protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+        if (ddlStatus.SelectedValue == "Release Quotation")
+        {
+            rfvText.Enabled = false;
+            declinedDiv.Visible = false;
+            quotationDiv.Visible = true;
+        }
+        else {
+            rfvText.Enabled = true;
+            declinedDiv.Visible = true;
+            quotationDiv.Visible = false;
+        }
+    }
+
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        if (ddlStatus.SelectedValue == "Release Quotation" && (Request.Files["quotationFile"] == null || Request.Files["quotationFile"].ContentLength <= 0 )){
+            Session["ErrorMessage"] = "Please Attach Quotation File!";
+            return;
+        }
+        _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
+        var _currentUserName = User.Identity.Name;
+        var _enquiryId = int.Parse(hdnEnquiryId.Value);
+        var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.Id == _enquiryId).First();
+        var salesPersonId = enquiry.CreatedBy;
+        var text = "Enquiry " + StringHelper.ToSentenceCase(ddlStatus.SelectedValue.ToString()) + ". Updated By " + _currentUserName + " !";
+        var commentText = StringHelper.ToSentenceCase(ddlStatus.SelectedValue.ToString()) + " - " + txtText.Text.Trim();
+        var _enquiryStatus = ddlStatus.SelectedValue.ToString(); ;
+
+        var canUpdate = CanUpdateEnquiry(enquiry);
+        if (!canUpdate) {
+            return;
+        }
+
+        enquiry.Status = ddlStatus.SelectedValue;
+        if (ddlStatus.SelectedValue == "Release Quotation")
+        {
+            Hashtable hash = FileHelper.UpdateCommentFile(Request.Files["quotationFile"], int.Parse(hdnEnquiryId.Value), "quotation_file_");
+            enquiry.QuotationFileName = hash["fileName"].ToString();
+            enquiry.QuotationFilePath = hash["filePath"].ToString();
+            _enquiryStatus = "QuotationReleased";
+            enquiry.Status = "QuotationReleased";
+        }else if(ddlStatus.SelectedValue == "Missing Information"){
+            _enquiryStatus = "MissingInformation";
+            enquiry.Status = "MissingInformation";
+        }
+
+        var notification = new Notification { IsRead = "False", UserId = salesPersonId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = _enquiryId };
+        var newEvent = new Event { State = _enquiryStatus, CreatedBy = _currentUserName, CreatedAt = DateTime.Now, EnquiryId = _enquiryId };
+
+        if (ddlStatus.SelectedValue != "Release Quotation"){
+            var comment = new Comment { Text = commentText, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId };
+            _quotationTrackingSystemDBEntities.AddToComments(comment);
+        }
+
+        _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
+        _quotationTrackingSystemDBEntities.AddToNotifications(notification);
+        _quotationTrackingSystemDBEntities.SaveChanges();
+
+        Session["NoticeMessage"] = "Successfully updated enquiry!";
+        Response.Redirect("EnquiryDetails.aspx?id=" + _enquiryId);
+
+    }
+
+    public bool CanUpdateEnquiry(Enquiry enquiry) {
+        var canUpdate = true;
+        if (enquiry.Status == "QuotationReleased" || enquiry.Status == "MissingInformation" || enquiry.Status == "Declined")
+        {
+            canUpdate = false;
+            Session["ErrorMessage"] = "Now you cannot update enquiry status !";
+            Response.Redirect("EnquiryDetails.aspx?id=" + hdnEnquiryId.Value);
+        }
+        return canUpdate;
+    }
+}

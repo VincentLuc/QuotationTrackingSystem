@@ -65,7 +65,7 @@ public partial class Enquiries_Details : System.Web.UI.Page
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        Hashtable hash = FileHelper.UpdateCommentFile(Request.Files["commentFile"], int.Parse(hdnEnquiryId.Value));
+        Hashtable hash = FileHelper.UpdateCommentFile(Request.Files["commentFile"], int.Parse(hdnEnquiryId.Value), "comment_file_");
         _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
         var _currentUserId = CurrentUser.Id();
         var _currentUserName = User.Identity.Name;

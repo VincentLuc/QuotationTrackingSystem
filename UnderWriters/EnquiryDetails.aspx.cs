@@ -55,6 +55,14 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
         sendFile(enquiry.AdditionalDocumentName, enquiry.AdditionalDocumentPath);
     }
 
+    protected void btnQuotationDocument_Click(object sender, EventArgs e)
+    {
+        var _currentUserId = CurrentUser.Id();
+        var enquiryId = int.Parse(hdnEnquiryId.Value);
+        var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId).Where(x => x.Id == enquiryId).FirstOrDefault();
+        sendFile(enquiry.QuotationFileName, enquiry.QuotationFilePath);
+    }
+
     protected void sendFile(string FileName, string FilePath)
     {
         System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
@@ -69,7 +77,7 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        Hashtable hash = FileHelper.UpdateCommentFile(Request.Files["commentFile"], int.Parse(hdnEnquiryId.Value));
+        Hashtable hash = FileHelper.UpdateCommentFile(Request.Files["commentFile"], int.Parse(hdnEnquiryId.Value), "comment_file_");
         _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
         var _currentUserName = User.Identity.Name;
         var _enquiryId = int.Parse(hdnEnquiryId.Value);

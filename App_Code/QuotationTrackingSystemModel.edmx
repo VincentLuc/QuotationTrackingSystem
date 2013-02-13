@@ -121,6 +121,7 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="FileName" Type="nvarchar" MaxLength="100" />
           <Property Name="FilePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="State" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Text" Type="nvarchar" Nullable="false" MaxLength="500" />
           <Property Name="EnquiryId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="100" />
@@ -398,6 +399,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="FileName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="FilePath" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Text" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="EnquiryId" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
@@ -619,6 +621,7 @@
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="FileName" ColumnName="FileName" />
             <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+            <ScalarProperty Name="State" ColumnName="State" />
             <ScalarProperty Name="Text" ColumnName="Text" />
             <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
             <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -685,56 +688,56 @@
       <Diagram Name="QuotationTrackingSystemModel">
         <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Comment" Width="1.5" PointX="5.25" PointY="7.125" Height="2.5571907552083326" IsExpanded="true" />
         <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Email" Width="1.5" PointX="3" PointY="3.625" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Enquiry" Width="1.5" PointX="3" PointY="7.875" Height="7.1724251302083326" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Enquiry" Width="1.5" PointX="3" PointY="8" Height="7.1724251302083326" IsExpanded="true" />
         <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Event" Width="1.5" PointX="5.25" PointY="10.375" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Note" Width="1.5" PointX="5.25" PointY="13.25" Height="2.5571907552083317" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Notification" Width="1.5" PointX="8.25" PointY="10.125" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.tblUser" Width="1.5" PointX="0.75" PointY="9.75" Height="4.2879036458333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Visit" Width="1.5" PointX="3" PointY="16.625" Height="3.5186979166666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Note" Width="1.5" PointX="5.25" PointY="13.375" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Notification" Width="1.5" PointX="8.25" PointY="10.25" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.tblUser" Width="1.5" PointX="0.75" PointY="9.875" Height="4.2879036458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Visit" Width="1.5" PointX="3" PointY="16.875" Height="3.5186979166666674" IsExpanded="true" />
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Enquiries_Comments" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="8.7785953776041659" />
-          <ConnectorPoint PointX="5.25" PointY="8.7785953776041659" />
+          <ConnectorPoint PointX="4.5" PointY="8.8410953776041659" />
+          <ConnectorPoint PointX="5.25" PointY="8.8410953776041659" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Emails_tblUsers" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="9.75" />
+          <ConnectorPoint PointX="1.5" PointY="9.875" />
           <ConnectorPoint PointX="1.5" PointY="4.99974609375" />
           <ConnectorPoint PointX="3" PointY="4.99974609375" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Enquiries_tblUsers" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="11.893951822916666" />
-          <ConnectorPoint PointX="3" PointY="11.893951822916666" />
+          <ConnectorPoint PointX="2.25" PointY="12.018951822916666" />
+          <ConnectorPoint PointX="3" PointY="12.018951822916666" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Events_Enquiries" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="11.4612939453125" />
           <ConnectorPoint PointX="5.25" PointY="11.4612939453125" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Notes_Enquiries" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="14.148712565104166" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="14.148712565104166" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="14.148712565104166" />
-          <ConnectorPoint PointX="5.25" PointY="14.148712565104166" />
+          <ConnectorPoint PointX="4.5" PointY="14.273712565104166" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="14.273712565104166" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="14.273712565104166" />
+          <ConnectorPoint PointX="5.25" PointY="14.273712565104166" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Notifications_Enquiries" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="12.7422900390625" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="12.7422900390625" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="12.7422900390625" />
-          <ConnectorPoint PointX="8.25" PointY="12.7422900390625" />
+          <ConnectorPoint PointX="4.5" PointY="12.8047900390625" />
+          <ConnectorPoint PointX="7.791666666666667" PointY="12.8047900390625" />
+          <ConnectorPoint PointX="7.958333333333333" PointY="12.8047900390625" />
+          <ConnectorPoint PointX="8.25" PointY="12.8047900390625" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Notifications_tblUsers" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="14.037903645833332" />
-          <ConnectorPoint PointX="1.5" PointY="15.297425130208332" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="15.297425130208332" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="15.297425130208332" />
-          <ConnectorPoint PointX="5" PointY="15.297425130208332" />
-          <ConnectorPoint PointX="5" PointY="13" />
-          <ConnectorPoint PointX="7.875" PointY="13" />
-          <ConnectorPoint PointX="7.875" PointY="11.40239301953125" />
-          <ConnectorPoint PointX="8.25" PointY="11.40239301953125" />
+          <ConnectorPoint PointX="1.5" PointY="14.162903645833332" />
+          <ConnectorPoint PointX="1.5" PointY="15.422425130208332" />
+          <ConnectorPoint PointX="1.8229191666666667" PointY="15.422425130208332" />
+          <ConnectorPoint PointX="1.9895858333333332" PointY="15.422425130208332" />
+          <ConnectorPoint PointX="5" PointY="15.422425130208332" />
+          <ConnectorPoint PointX="5" PointY="13.125" />
+          <ConnectorPoint PointX="7.875" PointY="13.125" />
+          <ConnectorPoint PointX="7.875" PointY="11.49614301953125" />
+          <ConnectorPoint PointX="8.25" PointY="11.49614301953125" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Visits_tblUsers" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.9062525" PointY="14.037903645833332" />
-          <ConnectorPoint PointX="1.9062525" PointY="18.384348958333334" />
-          <ConnectorPoint PointX="3" PointY="18.384348958333334" />
+          <ConnectorPoint PointX="1.9062525" PointY="14.162903645833332" />
+          <ConnectorPoint PointX="1.9062525" PointY="18.634348958333334" />
+          <ConnectorPoint PointX="3" PointY="18.634348958333334" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

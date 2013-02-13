@@ -37,8 +37,15 @@
 </table>
 <div class="clear"></div>
 <h3 class="left">Enquiry Details</h3>
+<% if (enquiry.Status != "QuotationReleased" && enquiry.Status != "MissingInformation" && enquiry.Status != "Declined")
+   {%>
+<h3 class="right"><a href="Respond.aspx?id=<%= hdnEnquiryId.Value %>">Respond</a></h3>
+<%} %>
 <div class="clear"></div>
 <table class="table table-bordered">
+  <tr class='read'>
+    <td colspan="2"><span>Status:</span> <%= StringHelper.ToSentenceCase(enquiry.Status) %></td>
+  </tr>
   <tr>
     <td><span>Client Name:</span> <%= enquiry.ClientName %></td>
     <td><span>Contact Person Name:</span> <%= enquiry.ContactPersonName %></td>
@@ -64,9 +71,6 @@
     </td>
   </tr>
   <tr>
-    <td colspan="2"><span>Status:</span> <%= enquiry.Status %></td>
-  </tr>
-  <tr>
     <td><span>Address:</span> <%= enquiry.Address %></td>
     <td><span>Remarks:</span> <%= enquiry.Remarks %></td>
   </tr>
@@ -88,6 +92,12 @@
     <tr>
       <td><span>Additional Documents:</span> <%= enquiry.AdditionalDocumentName%></td>
       <td><asp:Button ID="btnAdditionalDocument" runat="server" Text="Download" onclick="btnAdditionalDocument_Click" CausesValidation="False"/></td>
+    </tr>
+  <% } %>
+  <% if(enquiry.Status == "QuotationReleased") {%>
+    <tr>
+      <td><span>Quotation Document:</span> <%= enquiry.QuotationFileName%></td>
+      <td><asp:Button ID="btnQuotationDocument" runat="server" Text="Download" onclick="btnQuotationDocument_Click" CausesValidation="False"/></td>
     </tr>
   <% } %>
         <asp:HiddenField ID="hdnEnquiryId" runat="server" />

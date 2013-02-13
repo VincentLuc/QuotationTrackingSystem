@@ -1848,14 +1848,16 @@ namespace QuotationTrackingSystemDBModel
         /// Create a new Note object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="state">Initial value of the State property.</param>
         /// <param name="text">Initial value of the Text property.</param>
         /// <param name="enquiryId">Initial value of the EnquiryId property.</param>
         /// <param name="createdBy">Initial value of the CreatedBy property.</param>
         /// <param name="createdAt">Initial value of the CreatedAt property.</param>
-        public static Note CreateNote(global::System.Int32 id, global::System.String text, global::System.Int32 enquiryId, global::System.String createdBy, global::System.DateTime createdAt)
+        public static Note CreateNote(global::System.Int32 id, global::System.String state, global::System.String text, global::System.Int32 enquiryId, global::System.String createdBy, global::System.DateTime createdAt)
         {
             Note note = new Note();
             note.Id = id;
+            note.State = state;
             note.Text = text;
             note.EnquiryId = enquiryId;
             note.CreatedBy = createdBy;
@@ -1940,6 +1942,30 @@ namespace QuotationTrackingSystemDBModel
         private global::System.String _FilePath;
         partial void OnFilePathChanging(global::System.String value);
         partial void OnFilePathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String State
+        {
+            get
+            {
+                return _State;
+            }
+            set
+            {
+                OnStateChanging(value);
+                ReportPropertyChanging("State");
+                _State = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("State");
+                OnStateChanged();
+            }
+        }
+        private global::System.String _State;
+        partial void OnStateChanging(global::System.String value);
+        partial void OnStateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
