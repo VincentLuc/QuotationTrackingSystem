@@ -23,6 +23,7 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
         if (enquiry == null) {
             Session["ErrorMessage"] = "Enquiry not found !";
             Response.Redirect("Enquiries.aspx");
+            return;
         }
         var enquiryEvent = enquiry.Events.Where(x => x.State == "UnderWriterViewed").FirstOrDefault();
         if (enquiryEvent == null) { 
@@ -92,7 +93,7 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
         _quotationTrackingSystemDBEntities.AddToComments(comment);
         _quotationTrackingSystemDBEntities.SaveChanges();
 
-        Session["NoticeMessage"] = "Successfully added comment!";
+        Session["NoticeMessage"] = "Successfully added comment !";
         Response.Redirect("EnquiryDetails.aspx?id=" + _enquiryId);
     }
 }

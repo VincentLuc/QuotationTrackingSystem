@@ -18,8 +18,14 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
             rfvText.Enabled = false;
             hdnEnquiryId.Value = Request.QueryString["id"];
             var _enquiryId = int.Parse(hdnEnquiryId.Value);
+            var _currentUserId = CurrentUser.Id();
             _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
-            var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.Id == _enquiryId).First();
+            var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.Id == _enquiryId).Where(x => x.UnderWriterId == _currentUserId).FirstOrDefault();
+            if (enquiry == null){
+                Session["ErrorMessage"] = "Enquiry not found !";
+                Response.Redirect("Enquiries.aspx");
+                return;
+            }
             var canUpdate = CanUpdateEnquiry(enquiry);
             if (!canUpdate) {
                 return;
@@ -79,18 +85,24 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
         var notification = new Notification { IsRead = "False", UserId = salesPersonId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = _enquiryId };
         var newEvent = new Event { State = _enquiryStatus, CreatedBy = _currentUserName, CreatedAt = DateTime.Now, EnquiryId = _enquiryId };
 
-        if (ddlStatus.SelectedValue != "Release Quotation"){
-            var comment = new Comment { Text = commentText, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId };
-            _quotationTrackingSystemDBEntities.AddToComments(comment);
-        }
-
         _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
         _quotationTrackingSystemDBEntities.AddToNotifications(notification);
         _quotationTrackingSystemDBEntities.SaveChanges();
 
+        if (ddlStatus.SelectedValue != "Release Quotation"){
+            var comment = new Comment { Text = commentText, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId, EventId = newEvent.Id };
+            _quotationTrackingSystemDBEntities.AddToComments(comment);
+            _quotationTrackingSystemDBEntities.SaveChanges();
+        }
+
         Session["NoticeMessage"] = "Successfully updated enquiry!";
         Response.Redirect("EnquiryDetails.aspx?id=" + _enquiryId);
 
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("EnquiryDetails.aspx?id=" + hdnEnquiryId.Value);
     }
 
     public bool CanUpdateEnquiry(Enquiry enquiry) {

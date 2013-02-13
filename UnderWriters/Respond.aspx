@@ -6,6 +6,7 @@
 <div class="breadcrumb">
   <ul>
     <li><a href="Enquiries.aspx">Enquiries</a><span class="divider">></span></li>
+    <li><a href="EnquiryDetails.aspx?id=<%= hdnEnquiryId.Value %>"><%= hdnEnquiryId.Value %></a><span class="divider">></span></li>
     <li><a class="active">Respond</a></li>
   </ul>
 </div>
@@ -36,6 +37,9 @@
   </p>
     <p>
         <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save" />
+        &nbsp;
+      <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn" 
+          onclick="btnCancel_Click" CausesValidation="False" />
   </p>
 </fieldset>
 </asp:Content>

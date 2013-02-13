@@ -10,7 +10,6 @@
           <EntitySet Name="Emails" EntityType="QuotationTrackingSystemDBModel.Store.Emails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Enquiries" EntityType="QuotationTrackingSystemDBModel.Store.Enquiries" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Events" EntityType="QuotationTrackingSystemDBModel.Store.Events" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Notes" EntityType="QuotationTrackingSystemDBModel.Store.Notes" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Notifications" EntityType="QuotationTrackingSystemDBModel.Store.Notifications" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="tblUsers" EntityType="QuotationTrackingSystemDBModel.Store.tblUsers" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Visits" EntityType="QuotationTrackingSystemDBModel.Store.Visits" store:Type="Tables" Schema="dbo" />
@@ -29,10 +28,6 @@
           <AssociationSet Name="FK_Events_Enquiries" Association="QuotationTrackingSystemDBModel.Store.FK_Events_Enquiries">
             <End Role="Enquiries" EntitySet="Enquiries" />
             <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Notes_Enquiries" Association="QuotationTrackingSystemDBModel.Store.FK_Notes_Enquiries">
-            <End Role="Enquiries" EntitySet="Enquiries" />
-            <End Role="Notes" EntitySet="Notes" />
           </AssociationSet>
           <AssociationSet Name="FK_Notifications_Enquiries" Association="QuotationTrackingSystemDBModel.Store.FK_Notifications_Enquiries">
             <End Role="Enquiries" EntitySet="Enquiries" />
@@ -55,6 +50,7 @@
           <Property Name="Text" Type="nvarchar" Nullable="false" MaxLength="500" />
           <Property Name="FileName" Type="nvarchar" MaxLength="100" />
           <Property Name="FilePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="EventId" Type="int" />
           <Property Name="EnquiryId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
@@ -89,6 +85,8 @@
           <Property Name="AdditionalDocumentPath" Type="nvarchar" MaxLength="200" />
           <Property Name="QuotationFileName" Type="nvarchar" MaxLength="100" />
           <Property Name="QuotationFilePath" Type="nvarchar" MaxLength="200" />
+          <Property Name="ConfirmationCopyFileName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ConfirmationCopyFilePath" Type="nvarchar" MaxLength="200" />
           <Property Name="InsuranceType" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="IntendedPolicyStartAt" Type="datetime" />
           <Property Name="InsuranceFor" Type="nvarchar" MaxLength="50" />
@@ -101,6 +99,7 @@
           <Property Name="UnderWriterId" Type="int" Nullable="false" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
           <Property Name="AcceptedQuotation" Type="nvarchar" MaxLength="50" />
+          <Property Name="ClientDeclinedReason" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
         </EntityType>
@@ -110,19 +109,6 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="State" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="EnquiryId" Type="int" Nullable="false" />
-          <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Notes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="FileName" Type="nvarchar" MaxLength="100" />
-          <Property Name="FilePath" Type="nvarchar" MaxLength="200" />
-          <Property Name="State" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Text" Type="nvarchar" Nullable="false" MaxLength="500" />
           <Property Name="EnquiryId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="nvarchar" Nullable="false" MaxLength="100" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
@@ -222,18 +208,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Notes_Enquiries">
-          <End Role="Enquiries" Type="QuotationTrackingSystemDBModel.Store.Enquiries" Multiplicity="1" />
-          <End Role="Notes" Type="QuotationTrackingSystemDBModel.Store.Notes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Enquiries">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Notes">
-              <PropertyRef Name="EnquiryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Notifications_Enquiries">
           <End Role="Enquiries" Type="QuotationTrackingSystemDBModel.Store.Enquiries" Multiplicity="1" />
           <End Role="Notifications" Type="QuotationTrackingSystemDBModel.Store.Notifications" Multiplicity="*" />
@@ -280,7 +254,6 @@
           <EntitySet Name="Emails" EntityType="QuotationTrackingSystemDBModel.Email" />
           <EntitySet Name="Enquiries" EntityType="QuotationTrackingSystemDBModel.Enquiry" />
           <EntitySet Name="Events" EntityType="QuotationTrackingSystemDBModel.Event" />
-          <EntitySet Name="Notes" EntityType="QuotationTrackingSystemDBModel.Note" />
           <EntitySet Name="Notifications" EntityType="QuotationTrackingSystemDBModel.Notification" />
           <EntitySet Name="tblUsers" EntityType="QuotationTrackingSystemDBModel.tblUser" />
           <EntitySet Name="Visits" EntityType="QuotationTrackingSystemDBModel.Visit" />
@@ -299,10 +272,6 @@
           <AssociationSet Name="FK_Events_Enquiries" Association="QuotationTrackingSystemDBModel.FK_Events_Enquiries">
             <End Role="Enquiries" EntitySet="Enquiries" />
             <End Role="Events" EntitySet="Events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Notes_Enquiries" Association="QuotationTrackingSystemDBModel.FK_Notes_Enquiries">
-            <End Role="Enquiries" EntitySet="Enquiries" />
-            <End Role="Notes" EntitySet="Notes" />
           </AssociationSet>
           <AssociationSet Name="FK_Notifications_Enquiries" Association="QuotationTrackingSystemDBModel.FK_Notifications_Enquiries">
             <End Role="Enquiries" EntitySet="Enquiries" />
@@ -325,6 +294,7 @@
           <Property Name="Text" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="FileName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="FilePath" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="EventId" Type="Int32" />
           <Property Name="EnquiryId" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
@@ -361,6 +331,8 @@
           <Property Name="AdditionalDocumentPath" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
           <Property Name="QuotationFileName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="QuotationFilePath" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="ConfirmationCopyFileName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="ConfirmationCopyFilePath" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
           <Property Name="InsuranceType" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="IntendedPolicyStartAt" Type="DateTime" />
           <Property Name="InsuranceFor" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
@@ -373,12 +345,12 @@
           <Property Name="UnderWriterId" Type="Int32" Nullable="false" />
           <Property Name="CompanyName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="AcceptedQuotation" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ClientDeclinedReason" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Comments" Relationship="QuotationTrackingSystemDBModel.FK_Enquiries_Comments" FromRole="Enquiries" ToRole="Comments" />
           <NavigationProperty Name="tblUser" Relationship="QuotationTrackingSystemDBModel.FK_Enquiries_tblUsers" FromRole="Enquiries" ToRole="tblUsers" />
           <NavigationProperty Name="Events" Relationship="QuotationTrackingSystemDBModel.FK_Events_Enquiries" FromRole="Enquiries" ToRole="Events" />
-          <NavigationProperty Name="Notes" Relationship="QuotationTrackingSystemDBModel.FK_Notes_Enquiries" FromRole="Enquiries" ToRole="Notes" />
           <NavigationProperty Name="Notifications" Relationship="QuotationTrackingSystemDBModel.FK_Notifications_Enquiries" FromRole="Enquiries" ToRole="Notifications" />
         </EntityType>
         <EntityType Name="Event">
@@ -391,20 +363,6 @@
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Enquiry" Relationship="QuotationTrackingSystemDBModel.FK_Events_Enquiries" FromRole="Events" ToRole="Enquiries" />
-        </EntityType>
-        <EntityType Name="Note">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FileName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="FilePath" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
-          <Property Name="State" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Text" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
-          <Property Name="EnquiryId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Enquiry" Relationship="QuotationTrackingSystemDBModel.FK_Notes_Enquiries" FromRole="Notes" ToRole="Enquiries" />
         </EntityType>
         <EntityType Name="Notification">
           <Key>
@@ -508,18 +466,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Notes_Enquiries">
-          <End Role="Enquiries" Type="QuotationTrackingSystemDBModel.Enquiry" Multiplicity="1" />
-          <End Role="Notes" Type="QuotationTrackingSystemDBModel.Note" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Enquiries">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Notes">
-              <PropertyRef Name="EnquiryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Notifications_Enquiries">
           <End Role="Enquiries" Type="QuotationTrackingSystemDBModel.Enquiry" Multiplicity="1" />
           <End Role="Notifications" Type="QuotationTrackingSystemDBModel.Notification" Multiplicity="*" />
@@ -567,6 +513,7 @@
             <ScalarProperty Name="Text" ColumnName="Text" />
             <ScalarProperty Name="FileName" ColumnName="FileName" />
             <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+            <ScalarProperty Name="EventId" ColumnName="EventId" />
             <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
             <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
             <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
@@ -595,6 +542,8 @@
             <ScalarProperty Name="AdditionalDocumentPath" ColumnName="AdditionalDocumentPath" />
             <ScalarProperty Name="QuotationFileName" ColumnName="QuotationFileName" />
             <ScalarProperty Name="QuotationFilePath" ColumnName="QuotationFilePath" />
+            <ScalarProperty Name="ConfirmationCopyFileName" ColumnName="ConfirmationCopyFileName" />
+            <ScalarProperty Name="ConfirmationCopyFilePath" ColumnName="ConfirmationCopyFilePath" />
             <ScalarProperty Name="InsuranceType" ColumnName="InsuranceType" />
             <ScalarProperty Name="IntendedPolicyStartAt" ColumnName="IntendedPolicyStartAt" />
             <ScalarProperty Name="InsuranceFor" ColumnName="InsuranceFor" />
@@ -607,22 +556,13 @@
             <ScalarProperty Name="UnderWriterId" ColumnName="UnderWriterId" />
             <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
             <ScalarProperty Name="AcceptedQuotation" ColumnName="AcceptedQuotation" />
+            <ScalarProperty Name="ClientDeclinedReason" ColumnName="ClientDeclinedReason" />
             <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
             <ScalarProperty Name="UpdatedAt" ColumnName="UpdatedAt" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Events"><EntityTypeMapping TypeName="QuotationTrackingSystemDBModel.Event"><MappingFragment StoreEntitySet="Events">
             <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="State" ColumnName="State" />
-            <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
-            <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-            <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-          </MappingFragment></EntityTypeMapping></EntitySetMapping>
-          <EntitySetMapping Name="Notes"><EntityTypeMapping TypeName="QuotationTrackingSystemDBModel.Note"><MappingFragment StoreEntitySet="Notes">
-            <ScalarProperty Name="Id" ColumnName="Id" />
-            <ScalarProperty Name="FileName" ColumnName="FileName" />
-            <ScalarProperty Name="FilePath" ColumnName="FilePath" />
-            <ScalarProperty Name="State" ColumnName="State" />
-            <ScalarProperty Name="Text" ColumnName="Text" />
             <ScalarProperty Name="EnquiryId" ColumnName="EnquiryId" />
             <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
             <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
@@ -686,58 +626,45 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="QuotationTrackingSystemModel">
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Comment" Width="1.5" PointX="5.25" PointY="7.125" Height="2.5571907552083326" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Email" Width="1.5" PointX="3" PointY="3.625" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Enquiry" Width="1.5" PointX="3" PointY="8" Height="7.1724251302083326" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Comment" Width="1.5" PointX="5.25" PointY="6.875" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Email" Width="1.5" PointX="3" PointY="2.5" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Enquiry" Width="1.5" PointX="3" PointY="6" Height="7.5570279947916648" IsExpanded="true" />
         <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Event" Width="1.5" PointX="5.25" PointY="10.375" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Note" Width="1.5" PointX="5.25" PointY="13.375" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Notification" Width="1.5" PointX="8.25" PointY="10.25" Height="2.7494921874999996" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.tblUser" Width="1.5" PointX="0.75" PointY="9.875" Height="4.2879036458333317" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Visit" Width="1.5" PointX="3" PointY="16.875" Height="3.5186979166666674" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Notification" Width="1.5" PointX="8.25" PointY="8.375" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.tblUser" Width="1.5" PointX="0.75" PointY="8" Height="4.2879036458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuotationTrackingSystemDBModel.Visit" Width="1.5" PointX="3" PointY="14.25" Height="3.5186979166666674" IsExpanded="true" />
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Enquiries_Comments" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="8.8410953776041659" />
-          <ConnectorPoint PointX="5.25" PointY="8.8410953776041659" />
+          <ConnectorPoint PointX="4.5" PointY="8.24974609375" />
+          <ConnectorPoint PointX="5.25" PointY="8.24974609375" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Emails_tblUsers" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="9.875" />
-          <ConnectorPoint PointX="1.5" PointY="4.99974609375" />
-          <ConnectorPoint PointX="3" PointY="4.99974609375" />
+          <ConnectorPoint PointX="1.5" PointY="8" />
+          <ConnectorPoint PointX="1.5" PointY="3.87474609375" />
+          <ConnectorPoint PointX="3" PointY="3.87474609375" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Enquiries_tblUsers" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="12.018951822916666" />
-          <ConnectorPoint PointX="3" PointY="12.018951822916666" />
+          <ConnectorPoint PointX="2.25" PointY="10.143951822916666" />
+          <ConnectorPoint PointX="3" PointY="10.143951822916666" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Events_Enquiries" ManuallyRouted="false">
           <ConnectorPoint PointX="4.5" PointY="11.4612939453125" />
           <ConnectorPoint PointX="5.25" PointY="11.4612939453125" />
         </AssociationConnector>
-        <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Notes_Enquiries" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="14.273712565104166" />
-          <ConnectorPoint PointX="4.916666666666667" PointY="14.273712565104166" />
-          <ConnectorPoint PointX="5.083333333333333" PointY="14.273712565104166" />
-          <ConnectorPoint PointX="5.25" PointY="14.273712565104166" />
-        </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Notifications_Enquiries" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.5" PointY="12.8047900390625" />
-          <ConnectorPoint PointX="7.791666666666667" PointY="12.8047900390625" />
-          <ConnectorPoint PointX="7.958333333333333" PointY="12.8047900390625" />
-          <ConnectorPoint PointX="8.25" PointY="12.8047900390625" />
+          <ConnectorPoint PointX="4.5" PointY="9.99974609375" />
+          <ConnectorPoint PointX="8.25" PointY="9.99974609375" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Notifications_tblUsers" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.5" PointY="14.162903645833332" />
-          <ConnectorPoint PointX="1.5" PointY="15.422425130208332" />
-          <ConnectorPoint PointX="1.8229191666666667" PointY="15.422425130208332" />
-          <ConnectorPoint PointX="1.9895858333333332" PointY="15.422425130208332" />
-          <ConnectorPoint PointX="5" PointY="15.422425130208332" />
-          <ConnectorPoint PointX="5" PointY="13.125" />
-          <ConnectorPoint PointX="7.875" PointY="13.125" />
-          <ConnectorPoint PointX="7.875" PointY="11.49614301953125" />
-          <ConnectorPoint PointX="8.25" PointY="11.49614301953125" />
+          <ConnectorPoint PointX="1.9062519999999998" PointY="8" />
+          <ConnectorPoint PointX="1.9062519999999998" PointY="5.75" />
+          <ConnectorPoint PointX="7.875" PointY="5.75" />
+          <ConnectorPoint PointX="7.875" PointY="9.1561210468749987" />
+          <ConnectorPoint PointX="8.25" PointY="9.1561210468749987" />
         </AssociationConnector>
         <AssociationConnector Association="QuotationTrackingSystemDBModel.FK_Visits_tblUsers" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.9062525" PointY="14.162903645833332" />
-          <ConnectorPoint PointX="1.9062525" PointY="18.634348958333334" />
-          <ConnectorPoint PointX="3" PointY="18.634348958333334" />
+          <ConnectorPoint PointX="1.5" PointY="12.287903645833332" />
+          <ConnectorPoint PointX="1.5" PointY="16.009348958333334" />
+          <ConnectorPoint PointX="3" PointY="16.009348958333334" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

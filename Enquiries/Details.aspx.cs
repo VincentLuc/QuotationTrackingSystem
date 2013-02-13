@@ -21,12 +21,12 @@ public partial class Enquiries_Details : System.Web.UI.Page
         var _currentUserId = CurrentUser.Id();
         var _enquiryId = int.Parse(hdnEnquiryId.Value);
         enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.CreatedBy == _currentUserId).Where(x => x.Id == _enquiryId).FirstOrDefault();
-        UnderWriterName = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == enquiry.UnderWriterId).FirstOrDefault().UserName;
         if (enquiry == null) {
-            Session["ErrorMessage"] = "Enquiry not found !";
+            Session["ErrorMessage"] = "You are not authorized to access that enquiry !";
             Response.Redirect("Index.aspx");
             return;
         }
+        UnderWriterName = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == enquiry.UnderWriterId).FirstOrDefault().UserName;
     }
     protected void btnDownload_Click(object sender, EventArgs e)
     {
@@ -50,6 +50,14 @@ public partial class Enquiries_Details : System.Web.UI.Page
         var enquiryId = int.Parse(hdnEnquiryId.Value);
         var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.CreatedBy == _currentUserId).Where(x => x.Id == enquiryId).FirstOrDefault();
         sendFile(enquiry.AdditionalDocumentName, enquiry.AdditionalDocumentPath);
+    }
+
+    protected void btnQuotationDocument_Click(object sender, EventArgs e)
+    {
+        var _currentUserId = CurrentUser.Id();
+        var enquiryId = int.Parse(hdnEnquiryId.Value);
+        var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.CreatedBy == _currentUserId).Where(x => x.Id == enquiryId).FirstOrDefault();
+        sendFile(enquiry.QuotationFileName, enquiry.QuotationFilePath);
     }
 
     protected void sendFile(string FileName, string FilePath) {
