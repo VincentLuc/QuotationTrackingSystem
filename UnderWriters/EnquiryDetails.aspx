@@ -37,7 +37,7 @@
 </table>
 <div class="clear"></div>
 <h3 class="left">Enquiry Details</h3>
-<% if (enquiry.Status != "QuotationReleased" && enquiry.Status != "MissingInformation" && enquiry.Status != "Declined")
+<% if (enquiry.Status == "Created" || enquiry.Status == "UnderWriterViewed" || enquiry.Status == "InformationUpdate")
    {%>
 <h3 class="right"><a href="Respond.aspx?id=<%= hdnEnquiryId.Value %>">Respond</a></h3>
 <%} %>
@@ -46,6 +46,22 @@
   <tr class='read'>
     <td colspan="2"><span>Status:</span> <%= StringHelper.ToSentenceCase(enquiry.Status) %></td>
   </tr>
+  <% if (enquiry.Status == "ClientAccepted"){ %>
+      <tr>
+        <td>
+          <span>Confirmation Copy: </span><%= enquiry.ConfirmationCopyFileName %>
+        </td>
+        <td>
+          <asp:Button ID="btnCC" runat="server" Text="Download" onclick="btnCC_Click" CausesValidation="False" />
+        </td>
+      </tr>
+   <%} %>
+   <% if (enquiry.Status == "ClientDeclined")
+      { %>
+      <tr>
+        <td colspan="2"><sapn>Reason: </sapn> <%= enquiry.ClientDeclinedReason %></td>
+      </tr>
+   <%} %>
   <tr>
     <td><span>Client Name:</span> <%= enquiry.ClientName %></td>
     <td><span>Contact Person Name:</span> <%= enquiry.ContactPersonName %></td>

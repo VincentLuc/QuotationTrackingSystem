@@ -96,4 +96,11 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
         Session["NoticeMessage"] = "Successfully added comment !";
         Response.Redirect("EnquiryDetails.aspx?id=" + _enquiryId);
     }
+    protected void btnCC_Click(object sender, EventArgs e)
+    {
+        var _currentUserId = CurrentUser.Id();
+        var enquiryId = int.Parse(hdnEnquiryId.Value);
+        var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId).Where(x => x.Id == enquiryId).FirstOrDefault();
+        sendFile(enquiry.ConfirmationCopyFileName, enquiry.ConfirmationCopyFilePath);
+    }
 }
