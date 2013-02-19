@@ -27,11 +27,11 @@ public partial class Enquiries_Index : System.Web.UI.Page
 
         LinkButton lb;
         lb = new LinkButton();
-        lb.CommandArgument = e.Row.Cells[4].Text;
+        lb.CommandArgument = e.Row.Cells[5].Text;
         lb.CommandName = "NumClick";
         lb.Text = "Details";
-        lb.PostBackUrl = "Details.aspx?id=" + e.Row.Cells[4].Text;
-        e.Row.Cells[4].Controls.Add((Control)lb);
+        lb.PostBackUrl = "Details.aspx?id=" + e.Row.Cells[5].Text;
+        e.Row.Cells[5].Controls.Add((Control)lb);
 
     }
     protected void BindDataToGridView()
@@ -43,6 +43,7 @@ public partial class Enquiries_Index : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("Requested At", typeof(string)));
         dt.Columns.Add(new DataColumn("Client Name", typeof(string)));
         dt.Columns.Add(new DataColumn("Phone", typeof(string)));
+        dt.Columns.Add(new DataColumn("Status", typeof(string)));
         dt.Columns.Add(new DataColumn("Insurance Type", typeof(string)));
         dt.Columns.Add(new DataColumn("Details", typeof(string)));
 
@@ -53,6 +54,7 @@ public partial class Enquiries_Index : System.Web.UI.Page
             dr["Requested At"] = DateTimeHelper.ConvertToString(x.CreatedAt.ToString());
             dr["Client Name"] = x.ClientName;
             dr["Phone"] = x.Phone1;
+            dr["Status"] = StringHelper.ToSentenceCase(x.Status);
             dr["Insurance Type"] = StringHelper.ToSentenceCase(x.InsuranceType);
             dr["Details"] = x.Id;
             dt.Rows.Add(dr);

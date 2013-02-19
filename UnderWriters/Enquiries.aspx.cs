@@ -30,11 +30,11 @@ public partial class UnderWriters_Enquiries : System.Web.UI.Page
         if (e.Row.RowType != DataControlRowType.DataRow) return;
 
         LinkButton lb = new LinkButton();
-        lb.CommandArgument = e.Row.Cells[4].Text;
+        lb.CommandArgument = e.Row.Cells[5].Text;
         lb.CommandName = "NumClick";
         lb.Text = "Details";
-        lb.PostBackUrl = "EnquiryDetails.aspx?id=" + e.Row.Cells[4].Text;
-        e.Row.Cells[4].Controls.Add((Control)lb);
+        lb.PostBackUrl = "EnquiryDetails.aspx?id=" + e.Row.Cells[5].Text;
+        e.Row.Cells[5].Controls.Add((Control)lb);
 
         for (int i = 0; i < e.Row.Cells.Count; i++)
         {
@@ -50,6 +50,7 @@ public partial class UnderWriters_Enquiries : System.Web.UI.Page
 
         dt.Columns.Add(new DataColumn("Client Name", typeof(string)));
         dt.Columns.Add(new DataColumn("Phone", typeof(string)));
+        dt.Columns.Add(new DataColumn("Status", typeof(string)));
         dt.Columns.Add(new DataColumn("Submitted By (Sales User)", typeof(string)));
         dt.Columns.Add(new DataColumn("Submitted At", typeof(string)));
         dt.Columns.Add(new DataColumn("Details", typeof(string)));
@@ -61,6 +62,7 @@ public partial class UnderWriters_Enquiries : System.Web.UI.Page
             dr = dt.NewRow();
             dr["Client Name"] = x.ClientName;
             dr["Phone"] = x.Phone1;
+            dr["Status"] = StringHelper.ToSentenceCase(x.Status);
             dr["Submitted By (Sales User)"] = x.tblUser.UserName;
             dr["Submitted At"] = DateTimeHelper.ConvertToString(x.CreatedAt.ToString());
             dr["Details"] = x.Id;
