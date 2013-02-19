@@ -27,6 +27,11 @@ public partial class Enquiries_Details : System.Web.UI.Page
             return;
         }
         UnderWriterName = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == enquiry.UnderWriterId).FirstOrDefault().UserName;
+        var count = _quotationTrackingSystemDBEntities.Notifications.Where(x => x.UserId == _currentUserId).Where(x => x.EnquiryId == _enquiryId).Where(x => x.IsRead == "False").Count();
+        if (count > 0) {
+            _quotationTrackingSystemDBEntities.Notifications.Where(x => x.UserId == _currentUserId).Where(x => x.EnquiryId == _enquiryId).Where(x => x.IsRead == "False").ToList().ForEach(x => x.IsRead = "True");
+            _quotationTrackingSystemDBEntities.SaveChanges();
+        }
     }
     protected void btnDownload_Click(object sender, EventArgs e)
     {

@@ -34,16 +34,6 @@ public partial class Notifications_Index : System.Web.UI.Page
         lb.Text = array[0];
         lb.PostBackUrl =  url + array[0];
         cell_3.Controls.Add((Control)lb);
-
-        if (array[1] == "False")
-        {
-            Button btn = new Button();
-            btn.Text = "Mark as read";
-            btn.CommandArgument = array[2];
-            btn.CssClass = "btn";
-            btn.Click += new EventHandler(btn_Clicked);
-            e.Row.Cells[4].Controls.Add(btn);
-        }
     }
 
     protected void btn_Clicked(object sender, System.EventArgs e)
@@ -67,7 +57,6 @@ public partial class Notifications_Index : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("Notification By", typeof(string)));
         dt.Columns.Add(new DataColumn("Text", typeof(string)));
         dt.Columns.Add(new DataColumn("Enquiry Id", typeof(string)));
-        dt.Columns.Add(new DataColumn("Read?", typeof(string)));
 
         var _currentUserId = CurrentUser.Id();
         foreach (var x in _quotationTrackingSystemDBEntities.Notifications.Where(x => x.UserId == _currentUserId).OrderByDescending(x => x.CreatedAt).ToList())

@@ -32,6 +32,11 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
             _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
             _quotationTrackingSystemDBEntities.SaveChanges();
         }
+        var count = _quotationTrackingSystemDBEntities.Notifications.Where(x => x.UserId == _currentUserId).Where(x => x.EnquiryId == _enquiryId).Where(x => x.IsRead == "False").Count();
+        if (count > 0) {
+            _quotationTrackingSystemDBEntities.Notifications.Where(x => x.UserId == _currentUserId).Where(x => x.EnquiryId == _enquiryId).Where(x => x.IsRead == "False").ToList().ForEach(x => x.IsRead = "True");
+            _quotationTrackingSystemDBEntities.SaveChanges();
+        }
     }
     protected void btnDownload_Click(object sender, EventArgs e)
     {

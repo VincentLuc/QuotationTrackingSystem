@@ -24,7 +24,7 @@
 </div>
     <asp:HiddenField ID="hdnScope" runat="server" />
     <asp:GridView ID="gvEnquiries" runat="server" AllowPaging="True" 
-        EmptyDataText="There are no enquiries !" 
+        EmptyDataText="No Enquiries under this scope!" 
         onpageindexchanging="gvEnquiries_PageIndexChanging" 
         onrowdatabound="gvEnquiries_RowDataBound" Width="100%" 
         CssClass="table table-bordered">
