@@ -12,6 +12,10 @@ public partial class UnderWriters_Enquiries : System.Web.UI.Page
     protected QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            hdnScope.Value = Request.QueryString["scope"] == null ? "Created" : Request.QueryString["scope"].ToString().Trim();
+        }
         BindDataToGridView();
     }
 
@@ -51,7 +55,7 @@ public partial class UnderWriters_Enquiries : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("Details", typeof(string)));
 
         var _currentUserId = CurrentUser.Id();
-        var list = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId).OrderByDescending(x => x.CreatedAt).ToList();
+        var list = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId).Where(x => x.Status == hdnScope.Value).OrderByDescending(x => x.CreatedAt).ToList();
 
         foreach (var x in list){
             dr = dt.NewRow();
