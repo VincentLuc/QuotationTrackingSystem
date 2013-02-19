@@ -68,7 +68,8 @@ public partial class Enquiries_RerspondToMissingInformation : System.Web.UI.Page
 
     protected bool CanUpdateInformation(Enquiry enquiry) {
         var canUpdate = true;
-        if (enquiry.Status != "MissingInformation") {
+        if (enquiry.Status != "MissingInformation" && enquiry.Status != "AdditionalInformation")
+        {
             canUpdate = false;
             Session["ErrorMessage"] = "Now you cannot update enquiry status !";
             Response.Redirect("Details.aspx?id=" + hdnEnquiryId.Value);

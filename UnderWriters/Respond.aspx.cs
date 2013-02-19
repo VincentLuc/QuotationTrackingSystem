@@ -70,16 +70,12 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
         }
 
         enquiry.Status = ddlStatus.SelectedValue;
+        _enquiryStatus = ddlStatus.SelectedValue;
         if (ddlStatus.SelectedValue == "Release Quotation")
         {
             Hashtable hash = FileHelper.UpdateCommentFile(Request.Files["quotationFile"], int.Parse(hdnEnquiryId.Value), "quotation_file_");
             enquiry.QuotationFileName = hash["fileName"].ToString();
             enquiry.QuotationFilePath = hash["filePath"].ToString();
-            _enquiryStatus = "QuotationReleased";
-            enquiry.Status = "QuotationReleased";
-        }else if(ddlStatus.SelectedValue == "Missing Information"){
-            _enquiryStatus = "MissingInformation";
-            enquiry.Status = "MissingInformation";
         }
 
         var notification = new Notification { IsRead = "False", UserId = salesPersonId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = _enquiryId };

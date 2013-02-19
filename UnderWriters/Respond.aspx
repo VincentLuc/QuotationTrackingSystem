@@ -16,9 +16,10 @@
     <label>Status<asp:DropDownList ID="ddlStatus" runat="server" CssClass="ddlstatus" 
           onselectedindexchanged="ddlStatus_SelectedIndexChanged" 
           AutoPostBack="True">
-          <asp:ListItem>Release Quotation</asp:ListItem>
+          <asp:ListItem Value="QuotationReleased">Release Quotation</asp:ListItem>
           <asp:ListItem Value="UnderwriterDeclined">Decline</asp:ListItem>
-          <asp:ListItem>Missing Information</asp:ListItem>
+          <asp:ListItem Value="AdditionalInformation">Additional Information</asp:ListItem>
+          <asp:ListItem Value="MissingInformation">Missing Information</asp:ListItem>
       </asp:DropDownList>
       </label>
   &nbsp;</p>

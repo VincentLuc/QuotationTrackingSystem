@@ -37,9 +37,9 @@
 </table>
 <div class="clear"></div>
 <h3 class="left">Enquiry Details</h3>
-<% if (enquiry.Status == "MissingInformation")
+<% if (enquiry.Status == "MissingInformation" || enquiry.Status == "AdditionalInformation")
    { %>
-<h3 class="right"><a href="RespondToMissingInformation.aspx?id=<%= enquiry.Id %>">Respond To Missing Information</a></h3>
+<h3 class="right"><a href="RespondToMissingInformation.aspx?id=<%= enquiry.Id %>">Respond To Additional / Missing Information</a></h3>
 <%} %>
 <% if (enquiry.Status == "QuotationReleased")
    { %>

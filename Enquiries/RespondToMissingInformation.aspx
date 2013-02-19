@@ -12,7 +12,7 @@
 </div>
 <asp:HiddenField ID="hdnEnquiryId" runat="server" />
 <fieldset>
-  <legend>Respond To Missing Information</legend>
+  <legend>Respond To Additional / Missing Information</legend>
   <p>
     <label>File</label>
     <input type="file" id="commentFile" name="commentFile" />
