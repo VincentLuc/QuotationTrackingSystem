@@ -111,12 +111,34 @@
     <label>Type of Insurance</label>
       <asp:DropDownList ID="ddlInsuranceType" runat="server">
           <asp:ListItem Value="0">Select</asp:ListItem>
-          <asp:ListItem>Motor</asp:ListItem>
-          <asp:ListItem Value="GroupMedical">Group Medical</asp:ListItem>
-          <asp:ListItem>Property</asp:ListItem>
-          <asp:ListItem Value="GeneralAccident">General Accident</asp:ListItem>
-          <asp:ListItem>Marine</asp:ListItem>
-          <asp:ListItem>Engineering</asp:ListItem>
+          <asp:ListItem>MOTOR - Comprehensive – Private/Commercial Vehicles</asp:ListItem>
+          <asp:ListItem>MEDICAL</asp:ListItem> 
+          <asp:ListItem>PROPERTY - Fire + Allied Perils</asp:ListItem>
+          <asp:ListItem>PROPERTY - Business Interruption following Fire</asp:ListItem>
+          <asp:ListItem>PROPERTY - Business Interruption ff Fire & Allied Perils</asp:ListItem>
+          <asp:ListItem>PROPERTY - Property All Risks</asp:ListItem>
+          <asp:ListItem>PROPERTY - Business Interruption ff Property All Risks</asp:ListItem>
+          <asp:ListItem>GENERAL ACCIDENT - Fidelity Guarantee</asp:ListItem>
+          <asp:ListItem>GENERAL ACCIDENT - Money</asp:ListItem>
+          <asp:ListItem>GENERAL ACCIDENT - Workmen Compensation</asp:ListItem>
+          <asp:ListItem>GENERAL ACCIDENT - Medical Malpractice</asp:ListItem>
+          <asp:ListItem>GENERAL ACCIDENT - Personal Accident</asp:ListItem>
+          <asp:ListItem>GENERAL ACCIDENT - Public Liability</asp:ListItem>
+          <asp:ListItem>GENERAL ACCIDENT - Comp General Liability – Occurrence Basis</asp:ListItem>
+          <asp:ListItem>GENERAL ACCIDENT - Travel Insurance</asp:ListItem>
+          <asp:ListItem>MARINE - Marine Caro – Single Shipment</asp:ListItem>
+          <asp:ListItem>MARINE - Marine Cargo – Open Policy</asp:ListItem>
+          <asp:ListItem>MARINE - Land Transit – Single Shipment</asp:ListItem>
+          <asp:ListItem>MARINE - Land Transit – Open Policy</asp:ListItem>
+          <asp:ListItem>MARINE - Goods in Transit – One year cover</asp:ListItem>
+          <asp:ListItem>ENGINEERING - Contractors’ All Risks</asp:ListItem>
+          <asp:ListItem>ENGINEERING - Contractors Plant & Equipment</asp:ListItem>
+          <asp:ListItem>ENGINEERING - Deterioration of Stocks</asp:ListItem>
+          <asp:ListItem>ENGINEERING - Erection All Risks</asp:ListItem>
+          <asp:ListItem>ENGINEERING - Machinery Breakdown</asp:ListItem>
+          <asp:ListItem>ENGINEERING - Loss of Profit ff Machinery Breakdown</asp:ListItem>
+          <asp:ListItem>ENGINEERING - Electronic Equipment</asp:ListItem>
+          <asp:ListItem>ENGINEERING - Boiler & Pressure Vessel</asp:ListItem>
       </asp:DropDownList>
     <asp:RequiredFieldValidator ID="rfvInsuranceType" runat="server" 
                     ControlToValidate="ddlInsuranceType" ForeColor="#FF3300" 
