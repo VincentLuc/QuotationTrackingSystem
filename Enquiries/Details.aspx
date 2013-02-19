@@ -63,7 +63,7 @@
    <% if (enquiry.Status == "ClientDeclined")
       { %>
       <tr>
-        <td colspan="2"><sapn>Reason: </sapn> <%= enquiry.ClientDeclinedReason %></td>
+        <td colspan="2"><span>Reason: </span> <%= enquiry.ClientDeclinedReason %></td>
       </tr>
    <%} %>
   <tr>

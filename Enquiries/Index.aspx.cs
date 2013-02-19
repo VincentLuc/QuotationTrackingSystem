@@ -12,7 +12,7 @@ public partial class Enquiries_Index : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack) {
-            hdnScope.Value = Request.QueryString["scope"] == null ? "Created" : Request.QueryString["scope"].ToString().Trim();            
+            hdnScope.Value = Request.QueryString["scope"] == null ? "New" : Request.QueryString["scope"].ToString().Trim();            
         }
         BindDataToGridView();
     }

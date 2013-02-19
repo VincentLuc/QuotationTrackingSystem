@@ -107,7 +107,7 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
 
     public bool CanUpdateEnquiry(Enquiry enquiry) {
         var canUpdate = true;
-        if (enquiry.Status != "Created" && enquiry.Status != "UnderWriterViewed" && enquiry.Status != "InformationUpdate") {
+        if (enquiry.Status != "New" && enquiry.Status != "UnderWriterViewed" && enquiry.Status != "InformationUpdate") {
             canUpdate = false;
             Session["ErrorMessage"] = "Now you cannot update enquiry status !";
             Response.Redirect("EnquiryDetails.aspx?id=" + hdnEnquiryId.Value);

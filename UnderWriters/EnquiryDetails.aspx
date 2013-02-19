@@ -37,7 +37,7 @@
 </table>
 <div class="clear"></div>
 <h3 class="left">Enquiry Details</h3>
-<% if (enquiry.Status == "Created" || enquiry.Status == "UnderWriterViewed" || enquiry.Status == "InformationUpdate")
+<% if (enquiry.Status == "New" || enquiry.Status == "UnderWriterViewed" || enquiry.Status == "InformationUpdate")
    {%>
 <h3 class="right"><a href="Respond.aspx?id=<%= hdnEnquiryId.Value %>">Respond</a></h3>
 <%} %>
@@ -59,7 +59,7 @@
    <% if (enquiry.Status == "ClientDeclined")
       { %>
       <tr>
-        <td colspan="2"><sapn>Reason: </sapn> <%= enquiry.ClientDeclinedReason %></td>
+        <td colspan="2"><span>Reason: </span> <%= enquiry.ClientDeclinedReason %></td>
       </tr>
    <%} %>
   <tr>

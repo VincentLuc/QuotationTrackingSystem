@@ -17,7 +17,7 @@
           onselectedindexchanged="ddlStatus_SelectedIndexChanged" 
           AutoPostBack="True">
           <asp:ListItem>Release Quotation</asp:ListItem>
-          <asp:ListItem Value="Declined">Decline</asp:ListItem>
+          <asp:ListItem Value="UnderwriterDeclined">Decline</asp:ListItem>
           <asp:ListItem>Missing Information</asp:ListItem>
       </asp:DropDownList>
       </label>

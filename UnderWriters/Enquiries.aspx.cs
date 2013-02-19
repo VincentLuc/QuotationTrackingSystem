@@ -14,7 +14,7 @@ public partial class UnderWriters_Enquiries : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            hdnScope.Value = Request.QueryString["scope"] == null ? "Created" : Request.QueryString["scope"].ToString().Trim();
+            hdnScope.Value = Request.QueryString["scope"] == null ? "New" : Request.QueryString["scope"].ToString().Trim();
         }
         BindDataToGridView();
     }

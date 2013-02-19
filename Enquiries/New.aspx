@@ -71,9 +71,6 @@
   <p>
     <label>Phone 2</label>
     <asp:TextBox ID="txtPhone2" runat="server" MaxLength="45"></asp:TextBox>
-    <asp:RequiredFieldValidator ID="rfvPhone2" runat="server" 
-                    ControlToValidate="txtPhone2" ForeColor="#FF3300" 
-                    SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
   <p>
     <label>Address</label>

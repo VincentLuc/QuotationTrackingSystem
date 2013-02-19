@@ -52,14 +52,14 @@ public partial class Enquiries_New : System.Web.UI.Page
         var _currentUserID = CurrentUser.Id();
         var _createdAt = DateTime.Now;
         var _underWriterId = int.Parse(ddlUnderwriterId.SelectedValue);
-        _enquiry = new Enquiry { ClientName = txtClientName.Text, ContactPersonName = txtContactPersonName.Text, Phone1 = txtPhone1.Text, Phone2 = txtPhone2.Text, InsuranceType = ddlInsuranceType.SelectedValue, IntendedPolicyStartAt = _policyStartAt, InsuranceFor = rbtnInsurance.SelectedValue, Status = "Created", Address = txtAddress.Text, Remarks = txtRemarks.Text, CreatedBy = _currentUserID, UnderWriterId = _underWriterId, CreatedAt = _createdAt, UpdatedAt = _createdAt };
+        _enquiry = new Enquiry { ClientName = txtClientName.Text, ContactPersonName = txtContactPersonName.Text, Phone1 = txtPhone1.Text, Phone2 = txtPhone2.Text, InsuranceType = ddlInsuranceType.SelectedValue, IntendedPolicyStartAt = _policyStartAt, InsuranceFor = rbtnInsurance.SelectedValue, Status = "New", Address = txtAddress.Text, Remarks = txtRemarks.Text, CreatedBy = _currentUserID, UnderWriterId = _underWriterId, CreatedAt = _createdAt, UpdatedAt = _createdAt };
         if (_enquiry.InsuranceFor == "Individual") {
             _enquiry.NationalIdOrIqamaNumber = txtNationalIdOrIqamaNumber.Text;
         } else {
             _enquiry.CRNumber = txtCrNumber.Text;
         }
         var _currentUserName = User.Identity.Name;
-        _event = new Event { State = "Created", CreatedAt = _createdAt, CreatedBy = _currentUserName };
+        _event = new Event { State = "New", CreatedAt = _createdAt, CreatedBy = _currentUserName };
         var text = "New Enquiry Created By " + _currentUserName + " !";
         _notification = new Notification { IsRead = "False", UserId = _underWriterId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text };
         _enquiry.Events.Add(_event);
