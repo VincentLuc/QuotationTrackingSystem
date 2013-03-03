@@ -11,13 +11,6 @@
 </div>
 <h3>User Details</h3>
 <hr />
-<% if (CurrentUser.IsSalesSupervisor(_user.Id.ToString()))
-   {%>
-<h3 class="right">
-    <a href="NewSalesUser.aspx?Supervisorid=<%= _user.Id%>">New Sales User</a>
-</h3>
-<div class="clear"></div>
-<%} %>
     <table style="width:100%;" class="table table-bordered">
         <tr>
             <td align="left" style="width:25%;">First Name<asp:HiddenField ID="hdnFldUserId" runat="server" /></td>
@@ -61,17 +54,5 @@
         </tr>
     </table>
     <hr />
-    <% if (CurrentUser.IsSalesSupervisor(_user.Id.ToString()))
-       {%>
-    <h3 class="left">
-      <a>Sales Users</a>
-    </h3>
-    <div class="clear"></div>
-    <hr />
-    <asp:GridView ID="gvSalesUser" runat="server" 
-        onpageindexchanging="gvSalesUser_PageIndexChanging" 
-        onrowdatabound="gvSalesUser_RowDataBound" Width="100%" AllowPaging="True" CssClass="table table-bordered">
-    </asp:GridView>
-    <%} %>
 </asp:Content>
 

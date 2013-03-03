@@ -65,7 +65,7 @@ public partial class Users_Index : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("Change Password", typeof(string)));
         dt.Columns.Add(new DataColumn("Details", typeof(string)));
 
-        foreach (var x in _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Role != "Sales").ToList())
+        foreach (var x in _quotationTrackingSystemDBEntities.tblUsers.ToList())
         {
             dr = dt.NewRow();
             dr["User Name"] = x.UserName;
