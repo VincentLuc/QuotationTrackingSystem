@@ -75,7 +75,7 @@
     <td><span>Phone2:</span> <%= enquiry.Phone2 %></td>
   </tr>
   <tr>
-    <td><span>Insurance Type:</span> <%= enquiry.InsuranceType %></td>
+    <td><span>Insurance Type:</span> <%= StringHelper.ToSentenceCase(enquiry.InsuranceType) %></td>
     <td><span>Intended Policy Start At:</span> <%= DateTimeHelper.ConvertToString(enquiry.IntendedPolicyStartAt.ToString()) %></td>
   </tr>
   <tr>
@@ -97,6 +97,14 @@
   <tr>
     <td><span>Created At:</span> <%= DateTimeHelper.ConvertToString(enquiry.CreatedAt.ToString()) %></td>
     <td><span>Updated At:</span> <%= DateTimeHelper.ConvertToString(enquiry.UpdatedAt.ToString()) %></td>
+  </tr>
+  <tr>
+    <td><span>Expected Premium:</span> <%= enquiry.ExpectedPremium %></td>
+    <td><span>Loss Ratio For <%= enquiry.CreatedAt.Year - 1 %>:</span> <%= StringHelper.ToFormattedString(enquiry.LossRatioOne.ToString()) %></td>
+  </tr>
+  <tr>
+    <td><span>Loss Ratio For <%= enquiry.CreatedAt.Year - 2 %>:</span> <%= StringHelper.ToFormattedString(enquiry.LossRatioTwo.ToString()) %></td>
+    <td><span>Loss Ratio For <%= enquiry.CreatedAt.Year - 3 %>:</span> <%= StringHelper.ToFormattedString(enquiry.LossRatioThree.ToString()) %></td>
   </tr>
   <tr>
     <td><span>Copy of CR:</span> <%= enquiry.CRCopyName %></td>
@@ -166,7 +174,7 @@
   </p>
   <p>
     <label>Text</label>
-    <asp:TextBox ID="txtText" runat="server" MaxLength="495" Height="166px" 
+    <asp:TextBox ID="txtText" runat="server" Height="166px" 
           TextMode="MultiLine" Width="305px"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvText" runat="server" 
                     ControlToValidate="txtText" ForeColor="#FF3300" 

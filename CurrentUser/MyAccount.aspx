@@ -13,18 +13,18 @@
 <legend>My Account</legend>
     <p>
       <label>First Name</label>
-      <asp:TextBox ID="txtFirstName" runat="server" MaxLength="45"></asp:TextBox>
+      <asp:TextBox ID="txtFirstName" runat="server" MaxLength="300"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvFirstName" runat="server" 
                     ControlToValidate="txtFirstName" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
     </p>
     <p>
       <label>Middle Name</label>
-      <asp:TextBox ID="txtMiddleName" runat="server" MaxLength="45"></asp:TextBox>
+      <asp:TextBox ID="txtMiddleName" runat="server" MaxLength="300"></asp:TextBox>
     </p>
     <p>
       <label>Last Name</label>
-      <asp:TextBox ID="txtLastName" runat="server" MaxLength="45"></asp:TextBox>
+      <asp:TextBox ID="txtLastName" runat="server" MaxLength="300"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvLastName" runat="server" 
                     ControlToValidate="txtLastName" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
     </p>

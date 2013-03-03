@@ -95,6 +95,14 @@
     <td><span>Updated At:</span> <%= DateTimeHelper.ConvertToString(enquiry.UpdatedAt.ToString()) %></td>
   </tr>
   <tr>
+    <td><span>Expected Premium:</span> <%= enquiry.ExpectedPremium %></td>
+    <td><span>Loss Ratio For <%= enquiry.CreatedAt.Year - 1 %>:</span> <%= StringHelper.ToFormattedString(enquiry.LossRatioOne.ToString()) %></td>
+  </tr>
+  <tr>
+    <td><span>Loss Ratio For <%= enquiry.CreatedAt.Year - 2 %>:</span> <%= StringHelper.ToFormattedString(enquiry.LossRatioTwo.ToString()) %></td>
+    <td><span>Loss Ratio For <%= enquiry.CreatedAt.Year - 3 %>:</span> <%= StringHelper.ToFormattedString(enquiry.LossRatioThree.ToString()) %></td>
+  </tr>
+  <tr>
     <td><span>Copy of CR:</span> <%= enquiry.CRCopyName %></td>
     <td><asp:Button ID="btnDownload" runat="server" Text="Download" onclick="btnDownload_Click" CausesValidation="False"/></td>
   </tr>

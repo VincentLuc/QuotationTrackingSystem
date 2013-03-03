@@ -27,7 +27,7 @@
   </p>
   <p id="declinedDiv" runat="server">
     <label>Reason</label>
-    <asp:TextBox ID="txtText" runat="server" MaxLength="495" Height="166px" 
+    <asp:TextBox ID="txtText" runat="server" Height="166px" 
           TextMode="MultiLine" Width="305px"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvText" runat="server" 
                     ControlToValidate="txtText" ForeColor="#FF3300" 

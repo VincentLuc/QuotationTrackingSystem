@@ -27,28 +27,28 @@
     <label>Client Name<asp:HiddenField ID="hdnVisitId" 
                     runat="server" />
      </label>
-     <asp:TextBox ID="txtClientName" runat="server" MaxLength="45"></asp:TextBox>
+     <asp:TextBox ID="txtClientName" runat="server" MaxLength="300"></asp:TextBox>
      <asp:RequiredFieldValidator ID="rfvClientName" runat="server" 
                     ControlToValidate="txtClientName" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
   <p>
     <label>Contact Person</label>
-    <asp:TextBox ID="txtContactPerson" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:TextBox ID="txtContactPerson" runat="server" MaxLength="300"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvContactPerson" runat="server" 
                     ControlToValidate="txtContactPerson" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
   <p>
     <label>Designation</label>
-    <asp:TextBox ID="txtDesignation" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:TextBox ID="txtDesignation" runat="server" MaxLength="300"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvDesignation" runat="server" 
                     ControlToValidate="txtDesignation" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
   <p>
     <label>Phone</label>
-    <asp:TextBox ID="txtPhone" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:TextBox ID="txtPhone" runat="server" MaxLength="300"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvPhone" runat="server" 
                     ControlToValidate="txtPhone" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>

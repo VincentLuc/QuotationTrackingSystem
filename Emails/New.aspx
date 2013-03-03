@@ -21,7 +21,7 @@
   </p>
   <p>
     <label>Subject</label>
-    <asp:TextBox ID="txtSubject" runat="server" MaxLength="95"></asp:TextBox>
+    <asp:TextBox ID="txtSubject" runat="server" MaxLength="300"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvSubject" runat="server" 
                     ControlToValidate="txtSubject" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
@@ -29,7 +29,7 @@
   <p>
     <label>Body</label>
     <asp:TextBox ID="txtBody" runat="server" Height="161px" TextMode="MultiLine" 
-          Width="307px" MaxLength="3995"></asp:TextBox>
+          Width="307px"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvBody" runat="server" 
                     ControlToValidate="txtBody" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>

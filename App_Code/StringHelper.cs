@@ -36,4 +36,12 @@ public static class StringHelper
     {
         return Regex.Replace(str, "[a-z][A-Z]", m => m.Value[0] + " " + char.ToLower(m.Value[1]));
     }
+
+    public static string ToFormattedString(string input) {
+        var output = "-";
+        if (!string.IsNullOrEmpty(input)) {
+            output = input;
+        }
+        return output;
+    }
 }

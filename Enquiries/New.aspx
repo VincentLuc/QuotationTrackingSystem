@@ -49,46 +49,76 @@
   <div class="left-custom">
   <p>
     <label>Client Name</label>
-    <asp:TextBox ID="txtClientName" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:TextBox ID="txtClientName" runat="server" MaxLength="300"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvClientName" runat="server" 
                     ControlToValidate="txtClientName" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
   <p>
     <label>Contact Person Name</label>
-    <asp:TextBox ID="txtContactPersonName" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:TextBox ID="txtContactPersonName" runat="server" MaxLength="300"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvContactPersonName" runat="server" 
                     ControlToValidate="txtContactPersonName" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
   <p>
     <label>Phone 1</label>
-    <asp:TextBox ID="txtPhone1" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:TextBox ID="txtPhone1" runat="server" MaxLength="300"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvPhone1" runat="server" 
                     ControlToValidate="txtPhone1" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
   <p>
     <label>Phone 2</label>
-    <asp:TextBox ID="txtPhone2" runat="server" MaxLength="45"></asp:TextBox>
+    <asp:TextBox ID="txtPhone2" runat="server" MaxLength="300"></asp:TextBox>
   </p>
   <p>
     <label>Address</label>
-    <asp:TextBox ID="txtAddress" runat="server" MaxLength="45" TextMode="MultiLine"></asp:TextBox>
+    <asp:TextBox ID="txtAddress" runat="server" MaxLength="495" TextMode="MultiLine"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvAddress" runat="server" 
                     ControlToValidate="txtAddress" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
   <p>
     <label>Remarks</label>
-    <asp:TextBox ID="txtRemarks" runat="server" MaxLength="45" TextMode="MultiLine"></asp:TextBox>
+    <asp:TextBox ID="txtRemarks" runat="server" TextMode="MultiLine"></asp:TextBox>
   </p>
   <p>
     <label>Intended Policy Start At</label>
-    <asp:TextBox ID="txtIntendedPolicyStartAt" runat="server" MaxLength="45" CssClass="txtCalendar"></asp:TextBox>
+    <asp:TextBox ID="txtIntendedPolicyStartAt" runat="server" CssClass="txtCalendar"></asp:TextBox>
+  </p>
+  <p>
+    <label>Insurance For</label>
+      <asp:RadioButtonList ID="rbtnInsurance" runat="server" AutoPostBack="True" 
+          onselectedindexchanged="rbtnInsurance_SelectedIndexChanged" 
+          RepeatDirection="Horizontal">
+          <asp:ListItem>Individual</asp:ListItem>
+          <asp:ListItem>Corporate</asp:ListItem>
+      </asp:RadioButtonList>
+  </p>
+  <p id="individual" runat="server">
+    <label>National Id / Iqama Number</label>
+      <asp:TextBox ID="txtNationalIdOrIqamaNumber" runat="server" MaxLength="300"></asp:TextBox>
+      <asp:RequiredFieldValidator ID="rfvNationalIdOrIqamaNumber" runat="server"  ControlToValidate="txtNationalIdOrIqamaNumber" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  </p>
+  <p id="corporate" runat="server">
+  <label>CR Number</label>
+      <asp:TextBox ID="txtCrNumber" runat="server" MaxLength="300"></asp:TextBox>
+      <asp:RequiredFieldValidator ID="rfvCRNumber" runat="server"  
+          ControlToValidate="txtCrNumber" ForeColor="#FF3300" SetFocusOnError="True" 
+          Enabled="False">*</asp:RequiredFieldValidator>
   </p>
   </div>
   <div class="right-custom">
+  <p>
+    <label>Expected Premium</label>
+    <asp:TextBox ID="txtExpectedPremium" runat="server"></asp:TextBox>
+      <asp:RequiredFieldValidator ID="rfvExpectedPremium" runat="server"  
+          ControlToValidate="txtExpectedPremium" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
+          <asp:RegularExpressionValidator ID="revExpectedPremium" runat="server" 
+                    ControlToValidate="txtExpectedPremium" ForeColor="#FF3300" SetFocusOnError="True" 
+                    ValidationExpression="^[0-9\.]+$">Enter in Correct Format</asp:RegularExpressionValidator>
+  </p>
   <p>
     <label>Underwriter</label>
       <asp:DropDownList ID="ddlUnderwriterId" runat="server" 
@@ -145,25 +175,25 @@
                     SetFocusOnError="True" InitialValue="0">*</asp:RequiredFieldValidator>
   </p>
   <p>
-    <label>Insurance For</label>
-      <asp:RadioButtonList ID="rbtnInsurance" runat="server" AutoPostBack="True" 
-          onselectedindexchanged="rbtnInsurance_SelectedIndexChanged" 
-          RepeatDirection="Horizontal">
-          <asp:ListItem>Individual</asp:ListItem>
-          <asp:ListItem>Corporate</asp:ListItem>
-      </asp:RadioButtonList>
+  <label>Loss Ratio For <%= DateTime.Now.Year - 1 %></label>
+  <asp:TextBox ID="txtLossRatioOne" runat="server" MaxLength="35"></asp:TextBox>
+  <asp:RegularExpressionValidator ID="revLossRatioOne" runat="server" 
+                    ControlToValidate="txtLossRatioOne" ForeColor="#FF3300" SetFocusOnError="True" 
+                    ValidationExpression="^[0-9\.]*$">Enter in Correct Format</asp:RegularExpressionValidator>
   </p>
-  <p id="individual" runat="server">
-    <label>National Id / Iqama Number</label>
-      <asp:TextBox ID="txtNationalIdOrIqamaNumber" runat="server"></asp:TextBox>
-      <asp:RequiredFieldValidator ID="rfvNationalIdOrIqamaNumber" runat="server"  ControlToValidate="txtNationalIdOrIqamaNumber" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
+  <p>
+  <label>Loss Ratio For <%= DateTime.Now.Year - 2 %></label>
+  <asp:TextBox ID="txtLossRatioTwo" runat="server" MaxLength="35"></asp:TextBox>
+  <asp:RegularExpressionValidator ID="revLossRationTwo" runat="server" 
+                    ControlToValidate="txtLossRatioTwo" ForeColor="#FF3300" SetFocusOnError="True" 
+                    ValidationExpression="^[0-9\.]*$">Enter in Correct Format</asp:RegularExpressionValidator>
   </p>
-  <p id="corporate" runat="server">
-  <label>CR Number</label>
-      <asp:TextBox ID="txtCrNumber" runat="server"></asp:TextBox>
-      <asp:RequiredFieldValidator ID="rfvCRNumber" runat="server"  
-          ControlToValidate="txtCrNumber" ForeColor="#FF3300" SetFocusOnError="True" 
-          Enabled="False">*</asp:RequiredFieldValidator>
+  <p>
+  <label>Loss Ratio For <%= DateTime.Now.Year - 3 %></label>
+  <asp:TextBox ID="txtLossRatioThree" runat="server" MaxLength="35"></asp:TextBox>
+  <asp:RegularExpressionValidator ID="revLossRatioThree" runat="server" 
+                    ControlToValidate="txtLossRatioThree" ForeColor="#FF3300" SetFocusOnError="True" 
+                    ValidationExpression="^[0-9\.]*$">Enter in Correct Format</asp:RegularExpressionValidator>
   </p>
   <p>
   <label>Copy of CR*</label>
@@ -178,7 +208,7 @@
   <input type="file" id="fileAdditionalDocuments" name="fileAdditionalDocuments" />
   </p>
   <p>
-      <asp:Button ID="btnSave" runat="server" Text="Save and Send to Under writer" CssClass="btn" 
+      <asp:Button ID="btnSave" runat="server" Text="Save and Send to Under writer" CssClass="btn btn-primary" 
           onclick="btnSave_Click" />
       &nbsp;
       <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn" 

@@ -13,7 +13,7 @@
 <legend>Change Password</legend>
    <p>
      <label>Current Password</label>
-     <asp:TextBox ID="txtCurrentPassword" runat="server" MaxLength="45" 
+     <asp:TextBox ID="txtCurrentPassword" runat="server" MaxLength="300" 
                     TextMode="Password"></asp:TextBox>
      <asp:RequiredFieldValidator ID="rfvCurrentPassword" runat="server" 
                     ControlToValidate="txtCurrentPassword" ForeColor="#FF3300" 
@@ -21,7 +21,7 @@
    </p>
    <p>
      <label>Password</label>
-     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="45"></asp:TextBox>
+     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" MaxLength="300"></asp:TextBox>
      <asp:RequiredFieldValidator ID="rfvPassword" runat="server" 
                     ControlToValidate="txtPassword" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
      <asp:RegularExpressionValidator ID="revPassword" runat="server" 
@@ -32,7 +32,7 @@
    <p>
      <label>Confirm Password</label>
      <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" 
-                    MaxLength="45"></asp:TextBox>
+                    MaxLength="300"></asp:TextBox>
      <asp:RequiredFieldValidator ID="rfvConfirmPassword" runat="server" 
                     ControlToValidate="txtConfirmPassword" ForeColor="#FF3300" 
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
