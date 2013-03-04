@@ -129,6 +129,44 @@
   <% } %>
         <asp:HiddenField ID="hdnEnquiryId" runat="server" />
 </table>
+<h3 class="left">Sales Users copy</h3>
+<div class="clear"></div>
+<table class="table table-bordered">
+<tbody>
+<tr>
+<% if (copySalesUsers.Count == 0)
+   { %>
+   <td>No copy to sales users</td>
+<%}
+   else
+   {%>
+<% foreach (var x in copySalesUsers)
+   {%>
+   <td><%= x.UserName %></td>
+<%} %>
+<%} %>
+</tr>
+</tbody>
+</table>
+<h3 class="left">Underwriter Users copy</h3>
+<div class="clear"></div>
+<table class="table table-bordered">
+<tbody>
+<tr>
+<% if (copyUnderwriterUsers.Count == 0)
+   { %>
+   <td>No copy to underwriters</td>
+<%}
+   else
+   {%>
+<% foreach (var x in copyUnderwriterUsers)
+   {%>
+   <td><%= x.UserName%></td>
+<%} %>
+<%} %>
+</tr>
+</tbody>
+</table>
 <h3 class="left">Comments</h3>
 <table class="table table-bordered">
   <thead>

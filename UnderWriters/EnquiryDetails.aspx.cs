@@ -12,6 +12,8 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
     protected QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities;
     public Enquiry enquiry;
     public bool hasDirectAccess;
+    public List<tblUser> copySalesUsers;
+    public List<tblUser> copyUnderwriterUsers;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack){
@@ -42,6 +44,19 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
         if (count > 0) {
             _quotationTrackingSystemDBEntities.Notifications.Where(x => x.UserId == _currentUserId).Where(x => x.EnquiryId == _enquiryId).Where(x => x.IsRead == "False").ToList().ForEach(x => x.IsRead = "True");
             _quotationTrackingSystemDBEntities.SaveChanges();
+        }
+        copySalesUsers = new List<tblUser>();
+        copyUnderwriterUsers = new List<tblUser>();
+        foreach (var x in _quotationTrackingSystemDBEntities.EnquiryUsers.Where(x => x.EnquiryId == _enquiryId).ToList())
+        {
+            if (x.tblUser.Role == "Sales")
+            {
+                copySalesUsers.Add(x.tblUser);
+            }
+            else
+            {
+                copyUnderwriterUsers.Add(x.tblUser);
+            }
         }
     }
     protected void btnDownload_Click(object sender, EventArgs e)
