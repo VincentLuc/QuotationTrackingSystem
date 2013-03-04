@@ -71,8 +71,7 @@ public partial class Enquiries_ClientResponse : System.Web.UI.Page
             _quotationTrackingSystemDBEntities.AddToComments(comment);
         }
         var _underWriterId = enquiry.UnderWriterId;
-        var notification = new Notification { IsRead = "False", UserId = _underWriterId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = notificationText, EnquiryId = _enquiryId };
-        _quotationTrackingSystemDBEntities.AddToNotifications(notification);
+        EnquiryHelper.SendNotifications(_quotationTrackingSystemDBEntities, enquiry, _currentUserName, notificationText, false);
         _quotationTrackingSystemDBEntities.SaveChanges();
         Response.Redirect("Details.aspx?id=" + hdnEnquiryId.Value);
     }

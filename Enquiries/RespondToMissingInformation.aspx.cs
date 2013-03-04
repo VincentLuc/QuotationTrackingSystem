@@ -47,12 +47,11 @@ public partial class Enquiries_RerspondToMissingInformation : System.Web.UI.Page
         var text = "Enquiry Information Updated. Updated By " + _currentUserName + " !";
         var commentText = "Informarmation Update - " + txtText.Text.Trim();
 
-        var notification = new Notification { IsRead = "False", UserId = underwriterId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = _enquiryId };
+        EnquiryHelper.SendNotifications(_quotationTrackingSystemDBEntities, enquiry, _currentUserName, text, false);
         var newEvent = new Event { State = "InformationUpdate", CreatedBy = _currentUserName, CreatedAt = DateTime.Now, EnquiryId = _enquiryId };
         enquiry.UpdatedAt = DateTime.Now;
         enquiry.Status = "InformationUpdate";
         _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
-        _quotationTrackingSystemDBEntities.AddToNotifications(notification);
         _quotationTrackingSystemDBEntities.SaveChanges();
 
         Hashtable hash = FileHelper.UpdateCommentFile(Request.Files["commentFile"], int.Parse(hdnEnquiryId.Value), "comment_file_");

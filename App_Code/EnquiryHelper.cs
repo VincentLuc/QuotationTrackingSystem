@@ -63,4 +63,21 @@ public static class EnquiryHelper
         }
         return hash;
     }
+
+    public static void SendNotifications(QuotationTrackingSystemDBEntities _entity, Enquiry _enquiry, string _currentUserName, string _notificationText, bool forSaleUser) {
+        Notification notification;
+        var _currentUserId = CurrentUser.Id();
+        if (forSaleUser){
+            notification = new Notification { IsRead = "False", UserId = _enquiry.CreatedBy, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = _notificationText, EnquiryId = _enquiry.Id };
+        }else{
+            notification = new Notification { IsRead = "False", UserId = _enquiry.UnderWriterId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = _notificationText, EnquiryId = _enquiry.Id };
+        }
+        _entity.AddToNotifications(notification);
+        foreach (var x in _entity.EnquiryUsers.Where(x => x.EnquiryId == _enquiry.Id).ToList()) {
+            if (_currentUserId != x.UserId){
+                notification = new Notification { IsRead = "False", UserId = x.UserId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = _notificationText, EnquiryId = _enquiry.Id };
+                _entity.AddToNotifications(notification);
+            }
+        }
+    }
 }

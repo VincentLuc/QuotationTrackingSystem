@@ -78,11 +78,10 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
             enquiry.QuotationFilePath = hash["filePath"].ToString();
         }
 
-        var notification = new Notification { IsRead = "False", UserId = salesPersonId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = _enquiryId };
+        EnquiryHelper.SendNotifications(_quotationTrackingSystemDBEntities, enquiry, _currentUserName, text, true);
         var newEvent = new Event { State = _enquiryStatus, CreatedBy = _currentUserName, CreatedAt = DateTime.Now, EnquiryId = _enquiryId };
 
         _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
-        _quotationTrackingSystemDBEntities.AddToNotifications(notification);
         _quotationTrackingSystemDBEntities.SaveChanges();
 
         if (ddlStatus.SelectedValue != "Release Quotation"){

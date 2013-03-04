@@ -92,9 +92,13 @@ public partial class Enquiries_Details : System.Web.UI.Page
         var text = "New Comment on Enquiry. Commented By " + _currentUserName + " !";
 
         var comment = new Comment { Text = txtText.Text.Trim(), FileName = hash["fileName"].ToString(), FilePath = hash["filePath"].ToString(), CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId };
-        var notification = new Notification { IsRead = "False", UserId = _underWriterId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = _enquiryId };
+        EnquiryHelper.SendNotifications(_quotationTrackingSystemDBEntities, enquiry, _currentUserName, text, false);
 
-        _quotationTrackingSystemDBEntities.AddToNotifications(notification);
+        if (_currentUserId != enquiry.CreatedBy){
+            Notification notification = new Notification { IsRead = "False", UserId = enquiry.CreatedBy, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = enquiry.Id };
+            _quotationTrackingSystemDBEntities.AddToNotifications(notification);
+        }
+
         _quotationTrackingSystemDBEntities.AddToComments(comment);
         _quotationTrackingSystemDBEntities.SaveChanges();
         Session["NoticeMessage"] = "Successfully added comment!";

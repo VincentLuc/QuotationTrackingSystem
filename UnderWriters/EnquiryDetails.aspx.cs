@@ -98,9 +98,13 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
         var text = "New Comment on Enquiry. Commented By " + _currentUserName + " !";
 
         var comment = new Comment { Text = txtText.Text.Trim(), FileName = hash["fileName"].ToString(), FilePath = hash["filePath"].ToString(), CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId };
-        var notification = new Notification { IsRead = "False", UserId = salesPersonId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = _enquiryId };
+        EnquiryHelper.SendNotifications(_quotationTrackingSystemDBEntities, enquiry, _currentUserName, text, true);
 
-        _quotationTrackingSystemDBEntities.AddToNotifications(notification);
+        if (CurrentUser.Id() != enquiry.UnderWriterId){
+            Notification notification = new Notification { IsRead = "False", UserId = enquiry.UnderWriterId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = enquiry.Id };
+            _quotationTrackingSystemDBEntities.AddToNotifications(notification);
+        }
+
         _quotationTrackingSystemDBEntities.AddToComments(comment);
         _quotationTrackingSystemDBEntities.SaveChanges();
 
