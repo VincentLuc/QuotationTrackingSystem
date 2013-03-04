@@ -12,6 +12,7 @@ public partial class Enquiries_Details : System.Web.UI.Page
     protected QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities;
     public Enquiry enquiry;
     public string UnderWriterName;
+    public bool hasDirectAccess;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack){
@@ -20,13 +21,16 @@ public partial class Enquiries_Details : System.Web.UI.Page
         _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
         var _currentUserId = CurrentUser.Id();
         var _enquiryId = int.Parse(hdnEnquiryId.Value);
-        enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.CreatedBy == _currentUserId).Where(x => x.Id == _enquiryId).FirstOrDefault();
-        if (enquiry == null) {
+        Hashtable hash = EnquiryHelper.CanAccessEnquiry(_currentUserId, _enquiryId, true);
+        if (!(bool)hash["CanAccess"])
+        {
             Session["ErrorMessage"] = "You are not authorized to access that enquiry !";
             Response.Redirect("Index.aspx");
             return;
         }
+        enquiry = (Enquiry)hash["Enquiry"];
         UnderWriterName = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == enquiry.UnderWriterId).FirstOrDefault().UserName;
+        hasDirectAccess = (bool)hash["DirectAccess"];
         var count = _quotationTrackingSystemDBEntities.Notifications.Where(x => x.UserId == _currentUserId).Where(x => x.EnquiryId == _enquiryId).Where(x => x.IsRead == "False").Count();
         if (count > 0) {
             _quotationTrackingSystemDBEntities.Notifications.Where(x => x.UserId == _currentUserId).Where(x => x.EnquiryId == _enquiryId).Where(x => x.IsRead == "False").ToList().ForEach(x => x.IsRead = "True");

@@ -37,9 +37,12 @@
 </table>
 <div class="clear"></div>
 <h3 class="left">Enquiry Details</h3>
+<% if (hasDirectAccess)
+   {%>
 <% if (enquiry.Status == "New" || enquiry.Status == "UnderWriterViewed" || enquiry.Status == "InformationUpdate")
    {%>
 <h3 class="right"><a href="Respond.aspx?id=<%= hdnEnquiryId.Value %>">Respond</a></h3>
+<%} %>
 <%} %>
 <div class="clear"></div>
 <table class="table table-bordered">

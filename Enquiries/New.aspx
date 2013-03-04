@@ -44,6 +44,7 @@
     <li><a class="active">New</a></li>
   </ul>
 </div>
+    <asp:HiddenField ID="hdnCurrentUserId" runat="server" />
 <fieldset>
   <legend>New Enquiry</legend>
   <div class="left-custom">
@@ -108,22 +109,28 @@
           ControlToValidate="txtCrNumber" ForeColor="#FF3300" SetFocusOnError="True" 
           Enabled="False">*</asp:RequiredFieldValidator>
   </p>
+  <p>
+  <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
+          ConnectionString="<%$ ConnectionStrings:QuotationTrackingSystemDBConnectionString %>" 
+          
+          SelectCommand="SELECT [UserName], [Id] FROM [tblUsers] WHERE (([Id] &lt;&gt; @Id) AND ([Role] = @Role))">
+          <SelectParameters>
+              <asp:ControlParameter ControlID="hdnCurrentUserId" Name="Id" 
+                  PropertyName="Value" Type="Int32" />
+              <asp:Parameter DefaultValue="Sales" Name="Role" Type="String" />
+          </SelectParameters>
+      </asp:SqlDataSource>
+    <label>Copy to Sales Users</label>
+    <asp:ListBox ID="lstbxCopySales" runat="server" DataSourceID="SqlDataSource3" 
+          DataTextField="UserName" DataValueField="Id" SelectionMode="Multiple"></asp:ListBox>
+  </p>
   </div>
   <div class="right-custom">
-  <p>
-    <label>Expected Premium</label>
-    <asp:TextBox ID="txtExpectedPremium" runat="server"></asp:TextBox>
-      <asp:RequiredFieldValidator ID="rfvExpectedPremium" runat="server"  
-          ControlToValidate="txtExpectedPremium" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
-          <asp:RegularExpressionValidator ID="revExpectedPremium" runat="server" 
-                    ControlToValidate="txtExpectedPremium" ForeColor="#FF3300" SetFocusOnError="True" 
-                    ValidationExpression="^[0-9\.]+$">Enter in Correct Format</asp:RegularExpressionValidator>
-  </p>
   <p>
     <label>Underwriter</label>
       <asp:DropDownList ID="ddlUnderwriterId" runat="server" 
           DataSourceID="SqlDataSource1" DataTextField="UserName" DataValueField="Id" 
-          AppendDataBoundItems="True">
+          AppendDataBoundItems="True" AutoPostBack="True">
           <asp:ListItem Value="0">Select</asp:ListItem>
       </asp:DropDownList>
     <asp:RequiredFieldValidator ID="rfvUnderWriterId" runat="server" 
@@ -133,6 +140,21 @@
           ConnectionString="<%$ ConnectionStrings:QuotationTrackingSystemDBConnectionString %>" 
           SelectCommand="SELECT [Id], [UserName] FROM [tblUsers] WHERE ([Role] = @Role)">
           <SelectParameters>
+              <asp:Parameter DefaultValue="UnderWriter" Name="Role" Type="String" />
+          </SelectParameters>
+      </asp:SqlDataSource>
+  </p>
+  <p>
+    <label>Copy to Underwriter Users</label>
+    <asp:ListBox ID="lstbxCopyUnderwriters" runat="server" 
+          DataSourceID="SqlDataSource2" DataTextField="UserName" DataValueField="Id" 
+          SelectionMode="Multiple"></asp:ListBox>
+      <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+          ConnectionString="<%$ ConnectionStrings:QuotationTrackingSystemDBConnectionString %>" 
+          SelectCommand="SELECT [Id], [UserName] FROM [tblUsers] WHERE (([Id] &lt;&gt; @Id) AND ([Role] = @Role))">
+          <SelectParameters>
+              <asp:ControlParameter ControlID="ddlUnderwriterId" Name="Id" 
+                  PropertyName="SelectedValue" Type="Int32" />
               <asp:Parameter DefaultValue="UnderWriter" Name="Role" Type="String" />
           </SelectParameters>
       </asp:SqlDataSource>
@@ -173,6 +195,15 @@
     <asp:RequiredFieldValidator ID="rfvInsuranceType" runat="server" 
                     ControlToValidate="ddlInsuranceType" ForeColor="#FF3300" 
                     SetFocusOnError="True" InitialValue="0">*</asp:RequiredFieldValidator>
+  </p>
+  <p>
+    <label>Expected Premium</label>
+    <asp:TextBox ID="txtExpectedPremium" runat="server"></asp:TextBox>
+      <asp:RequiredFieldValidator ID="rfvExpectedPremium" runat="server"  
+          ControlToValidate="txtExpectedPremium" ForeColor="#FF3300" SetFocusOnError="True">*</asp:RequiredFieldValidator>
+          <asp:RegularExpressionValidator ID="revExpectedPremium" runat="server" 
+                    ControlToValidate="txtExpectedPremium" ForeColor="#FF3300" SetFocusOnError="True" 
+                    ValidationExpression="^[0-9\.]+$">Enter in Correct Format</asp:RegularExpressionValidator>
   </p>
   <p>
   <label>Loss Ratio For <%= DateTime.Now.Year - 1 %></label>

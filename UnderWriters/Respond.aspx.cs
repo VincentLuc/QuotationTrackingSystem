@@ -22,7 +22,7 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
             _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
             var enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.Id == _enquiryId).Where(x => x.UnderWriterId == _currentUserId).FirstOrDefault();
             if (enquiry == null){
-                Session["ErrorMessage"] = "Enquiry not found !";
+                Session["ErrorMessage"] = "You are not authorized to access that enquiry !";
                 Response.Redirect("Enquiries.aspx");
                 return;
             }

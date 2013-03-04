@@ -11,6 +11,7 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
 {
     protected QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities;
     public Enquiry enquiry;
+    public bool hasDirectAccess;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack){
@@ -19,18 +20,23 @@ public partial class UnderWriters_EnquiryDetails : System.Web.UI.Page
         _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
         var _enquiryId = int.Parse(hdnEnquiryId.Value);
         var _currentUserId = CurrentUser.Id();
-        enquiry = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.Id == _enquiryId).Where(x => x.UnderWriterId == _currentUserId).FirstOrDefault();
-        if (enquiry == null) {
-            Session["ErrorMessage"] = "Enquiry not found !";
+        Hashtable hash = EnquiryHelper.CanAccessEnquiry(_currentUserId, _enquiryId, false);
+        if (!(bool)hash["CanAccess"]){
+            Session["ErrorMessage"] = "You are not authorized to access that enquiry !";
             Response.Redirect("Enquiries.aspx");
             return;
         }
-        var enquiryEvent = enquiry.Events.Where(x => x.State == "UnderWriterViewed").FirstOrDefault();
-        if (enquiryEvent == null) { 
-            var userName = User.Identity.Name;
-            var newEvent = new Event { State = "UnderWriterViewed", CreatedBy = userName, CreatedAt = DateTime.Now, EnquiryId = enquiry.Id };
-            _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
-            _quotationTrackingSystemDBEntities.SaveChanges();
+        enquiry = (Enquiry)hash["Enquiry"];
+        hasDirectAccess = (bool)hash["DirectAccess"];
+        if (hasDirectAccess){
+            var enquiryEvent = enquiry.Events.Where(x => x.State == "UnderWriterViewed").FirstOrDefault();
+            if (enquiryEvent == null)
+            {
+                var userName = User.Identity.Name;
+                var newEvent = new Event { State = "UnderWriterViewed", CreatedBy = userName, CreatedAt = DateTime.Now, EnquiryId = enquiry.Id };
+                _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
+                _quotationTrackingSystemDBEntities.SaveChanges();
+            }
         }
         var count = _quotationTrackingSystemDBEntities.Notifications.Where(x => x.UserId == _currentUserId).Where(x => x.EnquiryId == _enquiryId).Where(x => x.IsRead == "False").Count();
         if (count > 0) {

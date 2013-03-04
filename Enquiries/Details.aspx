@@ -37,6 +37,8 @@
 </table>
 <div class="clear"></div>
 <h3 class="left">Enquiry Details</h3>
+<% if (hasDirectAccess)
+   {%>
 <% if (enquiry.Status == "MissingInformation" || enquiry.Status == "AdditionalInformation")
    { %>
 <h3 class="right"><a href="RespondToMissingInformation.aspx?id=<%= enquiry.Id %>">Respond To Additional / Missing Information</a></h3>
@@ -44,6 +46,7 @@
 <% if (enquiry.Status == "QuotationReleased")
    { %>
 <h3 class="right"><a href="ClientResponse.aspx?id=<%= enquiry.Id %>">Client Response</a></h3>
+<%} %>
 <%} %>
 <div class="clear"></div>
 <table class="table table-bordered">

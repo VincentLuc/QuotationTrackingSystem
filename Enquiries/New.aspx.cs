@@ -21,6 +21,7 @@ public partial class Enquiries_New : System.Web.UI.Page
             corporate.Visible = false;
             rbtnInsurance.SelectedValue = "Individual";
         }
+        hdnCurrentUserId.Value = CurrentUser.Id().ToString();
     }
 
     protected void rbtnInsurance_SelectedIndexChanged(object sender, EventArgs e)
@@ -70,6 +71,30 @@ public partial class Enquiries_New : System.Web.UI.Page
         _enquiry.Notifications.Add(_notification);
         _quotationTrackingSystemDBEntities.AddToEnquiries(_enquiry);
         _quotationTrackingSystemDBEntities.SaveChanges();
+
+        EnquiryUser _enquiryUser;
+
+        foreach (ListItem item in lstbxCopySales.Items) {
+            if(item.Selected){
+              int salesUserId = int.Parse(item.Value);
+              _notification = new Notification { IsRead = "False", UserId = salesUserId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = _enquiry.Id };
+              _enquiryUser = new EnquiryUser { UserId = salesUserId, EnquiryId = _enquiry.Id };
+              _quotationTrackingSystemDBEntities.AddToNotifications(_notification);
+              _quotationTrackingSystemDBEntities.AddToEnquiryUsers(_enquiryUser);
+            }
+        }
+
+        foreach (ListItem item in lstbxCopyUnderwriters.Items)
+        {
+            if (item.Selected)
+            {
+                int underwriterId = int.Parse(item.Value);
+                _notification = new Notification { IsRead = "False", UserId = underwriterId, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, Text = text, EnquiryId = _enquiry.Id };
+                _enquiryUser = new EnquiryUser { UserId = underwriterId, EnquiryId = _enquiry.Id };
+                _quotationTrackingSystemDBEntities.AddToNotifications(_notification);
+                _quotationTrackingSystemDBEntities.AddToEnquiryUsers(_enquiryUser);
+            }
+        }
 
         HttpPostedFile lossRatioFile = Request.Files["filePreviousLossRatioReport"];
         HttpPostedFile additionalDocumentFile = Request.Files["fileAdditionalDocuments"];
