@@ -56,7 +56,14 @@ public partial class UnderWriters_Enquiries : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("Details", typeof(string)));
 
         var _currentUserId = CurrentUser.Id();
-        var list = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId).Where(x => x.Status == hdnScope.Value).OrderByDescending(x => x.CreatedAt).ToList();
+
+        List<int> enquiryList = new List<int>();
+        foreach (var x in _quotationTrackingSystemDBEntities.EnquiryUsers.Where(x => x.UserId == _currentUserId).ToList())
+        {
+            enquiryList.Add(x.EnquiryId);
+        }
+        var array = enquiryList.ToArray();
+        var list = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId || array.Contains(x.Id)).Where(x => x.Status == hdnScope.Value).OrderByDescending(x => x.CreatedAt).ToList();
 
         foreach (var x in list){
             dr = dt.NewRow();

@@ -48,7 +48,15 @@ public partial class Enquiries_Index : System.Web.UI.Page
         dt.Columns.Add(new DataColumn("Details", typeof(string)));
 
         var _currentUserId = CurrentUser.Id();
-        foreach (var x in _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.CreatedBy == _currentUserId).Where(x => x.Status == hdnScope.Value).OrderByDescending(x => x.CreatedAt).ToList())
+
+        List<int> list = new List<int>();
+        foreach (var x in _quotationTrackingSystemDBEntities.EnquiryUsers.Where(x => x.UserId == _currentUserId).ToList()) {
+            list.Add(x.EnquiryId);
+        }
+        var array = list.ToArray();
+
+
+        foreach (var x in _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.CreatedBy == _currentUserId || array.Contains(x.Id)).Where(x => x.Status == hdnScope.Value).OrderByDescending(x => x.CreatedAt).ToList())
         {
             dr = dt.NewRow();
             dr["Requested At"] = DateTimeHelper.ConvertToString(x.CreatedAt.ToString());
