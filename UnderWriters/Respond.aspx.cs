@@ -36,7 +36,7 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
     protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
     {
 
-        if (ddlStatus.SelectedValue == "Release Quotation")
+        if (ddlStatus.SelectedValue == "QuotationReleased")
         {
             rfvText.Enabled = false;
             declinedDiv.Visible = false;

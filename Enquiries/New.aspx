@@ -235,7 +235,7 @@
   <input type="file" id="filePreviousLossRatioReport" name="filePreviousLossRatioReport" />
   </p>
   <p>
-  <label>Additional Documents</label>
+  <label>Proposol Form / Additional Documents</label>
   <input type="file" id="fileAdditionalDocuments" name="fileAdditionalDocuments" />
   </p>
   <p>

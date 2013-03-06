@@ -11,7 +11,6 @@ public partial class Enquiries_Details : System.Web.UI.Page
 {
     protected QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities;
     public Enquiry enquiry;
-    public string UnderWriterName;
     public bool hasDirectAccess;
     public List<tblUser> copySalesUsers;
     public List<tblUser> copyUnderwriterUsers;
@@ -31,7 +30,6 @@ public partial class Enquiries_Details : System.Web.UI.Page
             return;
         }
         enquiry = (Enquiry)hash["Enquiry"];
-        UnderWriterName = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == enquiry.UnderWriterId).FirstOrDefault().UserName;
         hasDirectAccess = (bool)hash["DirectAccess"];
         var count = _quotationTrackingSystemDBEntities.Notifications.Where(x => x.UserId == _currentUserId).Where(x => x.EnquiryId == _enquiryId).Where(x => x.IsRead == "False").Count();
         if (count > 0) {

@@ -80,4 +80,9 @@ public static class EnquiryHelper
             }
         }
     }
+
+    public static string EnquiryUnderWriterName(Enquiry _enquiry) {
+        QuotationTrackingSystemDBEntities _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
+        return _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == _enquiry.UnderWriterId).First().UserName;
+    }
 }

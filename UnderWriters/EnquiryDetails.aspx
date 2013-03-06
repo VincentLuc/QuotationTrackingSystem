@@ -49,6 +49,15 @@
   <tr class='read'>
     <td colspan="2"><span>Status:</span> <%= StringHelper.ToSentenceCase(enquiry.Status) %></td>
   </tr>
+   <tr>
+    <td>
+      <span>Sales User:</span>&nbsp;<%= enquiry.tblUser.UserName %>
+    </td>
+    <td>
+        <asp:HiddenField ID="HiddenField1" runat="server" />
+      <span>Underwriter:</span>&nbsp;<%= EnquiryHelper.EnquiryUnderWriterName(enquiry) %>
+    </td>
+  </tr>
   <% if (enquiry.Status == "ClientAccepted"){ %>
       <tr>
         <td>
@@ -117,7 +126,7 @@
   <% } %>
   <% if(!string.IsNullOrEmpty(enquiry.AdditionalDocumentName)) {%>
     <tr>
-      <td><span>Additional Documents:</span> <%= enquiry.AdditionalDocumentName%></td>
+      <td><span>Proposol Form / Additional Documents:</span> <%= enquiry.AdditionalDocumentName%></td>
       <td><asp:Button ID="btnAdditionalDocument" runat="server" Text="Download" onclick="btnAdditionalDocument_Click" CausesValidation="False"/></td>
     </tr>
   <% } %>

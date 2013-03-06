@@ -29,7 +29,7 @@
       <asp:HiddenField ID="hdnEnquiryId" runat="server" />
   </p>
   <p id="declinedDiv" runat="server">
-    <label>Reason</label>
+    <label>Remarks / Reason</label>
     <asp:TextBox ID="txtText" runat="server" Height="166px" 
           TextMode="MultiLine" Width="305px"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvText" runat="server" 

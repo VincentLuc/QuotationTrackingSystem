@@ -14,7 +14,7 @@ public partial class UnderWriters_Enquiries : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            hdnScope.Value = Request.QueryString["scope"] == null ? "New" : Request.QueryString["scope"].ToString().Trim();
+            hdnScope.Value = Request.QueryString["scope"] == null ? "all" : Request.QueryString["scope"].ToString().Trim();
         }
         BindDataToGridView();
     }
@@ -57,15 +57,20 @@ public partial class UnderWriters_Enquiries : System.Web.UI.Page
 
         var _currentUserId = CurrentUser.Id();
 
-        List<int> enquiryList = new List<int>();
+        List<int> list = new List<int>();
         foreach (var x in _quotationTrackingSystemDBEntities.EnquiryUsers.Where(x => x.UserId == _currentUserId).ToList())
         {
-            enquiryList.Add(x.EnquiryId);
+            list.Add(x.EnquiryId);
         }
-        var array = enquiryList.ToArray();
-        var list = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId || array.Contains(x.Id)).Where(x => x.Status == hdnScope.Value).OrderByDescending(x => x.CreatedAt).ToList();
+        var array = list.ToArray();
+        List<Enquiry> enquiryList;
+        if (hdnScope.Value == "all") {
+            enquiryList = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId || array.Contains(x.Id)).OrderByDescending(x => x.CreatedAt).ToList();
+        } else {
+            enquiryList = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.UnderWriterId == _currentUserId || array.Contains(x.Id)).Where(x => x.Status == hdnScope.Value).OrderByDescending(x => x.CreatedAt).ToList();
+        }
 
-        foreach (var x in list){
+        foreach (var x in enquiryList){
             dr = dt.NewRow();
             dr["Client Name"] = x.ClientName;
             dr["Phone"] = x.Phone1;

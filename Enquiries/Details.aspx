@@ -53,6 +53,15 @@
   <tr class='read'>
        <td colspan="2"><span>Status:</span> <%= StringHelper.ToSentenceCase(enquiry.Status) %></td>
   </tr>
+  <tr>
+    <td>
+      <span>Sales User:</span>&nbsp;<%= enquiry.tblUser.UserName %>
+    </td>
+    <td>
+        <asp:HiddenField ID="hdnEnquiryId" runat="server" />
+      <span>Underwriter:</span>&nbsp;<%= EnquiryHelper.EnquiryUnderWriterName(enquiry) %>
+    </td>
+  </tr>
   <% if (enquiry.Status == "ClientAccepted"){ %>
       <tr>
         <td>
@@ -123,7 +132,7 @@
   <% } %>
   <% if(!string.IsNullOrEmpty(enquiry.AdditionalDocumentName)) {%>
     <tr>
-      <td><span>Additional Documents:</span> <%= enquiry.AdditionalDocumentName%></td>
+      <td><span>Proposol Form / Additional Documents:</span> <%= enquiry.AdditionalDocumentName%></td>
       <td><asp:Button ID="btnAdditionalDocument" runat="server" Text="Download" 
               onclick="btnAdditionalDocument_Click" CausesValidation="False"/></td>
     </tr>
@@ -134,12 +143,6 @@
       <td><asp:Button ID="btnQuotationDocument" runat="server" Text="Download" onclick="btnQuotationDocument_Click" CausesValidation="False"/></td>
     </tr>
   <% } %>
-  <tr>
-    <td colspan="2">
-        <asp:HiddenField ID="hdnEnquiryId" runat="server" />
-      Underwriter: <%= UnderWriterName %>
-    </td>
-  </tr>
 </table>
 <h3 class="left">Sales Users copy</h3>
 <div class="clear"></div>

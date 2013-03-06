@@ -12,7 +12,7 @@ public partial class Enquiries_Index : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack) {
-            hdnScope.Value = Request.QueryString["scope"] == null ? "New" : Request.QueryString["scope"].ToString().Trim();            
+            hdnScope.Value = Request.QueryString["scope"] == null ? "all" : Request.QueryString["scope"].ToString().Trim();            
         }
         BindDataToGridView();
     }
@@ -54,9 +54,15 @@ public partial class Enquiries_Index : System.Web.UI.Page
             list.Add(x.EnquiryId);
         }
         var array = list.ToArray();
+        List<Enquiry> enquiryList;
+        if (hdnScope.Value == "all") { 
+            enquiryList = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.CreatedBy == _currentUserId || array.Contains(x.Id)).OrderByDescending(x => x.CreatedAt).ToList();
+        } else { 
+            enquiryList = _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.CreatedBy == _currentUserId || array.Contains(x.Id)).Where(x => x.Status == hdnScope.Value).OrderByDescending(x => x.CreatedAt).ToList();
+        }
 
 
-        foreach (var x in _quotationTrackingSystemDBEntities.Enquiries.Where(x => x.CreatedBy == _currentUserId || array.Contains(x.Id)).Where(x => x.Status == hdnScope.Value).OrderByDescending(x => x.CreatedAt).ToList())
+        foreach (var x in enquiryList)
         {
             dr = dt.NewRow();
             dr["Requested At"] = DateTimeHelper.ConvertToString(x.CreatedAt.ToString());
