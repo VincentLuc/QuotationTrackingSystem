@@ -14,7 +14,6 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack) {
-            declinedDiv.Visible = false;
             rfvText.Enabled = false;
             hdnEnquiryId.Value = Request.QueryString["id"];
             var _enquiryId = int.Parse(hdnEnquiryId.Value);
@@ -39,19 +38,17 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
         if (ddlStatus.SelectedValue == "QuotationReleased")
         {
             rfvText.Enabled = false;
-            declinedDiv.Visible = false;
             quotationDiv.Visible = true;
         }
         else {
             rfvText.Enabled = true;
-            declinedDiv.Visible = true;
             quotationDiv.Visible = false;
         }
     }
 
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        if (ddlStatus.SelectedValue == "Release Quotation" && (Request.Files["quotationFile"] == null || Request.Files["quotationFile"].ContentLength <= 0 )){
+        if (ddlStatus.SelectedValue == "QuotationReleased" && (Request.Files["quotationFile"] == null || Request.Files["quotationFile"].ContentLength <= 0)){
             Session["ErrorMessage"] = "Please Attach Quotation File!";
             return;
         }
@@ -71,7 +68,7 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
 
         enquiry.Status = ddlStatus.SelectedValue;
         _enquiryStatus = ddlStatus.SelectedValue;
-        if (ddlStatus.SelectedValue == "Release Quotation")
+        if (ddlStatus.SelectedValue == "QuotationReleased")
         {
             Hashtable hash = FileHelper.UpdateCommentFile(Request.Files["quotationFile"], int.Parse(hdnEnquiryId.Value), "quotation_file_");
             enquiry.QuotationFileName = hash["fileName"].ToString();
@@ -84,7 +81,7 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
         _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
         _quotationTrackingSystemDBEntities.SaveChanges();
 
-        if (ddlStatus.SelectedValue != "Release Quotation"){
+        if (!string.IsNullOrEmpty(txtText.Text.Trim())){
             var comment = new Comment { Text = commentText, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId, EventId = newEvent.Id };
             _quotationTrackingSystemDBEntities.AddToComments(comment);
             _quotationTrackingSystemDBEntities.SaveChanges();

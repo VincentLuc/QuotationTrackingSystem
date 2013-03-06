@@ -26,7 +26,7 @@
     <input type="file" id="ccFile" name="ccFile" />
   </p>
   <p id="declinedDiv" runat="server">
-    <label>Reason</label>
+    <label>Remarks / Reason</label>
     <asp:TextBox ID="txtText" runat="server" Height="166px" 
           TextMode="MultiLine" Width="305px"></asp:TextBox>
     <asp:RequiredFieldValidator ID="rfvText" runat="server" 
@@ -34,7 +34,7 @@
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
     <p>
-        <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save" />
+        <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save" CssClass="btn btn-primary" />
         &nbsp;
       <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="btn" 
           onclick="btnCancel_Click" CausesValidation="False" />

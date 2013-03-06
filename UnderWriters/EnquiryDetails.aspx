@@ -219,7 +219,7 @@
                     SetFocusOnError="True">*</asp:RequiredFieldValidator>
   </p>
     <p>
-        <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save" />
+        <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save" CssClass="btn btn-primary" />
   </p>
 </fieldset>
 </asp:Content>

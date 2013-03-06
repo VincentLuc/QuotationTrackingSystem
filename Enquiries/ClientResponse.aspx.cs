@@ -16,7 +16,8 @@ public partial class Enquiries_ClientResponse : System.Web.UI.Page
         if (!IsPostBack) {
             _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
             confirmationDiv.Visible = true;
-            declinedDiv.Visible = false;
+            declinedDiv.Visible = true;
+            rfvText.Enabled = false;
             hdnEnquiryId.Value = Request.QueryString["id"];
             var _currentUserId = CurrentUser.Id();
             var _enquiryId = int.Parse(hdnEnquiryId.Value);
@@ -33,10 +34,10 @@ public partial class Enquiries_ClientResponse : System.Web.UI.Page
     {
         if (ddlResponse.SelectedValue == "ClientAccepted") {
             confirmationDiv.Visible = true;
-            declinedDiv.Visible = false;
+            rfvText.Enabled = false;
         } else {
             confirmationDiv.Visible = false;
-            declinedDiv.Visible = true;
+            rfvText.Enabled = true;
         }
     }
     protected void btnSave_Click(object sender, EventArgs e)
@@ -64,7 +65,7 @@ public partial class Enquiries_ClientResponse : System.Web.UI.Page
             enquiry.ConfirmationCopyFilePath = hash["filePath"].ToString();
             notificationText = "Enquiry Accepted By Client. Updated By " + _currentUserName + "!";
         }
-        else {
+        if(!string.IsNullOrEmpty(txtText.Text)) {
             enquiry.ClientDeclinedReason = txtText.Text.Trim();
             var comment = new Comment { Text = txtText.Text.Trim(), CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId };
             notificationText = "Enquiry Declined By Client. Updated By " + _currentUserName + "!";
