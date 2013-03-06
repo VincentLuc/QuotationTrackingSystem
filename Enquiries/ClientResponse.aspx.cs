@@ -66,7 +66,10 @@ public partial class Enquiries_ClientResponse : System.Web.UI.Page
             notificationText = "Enquiry Accepted By Client. Updated By " + _currentUserName + "!";
         }
         if(!string.IsNullOrEmpty(txtText.Text)) {
-            enquiry.ClientDeclinedReason = txtText.Text.Trim();
+            if (ddlResponse.SelectedValue != "ClientAccepted")
+            {
+                enquiry.ClientDeclinedReason = txtText.Text.Trim();
+            }
             var comment = new Comment { Text = txtText.Text.Trim(), CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId };
             notificationText = "Enquiry Declined By Client. Updated By " + _currentUserName + "!";
             _quotationTrackingSystemDBEntities.AddToComments(comment);

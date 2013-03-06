@@ -17,6 +17,8 @@
 </div>
 <hr />
 <h3 class="left">Events</h3>
+<h3 class="right"><a href="Print.aspx?id=<%= enquiry.Id %>">Take Print</a></h3>
+<div class="clear"></div>
 <table class="table table-bordered">
   <thead>
     <tr>
