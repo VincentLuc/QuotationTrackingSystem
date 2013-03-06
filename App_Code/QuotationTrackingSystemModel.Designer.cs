@@ -1579,7 +1579,7 @@ namespace QuotationTrackingSystemDBModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> LossRatioOne
+        public global::System.String LossRatioOne
         {
             get
             {
@@ -1589,13 +1589,13 @@ namespace QuotationTrackingSystemDBModel
             {
                 OnLossRatioOneChanging(value);
                 ReportPropertyChanging("LossRatioOne");
-                _LossRatioOne = StructuralObject.SetValidValue(value);
+                _LossRatioOne = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("LossRatioOne");
                 OnLossRatioOneChanged();
             }
         }
-        private Nullable<global::System.Decimal> _LossRatioOne;
-        partial void OnLossRatioOneChanging(Nullable<global::System.Decimal> value);
+        private global::System.String _LossRatioOne;
+        partial void OnLossRatioOneChanging(global::System.String value);
         partial void OnLossRatioOneChanged();
     
         /// <summary>
@@ -1603,7 +1603,7 @@ namespace QuotationTrackingSystemDBModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> LossRatioTwo
+        public global::System.String LossRatioTwo
         {
             get
             {
@@ -1613,13 +1613,13 @@ namespace QuotationTrackingSystemDBModel
             {
                 OnLossRatioTwoChanging(value);
                 ReportPropertyChanging("LossRatioTwo");
-                _LossRatioTwo = StructuralObject.SetValidValue(value);
+                _LossRatioTwo = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("LossRatioTwo");
                 OnLossRatioTwoChanged();
             }
         }
-        private Nullable<global::System.Decimal> _LossRatioTwo;
-        partial void OnLossRatioTwoChanging(Nullable<global::System.Decimal> value);
+        private global::System.String _LossRatioTwo;
+        partial void OnLossRatioTwoChanging(global::System.String value);
         partial void OnLossRatioTwoChanged();
     
         /// <summary>
@@ -1627,7 +1627,7 @@ namespace QuotationTrackingSystemDBModel
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Decimal> LossRatioThree
+        public global::System.String LossRatioThree
         {
             get
             {
@@ -1637,13 +1637,13 @@ namespace QuotationTrackingSystemDBModel
             {
                 OnLossRatioThreeChanging(value);
                 ReportPropertyChanging("LossRatioThree");
-                _LossRatioThree = StructuralObject.SetValidValue(value);
+                _LossRatioThree = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("LossRatioThree");
                 OnLossRatioThreeChanged();
             }
         }
-        private Nullable<global::System.Decimal> _LossRatioThree;
-        partial void OnLossRatioThreeChanging(Nullable<global::System.Decimal> value);
+        private global::System.String _LossRatioThree;
+        partial void OnLossRatioThreeChanging(global::System.String value);
         partial void OnLossRatioThreeChanged();
     
         /// <summary>

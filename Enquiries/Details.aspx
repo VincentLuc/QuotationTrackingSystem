@@ -132,7 +132,7 @@
   <% } %>
   <% if(!string.IsNullOrEmpty(enquiry.AdditionalDocumentName)) {%>
     <tr>
-      <td><span>Proposol Form / Additional Documents:</span> <%= enquiry.AdditionalDocumentName%></td>
+      <td><span>Proposal Form / Additional Documents:</span> <%= enquiry.AdditionalDocumentName%></td>
       <td><asp:Button ID="btnAdditionalDocument" runat="server" Text="Download" 
               onclick="btnAdditionalDocument_Click" CausesValidation="False"/></td>
     </tr>

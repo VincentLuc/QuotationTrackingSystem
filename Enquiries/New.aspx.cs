@@ -53,11 +53,8 @@ public partial class Enquiries_New : System.Web.UI.Page
         var _currentUserID = CurrentUser.Id();
         var _createdAt = DateTime.Now;
         var _underWriterId = int.Parse(ddlUnderwriterId.SelectedValue);
-        var lossRatioOne = NumberHelper.ConvertToDecimal(txtLossRatioOne.Text);
-        var lossRatioTwo = NumberHelper.ConvertToDecimal(txtLossRatioTwo.Text);
-        var lossRatioThree = NumberHelper.ConvertToDecimal(txtLossRatioThree.Text);
         var expectedPremium = decimal.Parse(txtExpectedPremium.Text.Trim());
-        _enquiry = new Enquiry { ClientName = txtClientName.Text, ContactPersonName = txtContactPersonName.Text, Phone1 = txtPhone1.Text, Phone2 = txtPhone2.Text, InsuranceType = ddlInsuranceType.SelectedValue, IntendedPolicyStartAt = _policyStartAt, InsuranceFor = rbtnInsurance.SelectedValue, Status = "New", Address = txtAddress.Text, Remarks = txtRemarks.Text, CreatedBy = _currentUserID, UnderWriterId = _underWriterId, CreatedAt = _createdAt, UpdatedAt = _createdAt, ExpectedPremium = expectedPremium, LossRatioOne = lossRatioOne, LossRatioTwo = lossRatioTwo, LossRatioThree = lossRatioThree };
+        _enquiry = new Enquiry { ClientName = txtClientName.Text, ContactPersonName = txtContactPersonName.Text, Phone1 = txtPhone1.Text, Phone2 = txtPhone2.Text, InsuranceType = ddlInsuranceType.SelectedValue, IntendedPolicyStartAt = _policyStartAt, InsuranceFor = rbtnInsurance.SelectedValue, Status = "New", Address = txtAddress.Text, Remarks = txtRemarks.Text, CreatedBy = _currentUserID, UnderWriterId = _underWriterId, CreatedAt = _createdAt, UpdatedAt = _createdAt, ExpectedPremium = expectedPremium, LossRatioOne = txtLossRatioOne.Text, LossRatioTwo = txtLossRatioTwo.Text, LossRatioThree = txtLossRatioThree.Text };
         if (_enquiry.InsuranceFor == "Individual") {
             _enquiry.NationalIdOrIqamaNumber = txtNationalIdOrIqamaNumber.Text;
         } else {

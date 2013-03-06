@@ -208,23 +208,14 @@
   <p>
   <label>Loss Ratio For <%= DateTime.Now.Year - 1 %></label>
   <asp:TextBox ID="txtLossRatioOne" runat="server" MaxLength="35"></asp:TextBox>
-  <asp:RegularExpressionValidator ID="revLossRatioOne" runat="server" 
-                    ControlToValidate="txtLossRatioOne" ForeColor="#FF3300" SetFocusOnError="True" 
-                    ValidationExpression="^[0-9\.]*$">Enter in Correct Format</asp:RegularExpressionValidator>
   </p>
   <p>
   <label>Loss Ratio For <%= DateTime.Now.Year - 2 %></label>
   <asp:TextBox ID="txtLossRatioTwo" runat="server" MaxLength="35"></asp:TextBox>
-  <asp:RegularExpressionValidator ID="revLossRationTwo" runat="server" 
-                    ControlToValidate="txtLossRatioTwo" ForeColor="#FF3300" SetFocusOnError="True" 
-                    ValidationExpression="^[0-9\.]*$">Enter in Correct Format</asp:RegularExpressionValidator>
   </p>
   <p>
   <label>Loss Ratio For <%= DateTime.Now.Year - 3 %></label>
   <asp:TextBox ID="txtLossRatioThree" runat="server" MaxLength="35"></asp:TextBox>
-  <asp:RegularExpressionValidator ID="revLossRatioThree" runat="server" 
-                    ControlToValidate="txtLossRatioThree" ForeColor="#FF3300" SetFocusOnError="True" 
-                    ValidationExpression="^[0-9\.]*$">Enter in Correct Format</asp:RegularExpressionValidator>
   </p>
   <p>
   <label>Copy of CR*</label>
@@ -235,7 +226,7 @@
   <input type="file" id="filePreviousLossRatioReport" name="filePreviousLossRatioReport" />
   </p>
   <p>
-  <label>Proposol Form / Additional Documents</label>
+  <label>Proposal Form / Additional Documents</label>
   <input type="file" id="fileAdditionalDocuments" name="fileAdditionalDocuments" />
   </p>
   <p>

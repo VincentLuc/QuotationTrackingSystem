@@ -9,7 +9,7 @@
   <div class="clear"></div>
   <hr />
     <asp:GridView ID="gvVisits" runat="server" AllowPaging="True" 
-        onpageindexchanging="gvVisits_PageIndexChanging" 
+        onpageindexchanging="gvVisits_PageIndexChanging" EmptyDataText="No Visits!" 
         onrowdatabound="gvVisits_RowDataBound" Width="100%" CssClass="table table-bordered">
     </asp:GridView>
 </asp:Content>

@@ -79,6 +79,8 @@
                             Value="SalesAndSalesSupervisor"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/UnderWriters/Enquiries.aspx" Text="Enquiries" 
                             Value="UnderWriter"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Enquiries/New.aspx" Text="New Enquiry" 
+                            Value="SalesAndSalesSupervisor"></asp:MenuItem>
                     </Items>
                 </asp:Menu>
                 <% } %>

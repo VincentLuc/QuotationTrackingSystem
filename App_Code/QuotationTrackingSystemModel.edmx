@@ -110,9 +110,9 @@
           <Property Name="AcceptedQuotation" Type="nvarchar" MaxLength="300" />
           <Property Name="ClientDeclinedReason" Type="nvarchar(max)" />
           <Property Name="ExpectedPremium" Type="decimal" Precision="37" />
-          <Property Name="LossRatioOne" Type="decimal" Precision="37" />
-          <Property Name="LossRatioTwo" Type="decimal" Precision="37" />
-          <Property Name="LossRatioThree" Type="decimal" Precision="37" />
+          <Property Name="LossRatioOne" Type="nvarchar" MaxLength="300" />
+          <Property Name="LossRatioTwo" Type="nvarchar" MaxLength="300" />
+          <Property Name="LossRatioThree" Type="nvarchar" MaxLength="300" />
           <Property Name="CreatedAt" Type="datetime" Nullable="false" />
           <Property Name="UpdatedAt" Type="datetime" Nullable="false" />
         </EntityType>
@@ -401,9 +401,9 @@
           <Property Name="AcceptedQuotation" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
           <Property Name="ClientDeclinedReason" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="ExpectedPremium" Type="Decimal" Precision="37" Scale="0" />
-          <Property Name="LossRatioOne" Type="Decimal" Precision="37" Scale="0" />
-          <Property Name="LossRatioTwo" Type="Decimal" Precision="37" Scale="0" />
-          <Property Name="LossRatioThree" Type="Decimal" Precision="37" Scale="0" />
+          <Property Name="LossRatioOne" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+          <Property Name="LossRatioTwo" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+          <Property Name="LossRatioThree" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
           <Property Name="CreatedAt" Type="DateTime" Nullable="false" />
           <Property Name="UpdatedAt" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Comments" Relationship="QuotationTrackingSystemDBModel.FK_Enquiries_Comments" FromRole="Enquiries" ToRole="Comments" />
