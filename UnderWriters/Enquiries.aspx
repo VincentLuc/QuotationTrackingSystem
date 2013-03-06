@@ -5,13 +5,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 <asp:HiddenField ID="hdnScope" runat="server" />
 <div class="navbar">
-  <div class="navbar-inner">
-    <a class="brand" href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=Created">Enquiries</a>
-    <ul class="nav">
+  <div class="navbar-inner"  style="height:47px;">
+    <ul class="nav" style="width:100%;">
       <li class="<%= (Request.QueryString["scope"] == null || Request.QueryString["scope"] == "all") ? "active" : "" %>"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=all">All</a></li>
       <li class="<%= (Request.QueryString["scope"] == "New") ? "active" : "" %>"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=New">New</a></li>
       <li class="<%= (Request.QueryString["scope"] == "UnderwriterDeclined") ? "active" : "" %>" style="width:155px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=UnderwriterDeclined" style="width:155px;">Underwriter Declined</a></li>
-      <li class="<%= (Request.QueryString["scope"] == "AdditionalInformation") ? "active" : "" %>" style="width:165px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=AdditionalInformation" style="width:155px;">Additional informariton</a></li>
+      <li class="<%= (Request.QueryString["scope"] == "AdditionalInformation") ? "active" : "" %>" style="width:165px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=AdditionalInformation" style="width:155px;">Additional information</a></li>
       <li class="<%= (Request.QueryString["scope"] == "MissingInformation") ? "active" : "" %>" style="width:155px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=MissingInformation" style="width:155px;">Missing informariton</a></li>
       <li class="<%= (Request.QueryString["scope"] == "InformationUpdate") ? "active" : "" %>" style="width:155px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=InformationUpdate" style="width:155px;">Informariton Updated</a></li>
       <li class="<%= (Request.QueryString["scope"] == "QuotationReleased") ? "active" : "" %>" style="width:155px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=QuotationReleased" style="width:155px;">Released Quotation</a></li>

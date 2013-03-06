@@ -113,11 +113,12 @@
   <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
           ConnectionString="<%$ ConnectionStrings:QuotationTrackingSystemDBConnectionString %>" 
           
-          SelectCommand="SELECT [UserName], [Id] FROM [tblUsers] WHERE (([Id] &lt;&gt; @Id) AND ([Role] = @Role))">
+          
+          SelectCommand="SELECT [Id], [UserName] FROM [tblUsers] WHERE (([Role] = @Role) AND ([Id] &lt;&gt; @Id)) ORDER BY [UserName]">
           <SelectParameters>
-              <asp:ControlParameter ControlID="hdnCurrentUserId" Name="Id" 
-                  PropertyName="Value" Type="Int32" />
               <asp:Parameter DefaultValue="Sales" Name="Role" Type="String" />
+              <asp:ControlParameter ControlID="hdnCurrentUserId" Name="Id" 
+                  PropertyName="Value" Type="Int32" DefaultValue="0" />
           </SelectParameters>
       </asp:SqlDataSource>
     <label>Copy to Sales Users</label>
@@ -151,10 +152,11 @@
           SelectionMode="Multiple"></asp:ListBox>
       <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
           ConnectionString="<%$ ConnectionStrings:QuotationTrackingSystemDBConnectionString %>" 
-          SelectCommand="SELECT [Id], [UserName] FROM [tblUsers] WHERE (([Id] &lt;&gt; @Id) AND ([Role] = @Role))">
+          
+          SelectCommand="SELECT [UserName], [Id] FROM [tblUsers] WHERE (([Id] &lt;&gt; @Id) AND ([Role] = @Role)) ORDER BY [UserName]">
           <SelectParameters>
               <asp:ControlParameter ControlID="ddlUnderwriterId" Name="Id" 
-                  PropertyName="SelectedValue" Type="Int32" />
+                  PropertyName="SelectedValue" Type="Int32" DefaultValue="0" />
               <asp:Parameter DefaultValue="UnderWriter" Name="Role" Type="String" />
           </SelectParameters>
       </asp:SqlDataSource>

@@ -60,7 +60,7 @@
   </p>
   <p></p>
   <p>
-    <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save"  CssClass="btn btn-save"/>
+    <asp:Button ID="btnSave" runat="server" onclick="btnSave_Click" Text="Save"  CssClass="btn btn-save btn-primary"/>
     <asp:Button ID="btnCancel" runat="server" CausesValidation="False" 
                     onclick="btnCancel_Click" Text="Cancel"  CssClass="btn"/>
   </p>
