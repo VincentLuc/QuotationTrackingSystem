@@ -12,9 +12,9 @@ public partial class Users_Edit : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack) {
+            hdnFldUserId.Value = Request.QueryString["id"];
             _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
             int Id = int.Parse(Request.QueryString["id"].ToString());
-            hdnFldUserId.Value = Id.ToString();
             var Count = _quotationTrackingSystemDBEntities.tblUsers.Where(x => x.Id == Id).Count();
             if (Count == 0)
             {

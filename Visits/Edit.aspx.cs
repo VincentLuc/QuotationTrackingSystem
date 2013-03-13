@@ -12,8 +12,8 @@ public partial class Visits_Edit : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack) {
-            var VisitId = int.Parse(Request.QueryString["id"]);
             hdnVisitId.Value = Request.QueryString["id"];
+            var VisitId = int.Parse(Request.QueryString["id"]);
             _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
             Visit _visit = _quotationTrackingSystemDBEntities.Visits.Where(x => x.Id == VisitId).First();
             if (_visit.UserId != CurrentUser.Id()) { 
