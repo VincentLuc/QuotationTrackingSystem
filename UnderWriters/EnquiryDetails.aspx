@@ -60,20 +60,10 @@
       <span>Underwriter:</span>&nbsp;<%= EnquiryHelper.EnquiryUnderWriterName(enquiry) %>
     </td>
   </tr>
-  <% if (enquiry.Status == "ClientAccepted"){ %>
-      <tr>
-        <td>
-          <span>Confirmation Copy: </span><%= enquiry.ConfirmationCopyFileName %>
-        </td>
-        <td>
-          <asp:Button ID="btnCC" runat="server" Text="Download" onclick="btnCC_Click" CausesValidation="False" />
-        </td>
-      </tr>
-   <%} %>
    <% if (enquiry.Status == "ClientDeclined")
       { %>
       <tr>
-        <td colspan="2"><span>Reason: </span> <%= enquiry.ClientDeclinedReason %></td>
+        <td colspan="2"><span>Client Declined Reason: </span> <%= enquiry.ClientDeclinedReason %></td>
       </tr>
    <%} %>
   <tr>
@@ -132,12 +122,22 @@
       <td><asp:Button ID="btnAdditionalDocument" runat="server" Text="Download" onclick="btnAdditionalDocument_Click" CausesValidation="False"/></td>
     </tr>
   <% } %>
-  <% if(enquiry.Status == "QuotationReleased") {%>
+  <% if(!string.IsNullOrEmpty(enquiry.QuotationFileName)) {%>
     <tr>
       <td><span>Quotation Document:</span> <%= enquiry.QuotationFileName%></td>
       <td><asp:Button ID="btnQuotationDocument" runat="server" Text="Download" onclick="btnQuotationDocument_Click" CausesValidation="False"/></td>
     </tr>
   <% } %>
+  <% if (enquiry.Status == "ClientAccepted"){ %>
+      <tr>
+        <td>
+          <span>Confirmation Copy: </span><%= enquiry.ConfirmationCopyFileName %>
+        </td>
+        <td>
+          <asp:Button ID="btnCC" runat="server" Text="Download" onclick="btnCC_Click" CausesValidation="False" />
+        </td>
+      </tr>
+   <%} %>
         <asp:HiddenField ID="hdnEnquiryId" runat="server" />
 </table>
 <h3 class="left">Sales Users copy</h3>
@@ -189,7 +189,7 @@
     </tr>
   </thead>
   <tbody>
-    <% foreach(var enquiryComment in enquiry.Comments.OrderBy(x => x.CreatedAt)) {%>
+    <% foreach(var enquiryComment in enquiry.Comments.OrderByDescending(x => x.CreatedAt)) {%>
       <tr>
         <td><%= DateTimeHelper.To24Hours(enquiryComment.CreatedAt) %></td>
         <td><%= enquiryComment.CreatedBy %></td>

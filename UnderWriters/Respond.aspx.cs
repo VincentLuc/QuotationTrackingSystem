@@ -14,8 +14,8 @@ public partial class UnderWriters_Respond : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack) {
-            rfvText.Enabled = false;
             hdnEnquiryId.Value = Request.QueryString["id"];
+            rfvText.Enabled = false;
             var _enquiryId = int.Parse(hdnEnquiryId.Value);
             var _currentUserId = CurrentUser.Id();
             _quotationTrackingSystemDBEntities = new QuotationTrackingSystemDBEntities();
