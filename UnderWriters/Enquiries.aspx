@@ -14,6 +14,7 @@
       <li class="<%= (Request.QueryString["scope"] == "MissingInformation") ? "active" : "" %>" style="width:155px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=MissingInformation" style="width:155px;">Missing information</a></li>
       <li class="<%= (Request.QueryString["scope"] == "InformationUpdate") ? "active" : "" %>" style="width:155px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=InformationUpdate" style="width:155px;">Information Updated</a></li>
       <li class="<%= (Request.QueryString["scope"] == "QuotationReleased") ? "active" : "" %>" style="width:155px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=QuotationReleased" style="width:155px;">Released Quotation</a></li>
+      <li class="<%= (Request.QueryString["scope"] == "ClientReconsiderQuotation") ? "active" : "" %>" style="width:155px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=ClientReconsiderQuotation" style="width:155px;">Client Reconsider</a></li>
       <li class="<%= (Request.QueryString["scope"] == "ClientDeclined") ? "active" : "" %>" style="width:121px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=ClientDeclined" style="width:155px;">Client Declined</a></li>
       <li class="<%= (Request.QueryString["scope"] == "ClientAccepted") ? "active" : "" %>" style="width:155px;"><a href="/QuotationTrackingSystem/UnderWriters/Enquiries.aspx?scope=ClientAccepted" style="width:155px;">Client Accepted</a></li>
     </ul>

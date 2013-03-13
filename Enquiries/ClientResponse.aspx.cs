@@ -66,16 +66,22 @@ public partial class Enquiries_ClientResponse : System.Web.UI.Page
             notificationText = "Enquiry Accepted By Client. Updated By " + _currentUserName + "!";
         }
         if(!string.IsNullOrEmpty(txtText.Text)) {
-            if (ddlResponse.SelectedValue != "ClientAccepted")
+            if (ddlResponse.SelectedValue == "ClientDeclined")
             {
                 enquiry.ClientDeclinedReason = txtText.Text.Trim();
+                notificationText = "Enquiry Declined By Client. Updated By " + _currentUserName + "!";
             }
-            var comment = new Comment { Text = txtText.Text.Trim(), CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId };
-            notificationText = "Enquiry Declined By Client. Updated By " + _currentUserName + "!";
+            else if (ddlResponse.SelectedValue == "ClientReconsiderQuotation") {
+                notificationText = "Client Enquiry For Reconsider. Updated By "+_currentUserName+"!";
+            }
+            var commentText = StringHelper.ToSentenceCase(ddlResponse.SelectedValue) + " - " + txtText.Text.Trim();
+            var comment = new Comment { Text = commentText, CreatedAt = DateTime.Now, CreatedBy = _currentUserName, EnquiryId = _enquiryId };
             _quotationTrackingSystemDBEntities.AddToComments(comment);
         }
         var _underWriterId = enquiry.UnderWriterId;
         EnquiryHelper.SendNotifications(_quotationTrackingSystemDBEntities, enquiry, _currentUserName, notificationText, false);
+        var newEvent = new Event { State = ddlResponse.SelectedValue, CreatedBy = _currentUserName, CreatedAt = DateTime.Now, EnquiryId = _enquiryId };
+        _quotationTrackingSystemDBEntities.AddToEvents(newEvent);
         _quotationTrackingSystemDBEntities.SaveChanges();
         Response.Redirect("Details.aspx?id=" + hdnEnquiryId.Value);
     }

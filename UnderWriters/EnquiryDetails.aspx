@@ -48,7 +48,7 @@
 <h3 class="left">Enquiry Details</h3>
 <% if (hasDirectAccess)
    {%>
-<% if (enquiry.Status == "New" || enquiry.Status == "UnderWriterViewed" || enquiry.Status == "InformationUpdate")
+<% if (enquiry.Status == "New" || enquiry.Status == "UnderWriterViewed" || enquiry.Status == "InformationUpdate" || enquiry.Status == "ClientReconsiderQuotation")
    {%>
 <h3 class="right"><a href="Respond.aspx?id=<%= hdnEnquiryId.Value %>">Respond</a></h3>
 <%} %>

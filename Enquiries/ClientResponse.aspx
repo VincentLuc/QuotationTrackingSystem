@@ -19,6 +19,7 @@
           onselectedindexchanged="ddlResponse_SelectedIndexChanged">
           <asp:ListItem Value="ClientAccepted">Accepted</asp:ListItem>
           <asp:ListItem Value="ClientDeclined">Declined</asp:ListItem>
+          <asp:ListItem Value="ClientReconsiderQuotation">Reconsider / Review Quotation</asp:ListItem>
       </asp:DropDownList>
   </p>
    <p id="confirmationDiv" runat="server">
